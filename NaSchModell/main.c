@@ -28,7 +28,6 @@ int main(void)
 
    //TODO
 
-   drawbmp("test.bmp", 50, 30, NULL, NULL, NULL);
 
    iReturn = _getch();
    if (iReturn > 0) {

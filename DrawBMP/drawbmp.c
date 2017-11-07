@@ -35,19 +35,15 @@ void drawbmp(
    headers[1] = 0;                    // bfReserved (both)
    headers[2] = 54;                   // bfOffbits
    headers[3] = 40;                   // biSize
-   headers[4] = iWIDTH;  // biWidth
-   headers[5] = iHEIGHT; // biHeight
-
-                        // Would have biPlanes and biBitCount in position 6, but they're shorts.
-                        // It's easier to write them out separately (see below) than pretend
-                        // they're a single int, especially with endian issues...
-
+   headers[4] = iWIDTH;               // biWidth
+   headers[5] = iHEIGHT;              // biHeight
+   headers[6] = 0x00180001;           // biPlanes and biBitCount in position 6, but they're shorts.
    headers[7] = 0;                    // biCompression
    headers[8] = paddedsize;           // biSizeImage
    headers[9] = 0;                    // biXPelsPerMeter
-   headers[10] = 0;                    // biYPelsPerMeter
-   headers[11] = 0;                    // biClrUsed
-   headers[12] = 0;                    // biClrImportant
+   headers[10] = 0;                   // biYPelsPerMeter
+   headers[11] = 0;                   // biClrUsed
+   headers[12] = 0;                   // biClrImportant
 
 
    //
@@ -63,22 +59,7 @@ void drawbmp(
 
    fprintf(outfile, "BM");
 
-   for (n = 0; n <= 5; n++)
-   {
-      fprintf(outfile, "%c", headers[n] & 0x000000FF);
-      fprintf(outfile, "%c", (headers[n] & 0x0000FF00) >> 8);
-      fprintf(outfile, "%c", (headers[n] & 0x00FF0000) >> 16);
-      fprintf(outfile, "%c", (headers[n] & (unsigned int)0xFF000000) >> 24);
-   }
-
-   // These next 4 characters are for the biPlanes and biBitCount fields.
-
-   fprintf(outfile, "%c", 1);
-   fprintf(outfile, "%c", 0);
-   fprintf(outfile, "%c", 24);
-   fprintf(outfile, "%c", 0);
-
-   for (n = 7; n <= 12; n++)
+   for (n = 0; n <= 12; n++)
    {
       fprintf(outfile, "%c", headers[n] & 0x000000FF);
       fprintf(outfile, "%c", (headers[n] & 0x0000FF00) >> 8);
