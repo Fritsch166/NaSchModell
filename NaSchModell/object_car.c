@@ -33,7 +33,7 @@ OCAR newCar(void)
 
    ucCOUNTER += 1;
 
-   return (OCAR) psdcar;
+   return (OCAR)psdcar;
 }
 
 

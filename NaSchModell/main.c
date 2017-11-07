@@ -1,11 +1,15 @@
 
+#pragma warning( disable : 4710 464 )
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 
 #include "object_car.h"
 
-#pragma warning( disable : 4710 )
+#include "../common_includes/drawbmp.h"
+
+
 
 int main(void)
 {
@@ -22,6 +26,8 @@ int main(void)
 
 
    //TODO
+
+   drawbmp("test.bmp", 50, 30);
 
    iReturn = _getch();
    if (iReturn > 0) {
