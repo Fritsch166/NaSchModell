@@ -23,5 +23,8 @@
     <ClInclude Include="drawbmp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="colormap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,7 +3,8 @@
 #include <stdlib.h>
 
 
-struct object_data_car {
+struct object_data_car
+{
 
    unsigned char ucId;
    unsigned char ucSpeed;

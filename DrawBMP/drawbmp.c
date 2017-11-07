@@ -2,7 +2,14 @@
 
 #include <stdio.h>
 
-void drawbmp(const char * pcFilename, const int iWIDTH, const int iHEIGHT)
+void drawbmp(
+   const char * pcFilename,
+   const int iWIDTH,
+   const int iHEIGHT,
+   const unsigned char ** const ppcRED,
+   const unsigned char ** const ppcGREEN,
+   const unsigned char ** const ppcBLUE
+)
 {
 
    unsigned int headers[13];
@@ -10,7 +17,8 @@ void drawbmp(const char * pcFilename, const int iWIDTH, const int iHEIGHT)
    int extrabytes;
    int paddedsize;
    int x; int y; int n;
-   int red = 255, green = 255, blue = 0;
+   int red = 0, green = 0, blue = 0;
+
 
    extrabytes = 4 - ((iWIDTH * 3) % 4);                 // How many bytes of padding to add to each
                                                        // horizontal line - the size of which must
@@ -40,6 +48,11 @@ void drawbmp(const char * pcFilename, const int iWIDTH, const int iHEIGHT)
    headers[10] = 0;                    // biYPelsPerMeter
    headers[11] = 0;                    // biClrUsed
    headers[12] = 0;                    // biClrImportant
+
+
+   //
+   // Open FILE ..
+   //
 
    fopen_s(&outfile, pcFilename, "wb");
 
@@ -81,21 +94,11 @@ void drawbmp(const char * pcFilename, const int iWIDTH, const int iHEIGHT)
    {
       for (x = 0; x <= iWIDTH - 1; x++)
       {
-
-         //TODO data..
-         //red = reduce(redcount[x][y] + COLOUR_OFFSET) * red_multiplier;
-         //green = reduce(greencount[x][y] + COLOUR_OFFSET) * green_multiplier;
-         //blue = reduce(bluecount[x][y] + COLOUR_OFFSET) * blue_multiplier;
-
-         if (red > 255) red = 255; if (red < 0) red = 0;
-         if (green > 255) green = 255; if (green < 0) green = 0;
-         if (blue > 255) blue = 255; if (blue < 0) blue = 0;
-
          // Also, it's written in (b,g,r) format...
 
-         fprintf(outfile, "%c", blue);
-         fprintf(outfile, "%c", green);
-         fprintf(outfile, "%c", red);
+         fprintf(outfile, "%c", ppcBLUE[x][y]);
+         fprintf(outfile, "%c", ppcGREEN[x][y]);
+         fprintf(outfile, "%c", ppcRED[x][y]);
       }
 
       if (extrabytes)      // See above - BMP lines must be of lengths divisible by 4.

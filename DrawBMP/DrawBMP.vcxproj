@@ -22,6 +22,7 @@
     <ClCompile Include="drawbmp.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="colormap.h" />
     <ClInclude Include="drawbmp.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -101,7 +102,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call COPY.bat</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -134,7 +136,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call COPY.bat</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -7,7 +7,8 @@
 
 #include "object_car.h"
 
-#include "../common_includes/drawbmp.h"
+#include <drawbmp.h>
+#include <colormap.h>
 
 
 
@@ -27,7 +28,7 @@ int main(void)
 
    //TODO
 
-   drawbmp("test.bmp", 50, 30);
+   drawbmp("test.bmp", 50, 30, NULL, NULL, NULL);
 
    iReturn = _getch();
    if (iReturn > 0) {

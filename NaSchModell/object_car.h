@@ -1,7 +1,8 @@
 #pragma once
 
 
-struct object_car {
+struct object_car 
+{
    const unsigned bit : 1;
 };
 
