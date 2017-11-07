@@ -82,6 +82,7 @@ void drawbmp(const char * pcFilename, const int iWIDTH, const int iHEIGHT)
       for (x = 0; x <= iWIDTH - 1; x++)
       {
 
+         //TODO data..
          //red = reduce(redcount[x][y] + COLOUR_OFFSET) * red_multiplier;
          //green = reduce(greencount[x][y] + COLOUR_OFFSET) * green_multiplier;
          //blue = reduce(bluecount[x][y] + COLOUR_OFFSET) * blue_multiplier;
