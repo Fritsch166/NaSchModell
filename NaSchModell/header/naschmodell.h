@@ -1,12 +1,6 @@
 #ifndef _INC_NASCHMODELLH
 #define _INC_NASCHMODELLH
 
-/**TODO****************************
- * enum SaveToFile
- * Filepath
- * colormap
- **********************************/
-
 #pragma warning( disable : 4710 464 820 )
 
 #include <stdlib.h>
@@ -36,7 +30,17 @@
 #define BOARDHEIGHT 30
 
 
+enum toggle
+{
+   off,
+   on
+};
 
+enum mode
+{
+   step,
+   automatic
+};
 
 
 struct settings
@@ -44,19 +48,26 @@ struct settings
    int iVMax;
    int iCars;
    int iPProzent;
+   enum toggle eTCruiseControl;
+   enum toggle eTDelayedAtV0;
+   //TODO enum toggle eTSaveToFile;
+   enum mode eMode;
+   //TODO acFilepath
 };
 
 struct gaugings
 {
    int iTicks;
    int iTrafficJams;
+   //TODO time
+   //TODO colormap
 };
 
 struct naschmodell
 {
    struct settings sSettings;
    struct gaugings sGaugings;
-   struct object_car apsCars[ARRAY_LENGTH];
+   struct object_car asCars[ARRAY_LENGTH];
 };
 
 

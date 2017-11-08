@@ -21,7 +21,17 @@ int main(void)
    //Initializes the struct----------------------------------------
    
 
-     //TODO
+   sModell.sSettings.eMode = step;
+   sModell.sSettings.eTCruiseControl = off;
+   sModell.sSettings.eTDelayedAtV0 = off;
+   sModell.sSettings.iCars = 0;
+   sModell.sSettings.iPProzent = 33;
+   sModell.sSettings.iVMax = 5;
+
+   sModell.sGaugings.iTicks = 0;
+   sModell.sGaugings.iTrafficJams = 0;
+
+   disableAllCars(sModell.asCars);
 
 
    //PRINTS-------------------------------------------------------
@@ -64,15 +74,15 @@ int main(void)
       {
 
       case OP_START:
-         //TODO
+         //TODO start algo
          break;
 
       case OP_CHANGEMODESTATE:
-         //TODO
+         //TODO changemode
          break;
 
       case OP_OPENMENUSAVE:
-         //TODO
+         //TODO open_menu_save
          break;
 
       case OP_EXIT:
