@@ -8,10 +8,7 @@ int main(void)
 {
    struct naschmodell sModell;
    int iOpt = OP_DEFAULT;
-   int iN = 0;
    int i = 0;
-   short int siX = 0;
-   short int siY = 0;
 
 
    //Initializes the struct and prints the standard GUI-------------
@@ -20,11 +17,17 @@ int main(void)
 
 
    sModell.sSettings.eMode = step;
+   sModell.sSettings.eTSaveToFile = off;
    sModell.sSettings.eTCruiseControl = off;
    sModell.sSettings.eTDelayedAtV0 = off;
    sModell.sSettings.iCars = 10; //TODO remove test value
    sModell.sSettings.iPProzent = 33;
    sModell.sSettings.iVMax = 5;
+   for (i = 0; i < COMPLPATHLENGTH; i++)
+   {
+      sModell.sSettings.acFilename[i] = 0;
+      sModell.sSettings.acComplFilePath[i] = 0;
+   }
 
    sModell.sGaugings.iTicks = 0;
    sModell.sGaugings.iTrafficJams = 0;
@@ -37,10 +40,12 @@ int main(void)
    _clrscr();
    printFrame(0, 0, WINDOWWIDTH + 2, STATUSHEIGHT + BOARDHEIGHT + MENUHEIGHT + 4);
    printFrame(0, MENUHEIGHT + 1, WINDOWWIDTH + 2, BOARDHEIGHT + 2);
+   printFrame(0, BOARDHEIGHT + MENUHEIGHT + 2, STATUS_SETTINGS_WIDTH + 2, STATUSHEIGHT + 2);
 
    printBoard(&sModell, 0);
+   printStatusSettings(&sModell);
    // TODO printStatus(sMyNQueen);
-   
+
 
    _gotoxy(2, 1);
    printf("MENUE                                    ");
@@ -64,26 +69,27 @@ int main(void)
       switch (iOpt)
       {
 
-      case OP_START:
-         //TODO start algo
-         break;
+         case OP_START:
+            //TODO start algo
+            break;
 
-      case OP_CHANGEMODESTATE:
-         //TODO changemode
-         break;
+         case OP_CHANGEMODESTATE:
+            //TODO changemode
+            break;
 
-      case OP_OPENMENUSAVE:
-         //TODO open_menu_save
-         break;
+         case OP_OPENMENUSAVE:
+            //TODO open_menu_save
+            break;
 
-      case OP_EXIT:
-         break;
+         case OP_EXIT:
+            break;
 
-      default:
-         break;
+         default:
+            break;
       }
 
-   } while (iOpt != OP_EXIT);
+   }
+   while (iOpt != OP_EXIT);
 
    _clrscr();
 

@@ -26,9 +26,15 @@
 #define MENUHEIGHT 4
 #define STATUSHEIGHT 4
 #define BOARDHEIGHT 27
+#define STATUS_SETTINGS_WIDTH 43
 
 #define STREET_LENGTH 1000
 #define PART_STREET_LENGTH 200
+
+//! Number of maximum writeable char
+#define MAXWRITEPATHLENGTH 250
+//! Length of the filepath array's
+#define COMPLPATHLENGTH (MAXWRITEPATHLENGTH + 5)
 
 
 enum toggle
@@ -51,9 +57,14 @@ struct settings
    int iPProzent;
    enum toggle eTCruiseControl;
    enum toggle eTDelayedAtV0;
-   //TODO enum toggle eTSaveToFile;
+   enum toggle eTSaveToFile;
    enum mode eMode;
-   //TODO acFilepath
+
+   //! Storage of the written filename
+   char acFilename[COMPLPATHLENGTH];
+
+   //! Storage of the complete filename [acFilename + ".bmp\0"]
+   char acComplFilePath[COMPLPATHLENGTH];
 };
 
 struct gaugings
@@ -78,5 +89,6 @@ typedef struct naschmodell * PMODELL;
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void printBoard(PMODELL pModell, int iView);
+void printStatusSettings(PMODELL pModell);
 
 

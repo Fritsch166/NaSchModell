@@ -4,7 +4,7 @@
 void printBoard(PMODELL pModell, int iView)
 {
    int iXStart = 3;
-   int iYStart = MENUHEIGHT + 2;
+   int iYStart = MENUHEIGHT + 3;
    int iPosStreet = 0;
    int iY = 0;
    int iX = 0;

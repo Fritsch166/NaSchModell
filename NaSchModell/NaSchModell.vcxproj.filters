@@ -46,5 +46,8 @@
     <ClCompile Include="c-files\printFrame.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c-files\printStatusSettings.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
