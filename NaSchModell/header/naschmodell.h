@@ -1,6 +1,11 @@
 #ifndef _INC_NASCHMODELLH
 #define _INC_NASCHMODELLH
 
+/**TODO****************************
+ * enum SaveToFile
+ * Filepath
+ * colormap
+ **********************************/
 
 #pragma warning( disable : 4710 464 )
 
@@ -28,9 +33,25 @@
 #define STATUSHEIGHT 4
 #define BOARDHEIGHT 8
 
+
+
+struct settings {
+   int iVMax;
+   int iCars;
+   int iPProzent;
+};
+
+struct gaugings {
+   int iTicks;
+   int iTrafficJams;
+
+};
+
 struct naschmodell {
 
-   int iTest;
+   struct settings sSettings;
+   struct gaugings sGaugings;
+   OCAR aCars[100];
 
 };
 

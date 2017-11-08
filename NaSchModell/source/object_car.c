@@ -1,14 +1,16 @@
-#include "object_car.h"
 
+#include <object_car.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 
 struct object_data_car
 {
 
-   unsigned char ucId;
-   unsigned char ucSpeed;
-   char cAcceleration;
+   int iId;
+   int iV;
+   int iVChange;
+  
 
 };
 
@@ -18,7 +20,7 @@ typedef struct object_data_car * odcar;
 
 OCAR newCar(void)
 {
-   static unsigned char ucCOUNTER = 0;
+   static int iCOUNTER = 0;
    odcar psdcar = 0;
 
 
@@ -28,11 +30,11 @@ OCAR newCar(void)
       return (OCAR)(0);
    }
 
-   psdcar->ucId = ucCOUNTER;
-   psdcar->ucSpeed = 0;
-   psdcar->cAcceleration = 0;
+   psdcar->iId = iCOUNTER;
+   psdcar->iV = 0;
+   psdcar->iVChange = 0;
 
-   ucCOUNTER += 1;
+   iCOUNTER += 1;
 
    return (OCAR)psdcar;
 }
