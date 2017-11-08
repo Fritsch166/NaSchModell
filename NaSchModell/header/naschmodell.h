@@ -7,7 +7,7 @@
  * colormap
  **********************************/
 
-#pragma warning( disable : 4710 464 )
+#pragma warning( disable : 4710 464 820 )
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -18,6 +18,8 @@
 #include <object_car.h>
 #include <drawbmp.h>
 #include <colormap.h>
+
+#define ARRAY_LENGTH 1000
 
 #define OP_DEFAULT '.'
 #define OP_EXIT 'e'
@@ -35,26 +37,35 @@
 
 
 
-struct settings {
+
+
+struct settings
+{
    int iVMax;
    int iCars;
    int iPProzent;
 };
 
-struct gaugings {
+struct gaugings
+{
    int iTicks;
    int iTrafficJams;
-
 };
 
-struct naschmodell {
-
+struct naschmodell
+{
    struct settings sSettings;
    struct gaugings sGaugings;
-   OCAR aCars[1000];
-
+   struct object_car* apsCars[ARRAY_LENGTH];
 };
 
+
 typedef struct naschmodell * PMODELL;
+
+
+void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
+void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
+
+
 
 #endif /* _INC_NASCHMODELLH */

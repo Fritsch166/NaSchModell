@@ -1,49 +1,44 @@
 
 #include <object_car.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 
-struct object_data_car
+void initCars(PCAR* apsCars)
 {
-
-   int iId;
-   int iV;
-   int iVChange;
-  
-
-};
-
-typedef struct object_data_car * odcar;
-
-
-
-OCAR newCar(void)
-{
-   static int iCOUNTER = 0;
-   odcar psdcar = 0;
-
-
-   psdcar = malloc(sizeof(struct object_data_car) * 1);
-
-   if (psdcar == 0) {
-      return (OCAR)(0);
+   for (int i = 0; i < ARRAY_LENGTH; i++)
+   {
+      apsCars[i] = NULL;
    }
-
-   psdcar->iId = iCOUNTER;
-   psdcar->iV = 0;
-   psdcar->iVChange = 0;
-
-   iCOUNTER += 1;
-
-   return (OCAR)psdcar;
 }
 
 
-void freeCar(OCAR psCar)
+PCAR* newCars(PCAR* apsCars, const int iCars)
 {
-   odcar psdcar = (odcar)(psCar);
+   for (int i = 0; i < ARRAY_LENGTH; i++)
+   {
+      if (i < iCars)
+      {
+         //TODO
+      }
+      else
+      {
+         apsCars[i] = NULL;
+      }
+   }
 
-   free(psdcar);
+   return (PCAR*)(apsCars);
+}
+
+
+void freeCars(PCAR* apsCars)
+{
+   for (int i = 0; i < ARRAY_LENGTH; i++)
+   {
+      if (apsCars[i] != NULL)
+      {
+         free(apsCars[i]);
+         apsCars[i] = NULL;
+      }
+   }
 }
 

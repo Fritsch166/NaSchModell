@@ -1,18 +1,25 @@
-#pragma once
 
+#ifndef _INC_OBJECT_CAR_H
+#define _INC_OBJECT_CAR_H
 
-struct object_car 
+#include <stdbool.h>
+
+struct object_car
 {
-   const unsigned bit : 1;
+   int iV;
+   int iVChange;
+   int iJamGroupId;
+   int iPosition;
+   bool bIsInJam;
 };
 
+typedef struct object_car * PCAR;
 
-typedef const struct object_car * OCAR;
+#include <naschmodell.h>
 
+void initCars(PCAR* apsCars);
+PCAR* newCars(PCAR* apsCars, const int iCars);
+void freeCars(PCAR* apsCars);
 
-OCAR newCar(void);
-void freeCar(OCAR psCar);
-
-
-
+#endif /* _INC_OBJECT_CAR_H */
 
