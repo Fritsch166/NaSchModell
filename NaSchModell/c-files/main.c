@@ -22,34 +22,25 @@ int main(void)
    sModell.sSettings.eMode = step;
    sModell.sSettings.eTCruiseControl = off;
    sModell.sSettings.eTDelayedAtV0 = off;
-   sModell.sSettings.iCars = 0;
+   sModell.sSettings.iCars = 10; //TODO remove test value
    sModell.sSettings.iPProzent = 33;
    sModell.sSettings.iVMax = 5;
 
    sModell.sGaugings.iTicks = 0;
    sModell.sGaugings.iTrafficJams = 0;
 
-   disableAllCars(sModell.asCars);
+   initCars(sModell.asCars, sModell.sSettings.iCars);
 
 
    //PRINTS-------------------------------------------------------
-
-
-   //Prints the standardGUI
-
 
    _clrscr();
    printFrame(0, 0, WINDOWWIDTH + 2, STATUSHEIGHT + BOARDHEIGHT + MENUHEIGHT + 4);
    printFrame(0, MENUHEIGHT + 1, WINDOWWIDTH + 2, BOARDHEIGHT + 2);
 
-
    printBoard(&sModell, 0);
-
-   /*
-
-    TODO printStatus(sMyNQueen);
-
-   */
+   // TODO printStatus(sMyNQueen);
+   
 
    _gotoxy(2, 1);
    printf("MENUE                                    ");
@@ -60,8 +51,8 @@ int main(void)
    _gotoxy(2, 4);
    printf(" [f] Speichern..  [q] Start..            ");
 
-
    _gotoxy(0, 0);
+
 
    //LOOP---------------------------------------------------------
 

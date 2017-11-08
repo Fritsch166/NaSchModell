@@ -2,28 +2,19 @@
 
 #include "..\h-files\naschmodell.h"
 
-
-void disableAllCars(ACAR asCars)
+void initCars(ACAR asCars, const int iCars)
 {
-   for (int i = 0; i < ARRAY_LENGTH; i++)
+   for (int i = 0; i < iCars; i++)
    {
-      asCars[i].bEnable = false;
-   }
-}
+      asCars[i].bIsInJam = false;
+      asCars[i].iJamGroupId = -1;
+      asCars[i].iVChange = 0;
 
+      //TODO randomize cars
+      asCars[i].iPosition = i;
+      asCars[i].iV = i;
+      
 
-void enableCars(ACAR asCars, const int iCars)
-{
-   for (int i = 0; i < ARRAY_LENGTH; i++)
-   {
-      if (i < iCars)
-      {
-         //TODO enable Car
-      }
-      else
-      {
-         asCars[i].bEnable = false;
-      }
    }
 }
 
