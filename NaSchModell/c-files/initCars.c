@@ -1,5 +1,4 @@
 
-
 #include "..\h-files\naschmodell.h"
 
 void initCars(ACAR asCars, const int iCars)
@@ -13,8 +12,7 @@ void initCars(ACAR asCars, const int iCars)
       //TODO randomize cars
       asCars[i].iPosition = i;
       asCars[i].iV = i;
-      
+
 
    }
 }
-

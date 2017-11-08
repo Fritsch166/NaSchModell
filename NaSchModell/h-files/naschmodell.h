@@ -7,9 +7,9 @@
 #include <conio.h>
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
 
 #include "Utilities.h"
-#include "object_car.h"
 
 #define ARRAY_LENGTH 990
 
@@ -62,11 +62,7 @@ struct settings
    enum toggle eTDelayedAtV0;
    enum toggle eTSaveToFile;
    enum mode eMode;
-
-   //! Storage of the written filename
    char acFilename[COMPLPATHLENGTH];
-
-   //! Storage of the complete filename [acFilename + ".bmp\0"]
    char acComplFilePath[COMPLPATHLENGTH];
 };
 
@@ -74,14 +70,19 @@ struct gaugings
 {
    int iTicks;
    int iTrafficJams;
-
-   //! Time storage when the algorithm is started. Saves the time since the program runs.
    clock_t runtime;
-
-   //! Storage of the time stamp. Time without jam
    char acTimeStamp[TIMESTAMPLENGTH];
    
    //TODO colormap
+};
+
+struct object_car
+{
+   int iV;
+   int iVChange;
+   int iJamGroupId;
+   int iPosition;
+   bool bIsInJam;
 };
 
 struct naschmodell
@@ -93,8 +94,9 @@ struct naschmodell
 
 
 typedef struct naschmodell * PMODELL;
+typedef struct object_car* ACAR;
 
-
+void initCars(ACAR asCars, const int iCars);
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void printBoard(PMODELL pModell, int iView);

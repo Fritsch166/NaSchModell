@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="h-files\naschmodell.h" />
-    <ClInclude Include="h-files\object_car.h" />
     <ClInclude Include="h-files\Utilities.h" />
   </ItemGroup>
   <ItemGroup>
@@ -28,8 +27,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="c-files\deleteArea.c" />
+    <ClCompile Include="c-files\initCars.c" />
     <ClCompile Include="c-files\main.c" />
-    <ClCompile Include="c-files\object_car.c" />
     <ClCompile Include="c-files\printBoard.c" />
     <ClCompile Include="c-files\printFrame.c" />
     <ClCompile Include="c-files\printStatusGaugings.c" />
