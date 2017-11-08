@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
+#include <time.h>
 
 #include "Utilities.h"
 #include "object_car.h"
@@ -17,6 +18,8 @@
 #define OP_START 'q'
 #define OP_CHANGEMODESTATE 'm'
 #define OP_OPENMENUSAVE 'f'
+#define OP_CHANGECRUISECONTROLSTATE 'c'
+#define OP_CHANGEDELAYATV0STATE 'd'
 
 #define FILLCHAR '#'
 #define STREETCHAR '-'
@@ -31,10 +34,10 @@
 #define STREET_LENGTH 1000
 #define PART_STREET_LENGTH 200
 
-//! Number of maximum writeable char
+
 #define MAXWRITEPATHLENGTH 250
-//! Length of the filepath array's
 #define COMPLPATHLENGTH (MAXWRITEPATHLENGTH + 5)
+#define TIMESTAMPLENGTH 50
 
 
 enum toggle
@@ -71,7 +74,13 @@ struct gaugings
 {
    int iTicks;
    int iTrafficJams;
-   //TODO time
+
+   //! Time storage when the algorithm is started. Saves the time since the program runs.
+   clock_t runtime;
+
+   //! Storage of the time stamp. Time without jam
+   char acTimeStamp[TIMESTAMPLENGTH];
+   
    //TODO colormap
 };
 
@@ -90,5 +99,6 @@ void printFrame(const short int siXStart, const short int siYStart, const short 
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void printBoard(PMODELL pModell, int iView);
 void printStatusSettings(PMODELL pModell);
+void printStatusGaugings(PMODELL pModell);
 
 

@@ -27,10 +27,15 @@ int main(void)
    {
       sModell.sSettings.acFilename[i] = 0;
       sModell.sSettings.acComplFilePath[i] = 0;
+      if (i < TIMESTAMPLENGTH)
+      {
+         sModell.sGaugings.acTimeStamp[i] = 0;
+      }
    }
 
    sModell.sGaugings.iTicks = 0;
    sModell.sGaugings.iTrafficJams = 0;
+   sModell.sGaugings.runtime = 0;
 
    initCars(sModell.asCars, sModell.sSettings.iCars);
 
@@ -44,17 +49,17 @@ int main(void)
 
    printBoard(&sModell, 0);
    printStatusSettings(&sModell);
-   // TODO printStatus(sMyNQueen);
+   printStatusGaugings(&sModell);
 
 
    _gotoxy(2, 1);
-   printf("MENUE                                    ");
+   printf("MENUE                                                            ");
    _gotoxy(2, 2);
-   printf("                                         ");
+   printf("                                                                 ");
    _gotoxy(2, 3);
-   printf(" [e] Exit         [m] Modus aendern      ");
+   printf(" [e] Exit         [m] Toggle Mode  [c] Toggle Cruise-control     ");
    _gotoxy(2, 4);
-   printf(" [f] Speichern..  [q] Start..            ");
+   printf(" [f] Speichern..  [q] Start..      [d] Toggle Delay_at_v=0       ");
 
    _gotoxy(0, 0);
 
@@ -74,7 +79,15 @@ int main(void)
             break;
 
          case OP_CHANGEMODESTATE:
-            //TODO changemode
+            //TODO change mode
+            break;
+
+         case OP_CHANGECRUISECONTROLSTATE:
+            //TODO change cruise-control
+            break;
+
+         case OP_CHANGEDELAYATV0STATE:
+            //TODO change delay_at_v0
             break;
 
          case OP_OPENMENUSAVE:

@@ -37,9 +37,9 @@ void printStatusSettings(PMODELL pModell)
 
    //! - Delayet at v=0
    _gotoxy(siX, siY + 1);
-   printf("Delayet at v=0: %s", (pModell->sSettings.eTDelayedAtV0 == off) ? ("OFF") : ("ON "));
+   printf("Delay at v=0:   %s", (pModell->sSettings.eTDelayedAtV0 == off) ? ("OFF") : ("ON "));
 
-   //! - Delayet at v=0
+   //! - Save to file
    _gotoxy(siX, siY + 2);
    printf("Save to file:   %s", (pModell->sSettings.eTSaveToFile == off) ? ("OFF") : ("ON "));
 
