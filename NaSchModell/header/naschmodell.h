@@ -19,6 +19,12 @@
 
 #define FILLCHAR '#'
 
+
+#define WINDOWWIDTH 108
+#define MENUHEIGHT 4
+#define STATUSHEIGHT 4
+#define BOARDHEIGHT 8
+
 struct naschmodell {
 
    int iTest;

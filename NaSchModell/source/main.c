@@ -28,29 +28,28 @@ int main(void)
 
 
    //Prints the standardGUI
+
+
    _clrscr();
+   printFrame(0, 0, WINDOWWIDTH + 2, STATUSHEIGHT + BOARDHEIGHT + MENUHEIGHT + 4);
+   printFrame(0, MENUHEIGHT + 1, WINDOWWIDTH + 2, BOARDHEIGHT + 2);
 
    /*
-   printFrame(0, 0, WINDOWWIDTH, STATUSHEIGHT + MAXBOARDSIZE + MENUHEIGHT);
-   printFrame(0, MENUHEIGHT - 1, WINDOWWIDTH, MAXBOARDSIZE + 2);
-
-   //Prints the Boardframe
-   siX = (short int)((WINDOWWIDTH - sMyNQueen.iCurrentSize) / 2) - 1;
-   siY = (short int)(MENUHEIGHT + (MAXBOARDSIZE - sMyNQueen.iCurrentSize) / 2) - 1;
-   printFrame(siX, siY, sMyNQueen.iCurrentSize + 2, sMyNQueen.iCurrentSize + 2);
 
    printBoard(sMyNQueen);
    printStatus(sMyNQueen);
 
-   _gotoxy(2, 1);
-   printf("MENUE                                          ");
-   _gotoxy(2, 2);
-   printf("                        [f] Speichermenue      ");
-   _gotoxy(2, 3);
-   printf(" [+/-] Groesse aendern  [m] Modus aendern      ");
-   _gotoxy(2, 4);
-   printf(" [e] Exit               [q] Start              ");
    */
+
+   _gotoxy(2, 1);
+   printf("MENUE                                    ");
+   _gotoxy(2, 2);
+   printf("                                         ");
+   _gotoxy(2, 3);
+   printf(" [e] Exit         [m] Modus aendern      ");
+   _gotoxy(2, 4);
+   printf(" [f] Speichern..  [q] Start..            ");
+
 
    _gotoxy(0, 0);
 
@@ -60,10 +59,10 @@ int main(void)
    {
 
       iOpt = _getch();
-      /*
-      switch (iOpt) //menu options -> myHeader.h
-      {
 
+      switch (iOpt)
+      {
+         /*
       case OP_OPENMENUSAVE: //! OP_MENUSAVE
          menuSave(&sMyNQueen);
          printBoard(sMyNQueen);
@@ -185,13 +184,14 @@ int main(void)
          _gotoxy(2, 4);
          printf(" [e] Exit               [q] Start              ");
          break;
+         */
 
-      case OP_EXIT: //! OP_EXIT
+      case OP_EXIT:
          break;
 
       default:
          break;
-      } */
+      }
 
    } while (iOpt != OP_EXIT);
 
