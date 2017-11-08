@@ -16,6 +16,9 @@
 
 #define OP_DEFAULT '.'
 #define OP_EXIT 'e'
+#define OP_START 'q'
+#define OP_CHANGEMODESTATE 'm'
+#define OP_OPENMENUSAVE 'f'
 
 #define FILLCHAR '#'
 
