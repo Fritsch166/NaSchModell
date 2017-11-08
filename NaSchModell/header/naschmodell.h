@@ -28,10 +28,10 @@
 #define FILLCHAR '#'
 
 
-#define WINDOWWIDTH 108
+#define WINDOWWIDTH 206
 #define MENUHEIGHT 4
 #define STATUSHEIGHT 4
-#define BOARDHEIGHT 8
+#define BOARDHEIGHT 30
 
 
 
@@ -51,7 +51,7 @@ struct naschmodell {
 
    struct settings sSettings;
    struct gaugings sGaugings;
-   OCAR aCars[100];
+   OCAR aCars[1000];
 
 };
 
