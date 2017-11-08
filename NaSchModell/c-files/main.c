@@ -46,6 +46,7 @@ int main(void)
    printFrame(0, 0, WINDOWWIDTH + 2, STATUSHEIGHT + BOARDHEIGHT + MENUHEIGHT + 4);
    printFrame(0, MENUHEIGHT + 1, WINDOWWIDTH + 2, BOARDHEIGHT + 2);
    printFrame(0, BOARDHEIGHT + MENUHEIGHT + 2, STATUS_SETTINGS_WIDTH + 2, STATUSHEIGHT + 2);
+   printFrame(STATUS_SETTINGS_WIDTH + 1, BOARDHEIGHT + MENUHEIGHT + 2, STATUS_GAUGINGS_WIDTH + 2, STATUSHEIGHT + 2);
 
    printBoard(&sModell, 0);
    printStatusSettings(&sModell);
@@ -74,24 +75,49 @@ int main(void)
       switch (iOpt)
       {
 
-         case OP_START:
-            //TODO start algo
-            break;
-
          case OP_CHANGEMODESTATE:
-            //TODO change mode
+            if (sModell.sSettings.eMode == step)
+            {
+               sModell.sSettings.eMode = automatic;
+            }
+            else
+            {
+               sModell.sSettings.eMode = step;
+            }
+            printStatusSettings(&sModell);
+            printStatusGaugings(&sModell);
             break;
 
          case OP_CHANGECRUISECONTROLSTATE:
-            //TODO change cruise-control
+            if (sModell.sSettings.eTCruiseControl == off)
+            {
+               sModell.sSettings.eTCruiseControl = on;
+            }
+            else
+            {
+               sModell.sSettings.eTCruiseControl = off;
+            }
+            printStatusSettings(&sModell);
             break;
 
          case OP_CHANGEDELAYATV0STATE:
-            //TODO change delay_at_v0
+            if (sModell.sSettings.eTDelayedAtV0 == off)
+            {
+               sModell.sSettings.eTDelayedAtV0 = on;
+            }
+            else
+            {
+               sModell.sSettings.eTDelayedAtV0 = off;
+            }
+            printStatusSettings(&sModell);
             break;
 
          case OP_OPENMENUSAVE:
             //TODO open_menu_save
+            break;
+
+         case OP_START:
+            //TODO start algo
             break;
 
          case OP_EXIT:
