@@ -9,21 +9,27 @@ void printBoard(PMODELL pModell, int iView)
    short int siY = 0;
    short int siX = 0;
 
+   static char acStreet[STREET_LENGTH + 1];
 
+   if (acStreet[0] == 0)
+   {
+      for (siI = 0; siI < STREET_LENGTH; siI++)
+      {
+         acStreet[siI] = STREETCHAR;
+      }
+   }
 
-   for (siI = 0; siI < STREET_LENGTH; siI++)
+   for (siI = 0; siI < STREET_LENGTH; siI += PART_STREET_LENGTH)
    {
       siX = (short int)(siI % PART_STREET_LENGTH);
       siY = (short int)(siI / PART_STREET_LENGTH);
 
       _gotoxy(siXStart + siX, (siYStart + siY * 5) + 2);
-      printf("-");
+      printf("%.*s", PART_STREET_LENGTH, acStreet + siI);
       _gotoxy(siXStart + siX, (siYStart + siY * 5) + 3);
-      printf("-");
+      printf("%.*s", PART_STREET_LENGTH, acStreet + siI);
       _gotoxy(siXStart + siX, (siYStart + siY * 5) + 4);
-      printf("-");
-
-      //TODO print Board
+      printf("%.*s", PART_STREET_LENGTH, acStreet + siI);
    }
 
    //Standard position of the cursor

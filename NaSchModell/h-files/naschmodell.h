@@ -19,6 +19,7 @@
 #define OP_OPENMENUSAVE 'f'
 
 #define FILLCHAR '#'
+#define STREETCHAR '-'
 
 
 #define WINDOWWIDTH 205
@@ -77,3 +78,5 @@ typedef struct naschmodell * PMODELL;
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void printBoard(PMODELL pModell, int iView);
+
+
