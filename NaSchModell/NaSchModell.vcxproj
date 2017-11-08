@@ -18,6 +18,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\deleteArea.c" />
+    <ClCompile Include="source\main.c" />
+    <ClCompile Include="source\object_car.c" />
+    <ClCompile Include="source\printFrame.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="resource\Utilities.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header\naschmodell.h" />
+    <ClInclude Include="header\object_car.h" />
+    <ClInclude Include="header\Utilities.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{0A6A66D7-AE99-4C6F-8C3D-98E782CFD371}</ProjectGuid>
@@ -70,10 +84,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\DrawBMP;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\NaSchModell\header;C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\DrawBMP\header;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\DrawBMP;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\NaSchModell\header;C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\DrawBMP\header;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,13 +133,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.c" />
-    <ClCompile Include="object_car.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="object_car.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

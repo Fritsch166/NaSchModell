@@ -1,6 +1,7 @@
-#include "drawbmp.h"
+
 
 #include <stdio.h>
+#include <drawbmp.h>
 
 void drawbmp(
    const char * pcFilename,

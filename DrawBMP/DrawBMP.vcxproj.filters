@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="drawbmp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="header\colormap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\drawbmp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="drawbmp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="colormap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="source\drawbmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
