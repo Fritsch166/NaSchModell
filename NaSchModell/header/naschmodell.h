@@ -19,7 +19,7 @@
 #include <drawbmp.h>
 #include <colormap.h>
 
-#define ARRAY_LENGTH 1000
+#define ARRAY_LENGTH 990
 
 #define OP_DEFAULT '.'
 #define OP_EXIT 'e'
@@ -56,7 +56,7 @@ struct naschmodell
 {
    struct settings sSettings;
    struct gaugings sGaugings;
-   struct object_car* apsCars[ARRAY_LENGTH];
+   struct object_car apsCars[ARRAY_LENGTH];
 };
 
 

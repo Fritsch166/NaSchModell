@@ -11,15 +11,15 @@ struct object_car
    int iJamGroupId;
    int iPosition;
    bool bIsInJam;
+   bool bEnable;
 };
 
-typedef struct object_car * PCAR;
+typedef struct object_car* ACAR;
 
 #include <naschmodell.h>
 
-void initCars(PCAR* apsCars);
-PCAR* newCars(PCAR* apsCars, const int iCars);
-void freeCars(PCAR* apsCars);
+void disableAllCars(ACAR asCars);
+void enableCars(ACAR asCars, const int iCars);
 
 #endif /* _INC_OBJECT_CAR_H */
 

@@ -19,7 +19,7 @@ int main(void)
    //Initializes the struct and prints the standard GUI-------------
 
    //Initializes the struct----------------------------------------
-
+   
 
      //TODO
 

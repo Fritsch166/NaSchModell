@@ -3,16 +3,16 @@
 #include <stdlib.h>
 
 
-void initCars(PCAR* apsCars)
+void disableAllCars(ACAR asCars)
 {
    for (int i = 0; i < ARRAY_LENGTH; i++)
    {
-      apsCars[i] = NULL;
+      asCars[i].bEnable = false;
    }
 }
 
 
-PCAR* newCars(PCAR* apsCars, const int iCars)
+void enableCars(ACAR asCars, const int iCars)
 {
    for (int i = 0; i < ARRAY_LENGTH; i++)
    {
@@ -22,22 +22,7 @@ PCAR* newCars(PCAR* apsCars, const int iCars)
       }
       else
       {
-         apsCars[i] = NULL;
-      }
-   }
-
-   return (PCAR*)(apsCars);
-}
-
-
-void freeCars(PCAR* apsCars)
-{
-   for (int i = 0; i < ARRAY_LENGTH; i++)
-   {
-      if (apsCars[i] != NULL)
-      {
-         free(apsCars[i]);
-         apsCars[i] = NULL;
+         asCars[i].bEnable = false;
       }
    }
 }
