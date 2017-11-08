@@ -1,5 +1,4 @@
-#ifndef _INC_NASCHMODELLH
-#define _INC_NASCHMODELLH
+#pragma once
 
 #pragma warning( disable : 4710 464 820 )
 
@@ -8,10 +7,8 @@
 #include <conio.h>
 #include <string.h>
 
-#include <Utilities.h>
-#include <object_car.h>
-#include <drawbmp.h>
-#include <colormap.h>
+#include "Utilities.h"
+#include "object_car.h"
 
 #define ARRAY_LENGTH 990
 
@@ -24,10 +21,13 @@
 #define FILLCHAR '#'
 
 
-#define WINDOWWIDTH 206
+#define WINDOWWIDTH 205
 #define MENUHEIGHT 4
 #define STATUSHEIGHT 4
-#define BOARDHEIGHT 30
+#define BOARDHEIGHT 27
+
+#define STREET_LENGTH 1000
+#define PART_STREET_LENGTH 200
 
 
 enum toggle
@@ -76,7 +76,4 @@ typedef struct naschmodell * PMODELL;
 
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
-
-
-
-#endif /* _INC_NASCHMODELLH */
+void printBoard(PMODELL pModell, int iView);

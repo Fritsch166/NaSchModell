@@ -1,5 +1,4 @@
-#ifndef _INC_COLORMAPH
-#define _INC_COLORMAPH
+#pragma once
 
 struct colormap
 {
@@ -11,5 +10,3 @@ struct colormap
 };
 
 typedef struct colormap CMAP;
-
-#endif // _INC_COLORMAPH

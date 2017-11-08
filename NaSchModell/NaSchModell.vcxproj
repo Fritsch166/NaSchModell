@@ -19,18 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\deleteArea.c" />
-    <ClCompile Include="source\main.c" />
-    <ClCompile Include="source\object_car.c" />
-    <ClCompile Include="source\printFrame.c" />
+    <ClInclude Include="h-files\naschmodell.h" />
+    <ClInclude Include="h-files\object_car.h" />
+    <ClInclude Include="h-files\Utilities.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="resource\Utilities.lib" />
+    <Library Include="lib-files\Utilities.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header\naschmodell.h" />
-    <ClInclude Include="header\object_car.h" />
-    <ClInclude Include="header\Utilities.h" />
+    <ClCompile Include="c-files\deleteArea.c" />
+    <ClCompile Include="c-files\main.c" />
+    <ClCompile Include="c-files\object_car.c" />
+    <ClCompile Include="c-files\printBoard.c" />
+    <ClCompile Include="c-files\printFrame.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -84,10 +85,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\NaSchModell\header;C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\DrawBMP\header;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\DrawBMP\h-files;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\NaSchModell\header;C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\DrawBMP\header;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Besitzer\Documents\Workspace\Repos\NaSchModell\DrawBMP\h-files;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

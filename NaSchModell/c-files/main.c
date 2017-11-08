@@ -1,9 +1,7 @@
 
 
 
-#include <naschmodell.h>
-
-
+#include "..\h-files\naschmodell.h"
 
 
 int main(void)
@@ -19,7 +17,7 @@ int main(void)
    //Initializes the struct and prints the standard GUI-------------
 
    //Initializes the struct----------------------------------------
-   
+
 
    sModell.sSettings.eMode = step;
    sModell.sSettings.eTCruiseControl = off;
@@ -44,10 +42,12 @@ int main(void)
    printFrame(0, 0, WINDOWWIDTH + 2, STATUSHEIGHT + BOARDHEIGHT + MENUHEIGHT + 4);
    printFrame(0, MENUHEIGHT + 1, WINDOWWIDTH + 2, BOARDHEIGHT + 2);
 
+
+   printBoard(&sModell, 0);
+
    /*
 
-   printBoard(sMyNQueen);
-   printStatus(sMyNQueen);
+    TODO printStatus(sMyNQueen);
 
    */
 

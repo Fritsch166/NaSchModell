@@ -15,33 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\deleteArea.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\object_car.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\printFrame.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="h-files\naschmodell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h-files\object_car.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h-files\Utilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="resource\Utilities.lib">
+    <Library Include="lib-files\Utilities.lib">
       <Filter>Resource Files</Filter>
     </Library>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header\naschmodell.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="header\object_car.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="header\Utilities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="c-files\deleteArea.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c-files\main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c-files\object_car.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c-files\printBoard.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c-files\printFrame.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

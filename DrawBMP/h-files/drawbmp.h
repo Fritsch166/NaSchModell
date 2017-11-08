@@ -1,5 +1,4 @@
-#ifndef _INC_DRAWBMPH
-#define _INC_DRAWBMPH
+#pragma once
 
 
 #ifdef DLLFUNKTION_EXPORT
@@ -17,4 +16,3 @@ _DLL_DECLSPEC_ void drawbmp(
    const unsigned char ** const ppcBLUE
 );
 
-#endif // _INC_DRAWBMPH
