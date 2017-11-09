@@ -40,11 +40,15 @@ int main(void)
    sModell.sGaugings.iTrafficJams = 0;
    sModell.sGaugings.runtime = 0;
 
+
+   //init one car
+   sModell.asCars[0].bDoDelayAtV0 = false;
    sModell.asCars[0].bIsInJam = false;
    sModell.asCars[0].iJamGroupId = -1;
    sModell.asCars[0].iVChange = 0;
    sModell.asCars[0].iV = rand() % (sModell.sSettings.iVMax + 1);
    sModell.asCars[0].iPosition = 5;
+   
 
 
    //PRINTS-------------------------------------------------------
@@ -143,6 +147,7 @@ int main(void)
                {
 
                   sModell.asCars[i].bIsInJam = false;
+                  sModell.asCars[i].bDoDelayAtV0 = false;
                   sModell.asCars[i].iJamGroupId = -1;
                   sModell.asCars[i].iVChange = 0;
                   sModell.asCars[i].iV = rand() % (sModell.sSettings.iVMax + 1);

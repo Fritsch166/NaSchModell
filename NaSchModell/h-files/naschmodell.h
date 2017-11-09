@@ -47,8 +47,6 @@
 
 
 
-
-
 #define MAXWRITEPATHLENGTH 250
 #define COMPLPATHLENGTH (MAXWRITEPATHLENGTH + 5)
 #define TIMESTAMPLENGTH 50
@@ -60,7 +58,8 @@ enum states
    accelerate,
    retard,
    dilly_dally,
-   drive
+   drive,
+   test_jam
 };
 
 enum toggle
@@ -106,6 +105,7 @@ struct object_car
    int iJamGroupId;
    int iPosition;
    bool bIsInJam;
+   bool bDoDelayAtV0;
 };
 
 struct naschmodell

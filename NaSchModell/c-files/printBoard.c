@@ -3,13 +3,14 @@
 
 static const char* const acVelocitys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-static const char* apcText[5] =
+static const char* apcText[6] =
 {
    "NewTick        ",
    "Beschleunigen  ",
    "Bremsen        ",
    "Trödeln        ",
-   "Fahren         "
+   "Fahren         ",
+   "Stau?          "
 };
 
 void printBoard(PMODELL pModell, enum states * pEState)
@@ -87,6 +88,7 @@ void printBoard(PMODELL pModell, enum states * pEState)
                break;
 
             case drive:
+            case test_jam:    
                cCompareV = (iTotalVelocity == 0 ? '!' : cCompareV);
 
             case accelerate:
