@@ -29,6 +29,7 @@
 #define OP_DEKREMENT '-'
 #define OP_INKREMENT '+'
 #define OP_SAVESETTINGS 5555555
+#define OP_PRINT 'p'
 
 
 #define FILLCHAR '#'

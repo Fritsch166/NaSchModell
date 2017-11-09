@@ -23,7 +23,7 @@ int main(void)
    sModell.sSettings.eTSaveToFile = off;
    sModell.sSettings.eTCruiseControl = off;
    sModell.sSettings.eTDelayedAtV0 = off;
-   sModell.sSettings.iCars = 0;
+   sModell.sSettings.iCars = 1;
    sModell.sSettings.iPProzent = 33;
    sModell.sSettings.iVMax = 5;
    for (i = 0; i < COMPLPATHLENGTH; i++)
@@ -39,6 +39,12 @@ int main(void)
    sModell.sGaugings.iTicks = 0;
    sModell.sGaugings.iTrafficJams = 0;
    sModell.sGaugings.runtime = 0;
+
+   sModell.asCars[0].bIsInJam = false;
+   sModell.asCars[0].iJamGroupId = -1;
+   sModell.asCars[0].iVChange = 0;
+   sModell.asCars[0].iV = rand() % (sModell.sSettings.iVMax + 1);
+   sModell.asCars[0].iPosition = 5;
 
 
    //PRINTS-------------------------------------------------------
@@ -128,7 +134,7 @@ int main(void)
 
             if (iOpt == OP_SAVESETTINGS)
             {
-
+               //! init cars and gaugings
                randomize(aiPositions, sModell.sSettings.iCars);
                sModell.sGaugings.iTicks = 0;
                sModell.sGaugings.iTrafficJams = 0;
@@ -143,14 +149,52 @@ int main(void)
                   sModell.asCars[i].iPosition = aiPositions[i];
 
                }
+               if (sModell.sSettings.eMode == automatic)
+               {
+                  sModell.sGaugings.runtime = clock();
+               }
+
+               //! print data 
+               printBoard(&sModell, 0);
+               printStatusGaugings(&sModell);
+
+               _gotoxy(2, 1);
+               printf("CALCULATION                                                      ");
+               _gotoxy(2, 2);
+               printf("                                                                 ");
+               _gotoxy(2, 3);
+               printf(" [e] Exit                                                        ");
+               if (sModell.sSettings.eTSaveToFile == on)
+               {
+                  _gotoxy(2, 3);
+                  printf(" [e] Exit         [p] Abbruch und drucken                        ");
+               }
+               _gotoxy(2, 4);
+               printf(" [s] Abbruch                                                     ");
+               if (sModell.sSettings.eMode == step)
+               {
+                  _gotoxy(2, 4);
+                  printf(" [s] Abbruch      [LEER] Next..                                  ");
+               }
+               _gotoxy(0, 0);
+
+               iOpt = calcNaSchModell(&sModell);
+
+               if (sModell.sSettings.eTSaveToFile == on)
+               {
+                  if (iOpt == OP_PRINT || sModell.sGaugings.iTicks >= MAXTICKS)
+                  {
+                     //TODO print
+                  }
+               }
+
+               printStatusGaugings(&sModell);
+
+               sModell.sGaugings.iTicks = 0;
+               sModell.sGaugings.iTrafficJams = 0;
+               sModell.sGaugings.runtime = 0;
             }
 
-
-
-            if (iOpt == OP_SAVESETTINGS)
-            {
-               //TODO start algo
-            }
 
             //! print data 
             printBoard(&sModell, 0);
