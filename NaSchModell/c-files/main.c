@@ -117,6 +117,7 @@ int main(void)
             break;
 
          case OP_START:
+            iOpt = settingWindow(&sModell);
             //TODO start algo
             break;
 

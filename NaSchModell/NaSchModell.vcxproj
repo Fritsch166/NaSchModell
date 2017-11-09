@@ -33,6 +33,7 @@
     <ClCompile Include="c-files\printFrame.c" />
     <ClCompile Include="c-files\printStatusGaugings.c" />
     <ClCompile Include="c-files\printStatusSettings.c" />
+    <ClCompile Include="c-files\settingWindow.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
