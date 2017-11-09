@@ -56,7 +56,7 @@
 
 enum states
 {
-   newtick,
+   newtick = 0,
    accelerate,
    retard,
    dilly_dally,
@@ -122,7 +122,7 @@ typedef struct object_car* ACAR;
 
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
-void printBoard(PMODELL pModell, int iView);
+void printBoard(PMODELL pModell, enum states * pEState);
 void printStatusSettings(PMODELL pModell);
 void printStatusGaugings(PMODELL pModell);
 int settingWindow(PMODELL pModell);

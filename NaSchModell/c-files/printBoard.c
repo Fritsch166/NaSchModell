@@ -1,7 +1,18 @@
 
 #include "..\h-files\naschmodell.h"
 
-void printBoard(PMODELL pModell, int iView)
+static const char* const acVelocitys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+static const char* apcText[5] =
+{
+   "NewTick        ",
+   "Beschleunigen  ",
+   "Bremsen        ",
+   "Trödeln        ",
+   "Fahren         "
+};
+
+void printBoard(PMODELL pModell, enum states * pEState)
 {
    int iXStart = 3;
    int iYStart = MENUHEIGHT + 3;
@@ -18,7 +29,7 @@ void printBoard(PMODELL pModell, int iView)
     * static values
     **************************************************/
    static char acStreet[STREET_LENGTH + 1];
-   static char* acVelocitys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 
    if (acStreet[0] == 0)
    {
@@ -66,17 +77,37 @@ void printBoard(PMODELL pModell, int iView)
       _gotoxy(iXStart + iX, (iYStart + iY * 5) + 3);
       printf("%c", acVelocitys[iTotalVelocity]);
 
-      if (iView > 0)
+
+      if (pEState != NULL)
       {
          cCompareV = (iVChange > 0 ? '>' : (iVChange == 0 ? '=' : ('<')));
-         if (iView > 1)
+         switch (*pEState)
          {
-            cCompareV = (iTotalVelocity == 0 ? '!' : cCompareV);
-         }
-         _gotoxy(iXStart + iX, (iYStart + iY * 5) + 4);
-         printf("%c", cCompareV);
-      }
+            case newtick:
+               break;
 
+            case drive:
+               cCompareV = (iTotalVelocity == 0 ? '!' : cCompareV);
+
+            case accelerate:
+            case retard:
+            case dilly_dally:
+               _gotoxy(iXStart + iX, (iYStart + iY * 5) + 4);
+               printf("%c", cCompareV);
+               break;
+
+            default:
+               ;
+         }
+
+         _gotoxy(iXStart, iYStart);
+         printf("%s", apcText[*pEState]);
+      }
+      else
+      {
+         _gotoxy(iXStart, iYStart);
+         printf("                    ");
+      }
    }
 
 

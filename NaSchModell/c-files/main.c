@@ -55,7 +55,7 @@ int main(void)
    printFrame(0, BOARDHEIGHT + MENUHEIGHT + 2, STATUS_SETTINGS_WIDTH + 2, STATUSHEIGHT + 2);
    printFrame(STATUS_SETTINGS_WIDTH + 1, BOARDHEIGHT + MENUHEIGHT + 2, STATUS_GAUGINGS_WIDTH + 2, STATUSHEIGHT + 2);
 
-   printBoard(&sModell, 0);
+   printBoard(&sModell, NULL);
    printStatusSettings(&sModell);
    printStatusGaugings(&sModell);
 
@@ -155,7 +155,7 @@ int main(void)
                }
 
                //! print data 
-               printBoard(&sModell, 0);
+               printBoard(&sModell, NULL);
                printStatusGaugings(&sModell);
 
                _gotoxy(2, 1);
@@ -197,7 +197,7 @@ int main(void)
 
 
             //! print data 
-            printBoard(&sModell, 0);
+            printBoard(&sModell, NULL);
 
             _gotoxy(2, 1);
             printf("MENUE                                                            ");

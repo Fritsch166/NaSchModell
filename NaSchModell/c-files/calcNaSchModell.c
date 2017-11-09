@@ -3,6 +3,8 @@
 
 int calcNaSchModell(PMODELL pModell)
 {
+   int iOpt = OP_DEFAULT;
+
    //TODO algo
 
    _getch();
@@ -28,5 +30,5 @@ int calcNaSchModell(PMODELL pModell)
 
 
 
-   return 0;
+   return iOpt;
 }
