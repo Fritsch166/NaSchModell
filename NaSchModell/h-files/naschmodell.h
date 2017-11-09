@@ -53,6 +53,15 @@
 #define TIMESTAMPLENGTH 50
 
 
+enum states
+{
+   newtick,
+   accelerate,
+   retard,
+   dilly_dally,
+   drive
+};
+
 enum toggle
 {
    off,
@@ -85,7 +94,7 @@ struct gaugings
    int iTrafficJams;
    clock_t runtime;
    char acTimeStamp[TIMESTAMPLENGTH];
-   
+
    //TODO colormap
 };
 
