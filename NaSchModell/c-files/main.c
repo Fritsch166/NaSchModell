@@ -15,12 +15,13 @@ int main(void)
 
    //Initializes the struct----------------------------------------
 
+   srand(time(NULL));
 
    sModell.sSettings.eMode = step;
    sModell.sSettings.eTSaveToFile = off;
    sModell.sSettings.eTCruiseControl = off;
    sModell.sSettings.eTDelayedAtV0 = off;
-   sModell.sSettings.iCars = 10; //TODO remove test value
+   sModell.sSettings.iCars = 0;
    sModell.sSettings.iPProzent = 33;
    sModell.sSettings.iVMax = 5;
    for (i = 0; i < COMPLPATHLENGTH; i++)
@@ -36,8 +37,6 @@ int main(void)
    sModell.sGaugings.iTicks = 0;
    sModell.sGaugings.iTrafficJams = 0;
    sModell.sGaugings.runtime = 0;
-
-   initCars(sModell.asCars, sModell.sSettings.iCars);
 
 
    //PRINTS-------------------------------------------------------
@@ -117,16 +116,51 @@ int main(void)
             break;
 
          case OP_START:
+
+            //! SettingWindow Start..
             iOpt = settingWindow(&sModell);
+
+            //! print changes settings
             printStatusSettings(&sModell);
+
+
+            if (iOpt == OP_SAVESETTINGS)
+            {
+            
+               sModell.sGaugings.iTicks = 0;
+               sModell.sGaugings.iTrafficJams = 0;
+               sModell.sGaugings.runtime = 0;
+               for (int i = 0; i < sModell.sSettings.iCars; i++)
+               {
+
+                  sModell.asCars[i].bIsInJam = false;
+                  sModell.asCars[i].iJamGroupId = -1;
+                  sModell.asCars[i].iVChange = 0;
+                  sModell.asCars[i].iV = rand() % (sModell.sSettings.iVMax + 1);
+
+                  //TODO randomize cars
+                  sModell.asCars[i].iPosition = i;
+                 
+               }
+            }
+
+            //! print data 
             printBoard(&sModell, 0);
 
             if (iOpt == OP_SAVESETTINGS)
             {
                //TODO start algo
             }
-            
-           
+
+            _gotoxy(2, 1);
+            printf("MENUE                                                            ");
+            _gotoxy(2, 2);
+            printf("                                                                 ");
+            _gotoxy(2, 3);
+            printf(" [e] Exit         [m] Toggle Mode  [c] Toggle Cruise-control     ");
+            _gotoxy(2, 4);
+            printf(" [f] Speichern..  [q] Start..      [d] Toggle Delay_at_v=0       ");
+            _gotoxy(0, 0);
             break;
 
          case OP_EXIT:

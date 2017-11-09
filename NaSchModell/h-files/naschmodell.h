@@ -106,7 +106,7 @@ struct naschmodell
 typedef struct naschmodell * PMODELL;
 typedef struct object_car* ACAR;
 
-void initCars(ACAR asCars, const int iCars);
+
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void printBoard(PMODELL pModell, int iView);

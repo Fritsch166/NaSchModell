@@ -27,7 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="c-files\deleteArea.c" />
-    <ClCompile Include="c-files\initCars.c" />
     <ClCompile Include="c-files\main.c" />
     <ClCompile Include="c-files\printBoard.c" />
     <ClCompile Include="c-files\printFrame.c" />

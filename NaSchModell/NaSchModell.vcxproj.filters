@@ -46,9 +46,6 @@
     <ClCompile Include="c-files\printStatusGaugings.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c-files\initCars.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="c-files\settingWindow.c">
       <Filter>Source Files</Filter>
     </ClCompile>
