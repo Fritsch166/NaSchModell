@@ -3,11 +3,13 @@
 
 #include "..\h-files\naschmodell.h"
 
+void randomize(int aiPositions[STREET_LENGTH], const int iAmountPositions);
 
 int main(void)
 {
    struct naschmodell sModell;
    int iOpt = OP_DEFAULT;
+   int aiPositions[STREET_LENGTH];
    int i = 0;
 
 
@@ -126,7 +128,8 @@ int main(void)
 
             if (iOpt == OP_SAVESETTINGS)
             {
-            
+
+               randomize(aiPositions, sModell.sSettings.iCars);
                sModell.sGaugings.iTicks = 0;
                sModell.sGaugings.iTrafficJams = 0;
                sModell.sGaugings.runtime = 0;
@@ -137,14 +140,12 @@ int main(void)
                   sModell.asCars[i].iJamGroupId = -1;
                   sModell.asCars[i].iVChange = 0;
                   sModell.asCars[i].iV = rand() % (sModell.sSettings.iVMax + 1);
+                  sModell.asCars[i].iPosition = aiPositions[i];
 
-                  //TODO randomize cars
-                  sModell.asCars[i].iPosition = i;
-                 
                }
             }
 
-            
+
 
             if (iOpt == OP_SAVESETTINGS)
             {
@@ -178,4 +179,36 @@ int main(void)
    _clrscr();
 
    return EXIT_SUCCESS;
+}
+
+void randomize(int aiPositions[STREET_LENGTH], const int iAmountPositions)
+{
+   int iN = 0;
+   int iPosition = 0;
+
+   for (iPosition = 0; iPosition < STREET_LENGTH; iPosition++)
+   {
+      aiPositions[iPosition] = -1;
+   }
+
+   for (iN = 0; iN < iAmountPositions;)
+   {
+      iPosition = (rand() % STREET_LENGTH);
+
+      if (aiPositions[iPosition] < 0)
+      {
+         aiPositions[iPosition] = iPosition;
+         iN++;
+      }
+   }
+
+   iN = 0;
+   for (iPosition = 0; iPosition < STREET_LENGTH; iPosition++)
+   {
+      if (aiPositions[iPosition] >= 0)
+      {
+         aiPositions[iN++] = aiPositions[iPosition];
+      }
+   }
+
 }
