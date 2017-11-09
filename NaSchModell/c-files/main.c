@@ -118,7 +118,15 @@ int main(void)
 
          case OP_START:
             iOpt = settingWindow(&sModell);
-            //TODO start algo
+            printStatusSettings(&sModell);
+            printBoard(&sModell, 0);
+
+            if (iOpt == OP_SAVESETTINGS)
+            {
+               //TODO start algo
+            }
+            
+           
             break;
 
          case OP_EXIT:
