@@ -144,13 +144,15 @@ int main(void)
                }
             }
 
-            //! print data 
-            printBoard(&sModell, 0);
+            
 
             if (iOpt == OP_SAVESETTINGS)
             {
                //TODO start algo
             }
+
+            //! print data 
+            printBoard(&sModell, 0);
 
             _gotoxy(2, 1);
             printf("MENUE                                                            ");

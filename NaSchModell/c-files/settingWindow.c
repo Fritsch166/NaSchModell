@@ -26,7 +26,7 @@ int settingWindow(PMODELL pModell)
    int aiValues[3];
 
    int aiMINValues[3] = {1, 1, 0};
-   int aiMAXValues[3] = {990, 50, 90};
+   int aiMAXValues[3] = {ARRAY_LENGTH, 50, 90};
 
 
    aiValues[0] = pModell->sSettings.iCars;

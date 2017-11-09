@@ -11,7 +11,11 @@
 
 #include "Utilities.h"
 
+#define STREET_LENGTH 1000
+#define PART_STREET_LENGTH 200
 #define ARRAY_LENGTH 990
+
+#define MAXTICKS 500
 
 #define OP_DEFAULT '.'
 #define OP_EXIT 'e'
@@ -41,8 +45,7 @@
 #define SETTING_WINDOW_HEIGHT 9
 
 
-#define STREET_LENGTH 1000
-#define PART_STREET_LENGTH 200
+
 
 
 #define MAXWRITEPATHLENGTH 250

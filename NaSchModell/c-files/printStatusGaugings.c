@@ -12,7 +12,7 @@ void printStatusGaugings(PMODELL pModell)
 
    //! - TICKS
    _gotoxy(siX, siY + 1);
-   printf("Ticks:                    %3.1d", pModell->sGaugings.iTicks);
+   printf("Ticks:        %3.1d%%        %3.1d", (int)(pModell->sGaugings.iTicks * 100.0 / MAXTICKS), pModell->sGaugings.iTicks);
 
    //! - VMAX
    _gotoxy(siX, siY + 2);
