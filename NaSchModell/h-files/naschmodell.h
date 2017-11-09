@@ -124,5 +124,6 @@ void deleteArea(const short int siXStart, const short int siYStart, const short 
 void printBoard(PMODELL pModell, int iView);
 void printStatusSettings(PMODELL pModell);
 void printStatusGaugings(PMODELL pModell);
+int settingWindow(PMODELL pModell);
 
 
