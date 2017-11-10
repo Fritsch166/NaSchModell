@@ -21,7 +21,7 @@ void printStatusSettings(PMODELL pModell)
 
    //! - P%
    _gotoxy(siX, siY + 2);
-   printf("P%%:     %2.1d", pModell->sSettings.iPProzent);
+   printf("P%%:     %2.1d%%", pModell->sSettings.iPProzent);
 
    //! - Mode
    _gotoxy(siX, siY + 3);
@@ -31,13 +31,13 @@ void printStatusSettings(PMODELL pModell)
    siX += 14;
 
 
-   //! - CruiseControl
-   _gotoxy(siX, siY + 0);
-   printf("Cruise-control: %s", (pModell->sSettings.eTCruiseControl == off) ? ("OFF") : ("ON "));
-
    //! - Delayet at v=0
+   _gotoxy(siX, siY + 0);
+   printf("Increased delay at v=0:  %2.1d%%", pModell->sSettings.iIncreasedDelayAtV0Prozent);
+
+   //! - CruiseControl
    _gotoxy(siX, siY + 1);
-   printf("Delay at v=0:   %s", (pModell->sSettings.eTDelayedAtV0 == off) ? ("OFF") : ("ON "));
+   printf("Cruise-control: %s", (pModell->sSettings.eTCruiseControl == off) ? ("OFF") : ("ON "));
 
    //! - Save to file
    _gotoxy(siX, siY + 2);

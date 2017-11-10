@@ -22,7 +22,7 @@ int main(void)
    sModell.sSettings.eMode = step;
    sModell.sSettings.eTSaveToFile = off;
    sModell.sSettings.eTCruiseControl = off;
-   sModell.sSettings.eTDelayedAtV0 = off;
+   sModell.sSettings.iIncreasedDelayAtV0Prozent = 0;
    sModell.sSettings.iCars = 1;
    sModell.sSettings.iPProzent = 33;
    sModell.sSettings.iVMax = 5;
@@ -70,9 +70,9 @@ int main(void)
    _gotoxy(2, 2);
    printf("                                                                 ");
    _gotoxy(2, 3);
-   printf(" [e] Exit         [m] Toggle Mode  [c] Toggle Cruise-control     ");
+   printf(" [e] Exit         [m] Toggle Mode                                ");
    _gotoxy(2, 4);
-   printf(" [f] Speichern..  [q] Start..      [d] Toggle Delay_at_v=0       ");
+   printf(" [f] Speichern..  [q] Start..      [c] Toggle Cruise-control     ");
 
    _gotoxy(0, 0);
 
@@ -108,18 +108,6 @@ int main(void)
             else
             {
                sModell.sSettings.eTCruiseControl = off;
-            }
-            printStatusSettings(&sModell);
-            break;
-
-         case OP_CHANGEDELAYATV0STATE:
-            if (sModell.sSettings.eTDelayedAtV0 == off)
-            {
-               sModell.sSettings.eTDelayedAtV0 = on;
-            }
-            else
-            {
-               sModell.sSettings.eTDelayedAtV0 = off;
             }
             printStatusSettings(&sModell);
             break;
@@ -213,9 +201,9 @@ int main(void)
             _gotoxy(2, 2);
             printf("                                                                 ");
             _gotoxy(2, 3);
-            printf(" [e] Exit         [m] Toggle Mode  [c] Toggle Cruise-control     ");
+            printf(" [e] Exit         [m] Toggle Mode                                ");
             _gotoxy(2, 4);
-            printf(" [f] Speichern..  [q] Start..      [d] Toggle Delay_at_v=0       ");
+            printf(" [f] Speichern..  [q] Start..      [c] Toggle Cruise-control     ");
             _gotoxy(0, 0);
             break;
 

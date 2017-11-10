@@ -1,21 +1,7 @@
 
 #include "..\h-files\naschmodell.h"
 
-
-/*
-
-26x9
-**************************
-**Cars:**.XX***+/-********
-**************************
-**Vmax:***.X**************
-**************************
-**P%:*****.X**************
-**************************
-**Save Settings? [ENTER]**
-**************************
-
-*/
+#define COUNT_VALUES 4
 
 int settingWindow(PMODELL pModell)
 {
@@ -23,15 +9,16 @@ int settingWindow(PMODELL pModell)
    short int siY = MENUHEIGHT + 2 + (BOARDHEIGHT - (2 + SETTING_WINDOW_HEIGHT)) / 2;
    int iOpt = OP_DEFAULT;
    int iState = 0;
-   int aiValues[3];
+   int aiValues[COUNT_VALUES];
 
-   int aiMINValues[3] = {1, 1, 0};
-   int aiMAXValues[3] = {ARRAY_LENGTH, 50, 90};
+   int aiMINValues[COUNT_VALUES] = {1, 1, 0, 0};
+   int aiMAXValues[COUNT_VALUES] = {ARRAY_LENGTH, 50, 90, 90};
 
 
    aiValues[0] = pModell->sSettings.iCars;
    aiValues[1] = pModell->sSettings.iVMax;
    aiValues[2] = pModell->sSettings.iPProzent;
+   aiValues[3] = pModell->sSettings.iIncreasedDelayAtV0Prozent;
 
    deleteArea(siX, siY, 2 + SETTING_WINDOW_WIDTH, 2 + SETTING_WINDOW_HEIGHT);
    printFrame(siX, siY, 2 + SETTING_WINDOW_WIDTH, 2 + SETTING_WINDOW_HEIGHT);
@@ -55,17 +42,19 @@ int settingWindow(PMODELL pModell)
       _gotoxy(siX + 3, siY + 4);
       printf("VMax:   %2.1d        ", aiValues[1]);
       _gotoxy(siX + 3, siY + 6);
-      printf("P%%:     %2.1d        ", aiValues[2]);
+      printf("P%%:    %2.1d%%        ", aiValues[2]);
+      _gotoxy(siX + 3, siY + 8);
+      printf("IDV0:  %2.1d%%        ", aiValues[3]);
 
-      if (iState < 3)
+      if (iState < COUNT_VALUES)
       {
          _gotoxy(siX + 13, siY + 2 + 2 * iState);
          printf("   [+/-]");
          _gotoxy(siX + 13, siY + 2 + 2 * iState);
       }
-      else if (iState == 3)
+      else if (iState == COUNT_VALUES)
       {
-         _gotoxy(siX + 3, siY + 8);
+         _gotoxy(siX + 3, siY + 10);
          printf("Save Settings? [ENTER]");
       }
 
@@ -91,7 +80,7 @@ int settingWindow(PMODELL pModell)
 
          case OP_ENTER:
             iState++;
-            if (iState > 3)
+            if (iState > COUNT_VALUES)
             {
                iOpt = OP_SAVESETTINGS;
             }
@@ -114,9 +103,10 @@ int settingWindow(PMODELL pModell)
       pModell->sSettings.iCars = aiValues[0];
       pModell->sSettings.iVMax = aiValues[1];
       pModell->sSettings.iPProzent = aiValues[2];
+      pModell->sSettings.iIncreasedDelayAtV0Prozent = aiValues[3];
    }
 
    deleteArea(siX, siY, 2 + SETTING_WINDOW_WIDTH, 2 + SETTING_WINDOW_HEIGHT);
-  
+
    return iOpt;
 }

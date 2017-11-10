@@ -163,7 +163,7 @@ int fDo_NewTick(PMODELL pModell)
 
       pMyCar->iV = pMyCar->iV + pMyCar->iVChange;
       pMyCar->iVChange = 0;
-      if (pModell->sSettings.eTDelayedAtV0 == on && pMyCar->iV + pMyCar->iVChange == 0)
+      if (pModell->sSettings.iIncreasedDelayAtV0Prozent > 0 && pMyCar->iV + pMyCar->iVChange == 0)
       {
          pMyCar->bDoDelayAtV0 = true;
       }
@@ -225,10 +225,10 @@ int fDo_DillyDally(PMODELL pModell)
       {
          iRandom = rand() % 100;
 
-         if (pModell->sSettings.eTDelayedAtV0 == on && pMyCar->bDoDelayAtV0 == true)
+         if (pModell->sSettings.iIncreasedDelayAtV0Prozent > 0 && pMyCar->bDoDelayAtV0 == true)
          {
             pMyCar->bDoDelayAtV0 = false;
-            if (iRandom < (pModell->sSettings.iPProzent + ((100 - pModell->sSettings.iPProzent) * 30 / 100)))
+            if (iRandom < (pModell->sSettings.iPProzent + ((100 - pModell->sSettings.iPProzent) * pModell->sSettings.iIncreasedDelayAtV0Prozent / 100)))
             {
                pMyCar->iVChange--;
             }

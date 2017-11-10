@@ -41,10 +41,10 @@
 #define MENUHEIGHT 4
 #define STATUSHEIGHT 4
 #define BOARDHEIGHT 27
-#define STATUS_SETTINGS_WIDTH 43
+#define STATUS_SETTINGS_WIDTH 44
 #define STATUS_GAUGINGS_WIDTH 34
 #define SETTING_WINDOW_WIDTH 26
-#define SETTING_WINDOW_HEIGHT 9
+#define SETTING_WINDOW_HEIGHT 11
 
 
 
@@ -82,7 +82,7 @@ struct settings
    int iCars;
    int iPProzent;
    enum toggle eTCruiseControl;
-   enum toggle eTDelayedAtV0;
+   int iIncreasedDelayAtV0Prozent;
    enum toggle eTSaveToFile;
    enum mode eMode;
    char acFilename[COMPLPATHLENGTH];
