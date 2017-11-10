@@ -137,6 +137,7 @@ int main(void)
             printStatusSettings(&sModell);
 
 
+
             if (iOpt == OP_SAVESETTINGS)
             {
                //! init cars and gaugings
@@ -202,10 +203,10 @@ int main(void)
                sModell.sGaugings.iCurrentTrafficJams = 0;
                sModell.sGaugings.runtime = 0;
             }
-
-
-            //! print data 
-            printBoard(&sModell, NULL);
+            else
+            {
+               printBoard(&sModell, NULL);
+            }
 
             _gotoxy(2, 1);
             printf("MENUE                                                            ");

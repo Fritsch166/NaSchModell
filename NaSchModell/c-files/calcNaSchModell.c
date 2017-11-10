@@ -266,6 +266,9 @@ int fDo_Drive(PMODELL pModell)
 int fDo_TestJam(PMODELL pModell)
 {
    int iCarId = 0;
+   int iCurrentJams = 0;
+   int iLastJamGroupId = -1;
+   PCAR pCar = 0;
 
    pModell->sGaugings.iTicks++;
 
@@ -273,6 +276,22 @@ int fDo_TestJam(PMODELL pModell)
    {
       fDo_TestJam_OnOne(pModell, iCarId);
    }
+
+   iLastJamGroupId = pModell->asCars[pModell->sSettings.iCars - 1].iJamGroupId;
+   for (iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
+   {
+      pCar = pModell->asCars + iCarId;
+
+      if (pCar->iJamGroupId >= 0)
+      {
+         if (pCar->iJamGroupId != iLastJamGroupId)
+         {
+            iCurrentJams++;
+            iLastJamGroupId = pCar->iJamGroupId;
+         }
+      }
+   }
+   pModell->sGaugings.iCurrentTrafficJams = iCurrentJams;
 
    return OP_DEFAULT;
 }
@@ -303,9 +322,16 @@ bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
       if (pMyCar->iV + pMyCar->iVChange == 0)
       {
          pMyCar->bIsInJam = true;
-         pMyCar->iJamGroupId = pModell->sGaugings.iTotalTrafficJams;
-         pModell->sGaugings.iTotalTrafficJams++;
 
+         if (iDiff <= 1 && fDo_TestJam_OnOne(pModell, iCarInfrontId) == true)
+         {
+            pMyCar->iJamGroupId = pCarInfront->iJamGroupId;
+         }
+         else
+         {
+            pMyCar->iJamGroupId = pModell->sGaugings.iTotalTrafficJams;
+            pModell->sGaugings.iTotalTrafficJams++;
+         }
       }
       else if (iDiff <= 1)
       {
