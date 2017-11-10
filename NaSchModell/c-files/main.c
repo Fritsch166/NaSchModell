@@ -37,7 +37,8 @@ int main(void)
    }
 
    sModell.sGaugings.iTicks = 0;
-   sModell.sGaugings.iTrafficJams = 0;
+   sModell.sGaugings.iTotalTrafficJams = 0;
+   sModell.sGaugings.iCurrentTrafficJams = 0;
    sModell.sGaugings.runtime = 0;
 
 
@@ -48,7 +49,7 @@ int main(void)
    sModell.asCars[0].iVChange = 0;
    sModell.asCars[0].iV = rand() % (sModell.sSettings.iVMax + 1);
    sModell.asCars[0].iPosition = 5;
-   
+
 
 
    //PRINTS-------------------------------------------------------
@@ -91,7 +92,7 @@ int main(void)
             {
                sModell.sSettings.eMode = automatic;
             }
-            else
+            else if (sModell.sSettings.eMode == automatic)
             {
                sModell.sSettings.eMode = step;
             }
@@ -141,7 +142,8 @@ int main(void)
                //! init cars and gaugings
                randomize(aiPositions, sModell.sSettings.iCars);
                sModell.sGaugings.iTicks = 0;
-               sModell.sGaugings.iTrafficJams = 0;
+               sModell.sGaugings.iTotalTrafficJams = 0;
+               sModell.sGaugings.iCurrentTrafficJams = 0;
                sModell.sGaugings.runtime = 0;
                for (int i = 0; i < sModell.sSettings.iCars; i++)
                {
@@ -154,7 +156,7 @@ int main(void)
                   sModell.asCars[i].iPosition = aiPositions[i];
 
                }
-               if (sModell.sSettings.eMode == automatic)
+               if (sModell.sSettings.eMode != step)
                {
                   sModell.sGaugings.runtime = clock();
                }
@@ -189,14 +191,15 @@ int main(void)
                {
                   if (iOpt == OP_PRINT || sModell.sGaugings.iTicks >= MAXTICKS)
                   {
-                     //TODO print
+                     //TODO print to file
                   }
                }
 
                printStatusGaugings(&sModell);
 
                sModell.sGaugings.iTicks = 0;
-               sModell.sGaugings.iTrafficJams = 0;
+               sModell.sGaugings.iTotalTrafficJams = 0;
+               sModell.sGaugings.iCurrentTrafficJams = 0;
                sModell.sGaugings.runtime = 0;
             }
 

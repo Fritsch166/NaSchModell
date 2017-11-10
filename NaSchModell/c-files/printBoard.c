@@ -8,7 +8,7 @@ static const char* apcText[6] =
    "NewTick        ",
    "Beschleunigen  ",
    "Bremsen        ",
-   "Trödeln        ",
+   "Troedeln       ",
    "Fahren         ",
    "Stau?          "
 };
@@ -24,6 +24,8 @@ void printBoard(PMODELL pModell, enum states * pEState)
    int iTotalVelocity = 0;
    int iVChange = 0;
    char cCompareV = '\0';
+   bool bIsInJam = false;
+   int iJamGroupId = 0;
 
 
    /**************************************************
@@ -56,6 +58,8 @@ void printBoard(PMODELL pModell, enum states * pEState)
       printf("%.*s", PART_STREET_LENGTH, acStreet + iPosStreet);
       _gotoxy(iXStart + iX, (iYStart + iY * 5) + 4);
       printf("%.*s", PART_STREET_LENGTH, acStreet + iPosStreet);
+      _gotoxy(iXStart + iX, (iYStart + iY * 5) + 5);
+      printf("%.*s", PART_STREET_LENGTH, acStreet + iPosStreet);
 
    }
 
@@ -67,6 +71,8 @@ void printBoard(PMODELL pModell, enum states * pEState)
       iPosStreet = pModell->asCars[iN].iPosition;
       iVChange = pModell->asCars[iN].iVChange;
       iTotalVelocity = (pModell->asCars[iN].iV) + iVChange;
+      bIsInJam = pModell->asCars[iN].bIsInJam;
+      iJamGroupId = pModell->asCars[iN].iJamGroupId;
 
 
       iX = (short int)(iPosStreet % PART_STREET_LENGTH);
@@ -88,7 +94,7 @@ void printBoard(PMODELL pModell, enum states * pEState)
                break;
 
             case drive:
-            case test_jam:    
+            case test_jam:
                cCompareV = (iTotalVelocity == 0 ? '!' : cCompareV);
 
             case accelerate:
@@ -104,6 +110,12 @@ void printBoard(PMODELL pModell, enum states * pEState)
 
          _gotoxy(iXStart, iYStart);
          printf("%s", apcText[*pEState]);
+
+         if (bIsInJam == true)
+         {
+            _gotoxy(iXStart + iX, (iYStart + iY * 5) + 5);
+            printf("%c", 'a' + (iJamGroupId % 26));
+         }
       }
       else
       {

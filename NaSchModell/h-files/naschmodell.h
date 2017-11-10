@@ -30,6 +30,7 @@
 #define OP_INKREMENT '+'
 #define OP_SAVESETTINGS 5555555
 #define OP_PRINT 'p'
+#define OP_STEP ' '
 
 
 #define FILLCHAR '#'
@@ -41,7 +42,7 @@
 #define STATUSHEIGHT 4
 #define BOARDHEIGHT 27
 #define STATUS_SETTINGS_WIDTH 43
-#define STATUS_GAUGINGS_WIDTH 31
+#define STATUS_GAUGINGS_WIDTH 34
 #define SETTING_WINDOW_WIDTH 26
 #define SETTING_WINDOW_HEIGHT 9
 
@@ -91,7 +92,8 @@ struct settings
 struct gaugings
 {
    int iTicks;
-   int iTrafficJams;
+   int iTotalTrafficJams;
+   int iCurrentTrafficJams;
    clock_t runtime;
    char acTimeStamp[TIMESTAMPLENGTH];
 
@@ -117,7 +119,7 @@ struct naschmodell
 
 
 typedef struct naschmodell * PMODELL;
-typedef struct object_car* ACAR;
+typedef struct object_car* PCAR;
 
 
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);

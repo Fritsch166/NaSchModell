@@ -11,38 +11,41 @@ void printStatusGaugings(PMODELL pModell)
    //!Prints:
 
    //! - TICKS
+   _gotoxy(siX, siY + 0);
+   printf("Ticks:           %3.1d%%     %3.1d", (int)(pModell->sGaugings.iTicks * 100.0 / MAXTICKS), pModell->sGaugings.iTicks);
+
+   //! - Total traffic jams
    _gotoxy(siX, siY + 1);
-   printf("Ticks:        %3.1d%%        %3.1d", (int)(pModell->sGaugings.iTicks * 100.0 / MAXTICKS), pModell->sGaugings.iTicks);
+   printf("Total   traffic jams: %7.1d", pModell->sGaugings.iTotalTrafficJams);
 
-   //! - VMAX
+   //! - Current traffic jams
    _gotoxy(siX, siY + 2);
-   printf("Traffic jams:       %9.1d", pModell->sGaugings.iTrafficJams);
-
-   //! - Time
+   printf("Current traffic jams: %7.1d", pModell->sGaugings.iCurrentTrafficJams); //TODO calc value
 
 
    //! - Time
    _gotoxy(siX, siY + 3);
-   if (pModell->sSettings.eMode == automatic)
+   if (pModell->sSettings.eMode == step)
+   {
+      printf("                                ");
+   }
+   else
    {
       if (pModell->sGaugings.runtime != 0)
       {
-         if (pModell->sGaugings.iTrafficJams == 0)
+         if (pModell->sGaugings.iTotalTrafficJams == 0)
          {
             iTimeMs = (int)(clock() - pModell->sGaugings.runtime);
-            sprintf_s(pModell->sGaugings.acTimeStamp, TIMESTAMPLENGTH, "Time without jams:   %2.1d,%0.3d", (int)(iTimeMs / CLOCKS_PER_SEC), (int)(iTimeMs % CLOCKS_PER_SEC));
+            sprintf_s(pModell->sGaugings.acTimeStamp, TIMESTAMPLENGTH, "Time    without jams:  %2.1d,%0.3dsec", (int)(iTimeMs / CLOCKS_PER_SEC), (int)(iTimeMs % CLOCKS_PER_SEC));
          }
 
          printf("%s", pModell->sGaugings.acTimeStamp);
       }
       else
       {
-         printf("Time without jams:   0,000sec");
+         printf("Time    without jams:   0,000sec");
       }
-   }
-   else
-   {
-      printf("                             ");
+
    }
 
 
