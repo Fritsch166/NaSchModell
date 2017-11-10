@@ -67,7 +67,7 @@ int userinteraction(PMODELL pModell)
 {
    int iOpt = OP_DEFAULT;
 
-   if (pModell->sSettings.eMode == step)
+   if (pModell->sSettings.eMode == step1)
    {
       do
       {
@@ -94,7 +94,7 @@ int userinteraction(PMODELL pModell)
 int fPrint_NewTick(PMODELL pModell)
 {
    enum states eState = newtick;
-   if (pModell->sSettings.eMode == step)
+   if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
    }
@@ -104,7 +104,7 @@ int fPrint_NewTick(PMODELL pModell)
 int fPrint_Accelerate(PMODELL pModell)
 {
    enum states eState = accelerate;
-   if (pModell->sSettings.eMode == step)
+   if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
    }
@@ -114,7 +114,7 @@ int fPrint_Accelerate(PMODELL pModell)
 int fPrint_Retard(PMODELL pModell)
 {
    enum states eState = retard;
-   if (pModell->sSettings.eMode == step)
+   if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
    }
@@ -124,7 +124,7 @@ int fPrint_Retard(PMODELL pModell)
 int fPrint_DillyDally(PMODELL pModell)
 {
    enum states eState = dilly_dally;
-   if (pModell->sSettings.eMode == step)
+   if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
    }
@@ -134,7 +134,7 @@ int fPrint_DillyDally(PMODELL pModell)
 int fPrint_Drive(PMODELL pModell)
 {
    enum states eState = drive;
-   if (pModell->sSettings.eMode == step)
+   if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
    }
@@ -144,7 +144,7 @@ int fPrint_Drive(PMODELL pModell)
 int fPrint_TestJam(PMODELL pModell)
 {
    enum states eState = test_jam;
-   if (pModell->sSettings.eMode == step || pModell->sSettings.eMode == automatic)
+   if (pModell->sSettings.eMode == step1 || pModell->sSettings.eMode == auto6)
    {
       printBoard(pModell, &eState);
    }

@@ -25,7 +25,7 @@ void printStatusGaugings(PMODELL pModell)
 
    //! - Time
    _gotoxy(siX, siY + 3);
-   if (pModell->sSettings.eMode == step)
+   if (pModell->sSettings.eMode == step1)
    {
       printf("                                ");
    }

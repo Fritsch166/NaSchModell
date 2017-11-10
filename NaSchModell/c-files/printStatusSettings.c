@@ -25,7 +25,7 @@ void printStatusSettings(PMODELL pModell)
 
    //! - Mode
    _gotoxy(siX, siY + 3);
-   printf("Mode: %s", (pModell->sSettings.eMode == step) ? ("Step") : ("Auto"));
+   printf("Mode: %s", (pModell->sSettings.eMode == step1) ? ("Step") : ("Auto"));
 
 
    siX += 14;

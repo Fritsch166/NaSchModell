@@ -19,7 +19,7 @@ int main(void)
 
    srand(time(NULL));
 
-   sModell.sSettings.eMode = step;
+   sModell.sSettings.eMode = step1;
    sModell.sSettings.eTSaveToFile = off;
    sModell.sSettings.eTCruiseControl = off;
    sModell.sSettings.iIncreasedDelayAtV0Prozent = 0;
@@ -88,13 +88,13 @@ int main(void)
       {
 
          case OP_CHANGEMODESTATE:
-            if (sModell.sSettings.eMode == step)
+            if (sModell.sSettings.eMode == step1)
             {
-               sModell.sSettings.eMode = automatic;
+               sModell.sSettings.eMode = auto6;
             }
-            else if (sModell.sSettings.eMode == automatic)
+            else if (sModell.sSettings.eMode == auto6)
             {
-               sModell.sSettings.eMode = step;
+               sModell.sSettings.eMode = step1;
             }
             printStatusSettings(&sModell);
             printStatusGaugings(&sModell);
@@ -145,7 +145,7 @@ int main(void)
                   sModell.asCars[i].iPosition = aiPositions[i];
 
                }
-               if (sModell.sSettings.eMode != step)
+               if (sModell.sSettings.eMode != step1)
                {
                   sModell.sGaugings.runtime = clock();
                }
@@ -167,7 +167,7 @@ int main(void)
                }
                _gotoxy(2, 4);
                printf(" [s] Abbruch                                                     ");
-               if (sModell.sSettings.eMode == step)
+               if (sModell.sSettings.eMode == step1)
                {
                   _gotoxy(2, 4);
                   printf(" [s] Abbruch      [LEER] Next..                                  ");
