@@ -19,15 +19,13 @@
   */
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight)
 {
-   short int siY = 0;
-   short int siX = 0;
 
    //Delete Area
-   for (siY = 0; siY < siHeight; siY++)
+   for (short int siY = 0; siY < siHeight; siY++)
    {
       _gotoxy(siXStart, siYStart + siY);
 
-      for (siX = 0; siX < siLength; siX++)
+      for (short int siX = 0; siX < siLength; siX++)
       {
          printf(" ");
       }

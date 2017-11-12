@@ -8,10 +8,6 @@ void randomize(int aiPositions[STREET_LENGTH], const int iAmountPositions);
 int main(void)
 {
    struct naschmodell sModell;
-   int iOpt = OP_DEFAULT;
-   int aiPositions[STREET_LENGTH];
-   int i = 0;
-
 
    //Initializes the struct and prints the standard GUI-------------
 
@@ -26,7 +22,7 @@ int main(void)
    sModell.sSettings.iCars = 1;
    sModell.sSettings.iPProzent = 33;
    sModell.sSettings.iVMax = 5;
-   for (i = 0; i < COMPLPATHLENGTH; i++)
+   for (int i = 0; i < COMPLPATHLENGTH; i++)
    {
       sModell.sSettings.acFilename[i] = 0;
       sModell.sSettings.acComplFilePath[i] = 0;
@@ -79,9 +75,8 @@ int main(void)
 
    //LOOP---------------------------------------------------------
 
-   do
+   for (int iOpt = OP_DEFAULT; iOpt != OP_EXIT; )
    {
-
       iOpt = _getch();
 
       switch (iOpt)
@@ -129,21 +124,25 @@ int main(void)
             if (iOpt == OP_SAVESETTINGS)
             {
                //! init cars and gaugings
-               randomize(aiPositions, sModell.sSettings.iCars);
+
                sModell.sGaugings.iTicks = 0;
                sModell.sGaugings.iTotalTrafficJams = 0;
                sModell.sGaugings.iCurrentTrafficJams = 0;
                sModell.sGaugings.runtime = 0;
-               for (int i = 0; i < sModell.sSettings.iCars; i++)
                {
+                  int aiPositions[STREET_LENGTH];
+                  randomize(aiPositions, sModell.sSettings.iCars);
+                  for (int i = 0; i < sModell.sSettings.iCars; i++)
+                  {
 
-                  sModell.asCars[i].bIsInJam = false;
-                  sModell.asCars[i].bDoDelayAtV0 = false;
-                  sModell.asCars[i].iJamGroupId = -1;
-                  sModell.asCars[i].iVChange = 0;
-                  sModell.asCars[i].iV = rand() % (sModell.sSettings.iVMax + 1);
-                  sModell.asCars[i].iPosition = aiPositions[i];
+                     sModell.asCars[i].bIsInJam = false;
+                     sModell.asCars[i].bDoDelayAtV0 = false;
+                     sModell.asCars[i].iJamGroupId = -1;
+                     sModell.asCars[i].iVChange = 0;
+                     sModell.asCars[i].iV = rand() % (sModell.sSettings.iVMax + 1);
+                     sModell.asCars[i].iPosition = aiPositions[i];
 
+                  }
                }
                if (sModell.sSettings.eMode != step1)
                {
@@ -215,7 +214,6 @@ int main(void)
       }
 
    }
-   while (iOpt != OP_EXIT);
 
    _clrscr();
 

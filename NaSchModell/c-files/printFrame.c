@@ -20,11 +20,8 @@
   */
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight)
 {
-   short int siY = 0;
-   short int siX = 0;
-
    //Prints horizontal
-   for (siX = 0; siX < siLength; siX++)
+   for (short int siX = 0; siX < siLength; siX++)
    {
       //top
       _gotoxy(siXStart + siX, siYStart);
@@ -36,7 +33,7 @@ void printFrame(const short int siXStart, const short int siYStart, const short 
    }
 
    //Prints vertical
-   for (siY = 0; siY < siHeight; siY++)
+   for (short int siY = 0; siY < siHeight; siY++)
    {
       //left
       _gotoxy(siXStart, siYStart + siY);

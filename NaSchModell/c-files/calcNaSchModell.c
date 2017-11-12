@@ -21,7 +21,6 @@ bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId);
 int calcNaSchModell(PMODELL pModell)
 {
    int iOpt = OP_DEFAULT;
-   int iF = 0;
    int(*aFunc[FUNC_COUNT])(PMODELL) =
    {
       fDo_NewTick,
@@ -44,21 +43,15 @@ int calcNaSchModell(PMODELL pModell)
       userinteraction
    };
 
-   do
+   for (int iF = 0; iOpt != OP_EXIT && iOpt != OP_STOP && iOpt != OP_PRINT; iF++, iF %= FUNC_COUNT)
    {
-      if (aFunc[iF] != NULL)
-      {
-         iOpt = aFunc[iF](pModell);
-      }
+      iOpt = aFunc[iF](pModell);
 
-      iF = (int)((iF + 1) % FUNC_COUNT);
-
-      if (iF == 0 && pModell->sGaugings.iTicks >= MAXTICKS)
+      if (iF == FUNC_COUNT - 1 && pModell->sGaugings.iTicks >= MAXTICKS)
       {
          iOpt = OP_STOP;
       }
    }
-   while (iOpt != OP_EXIT && iOpt != OP_STOP && iOpt != OP_PRINT);
 
    return iOpt;
 }
@@ -154,12 +147,9 @@ int fPrint_TestJam(PMODELL pModell)
 
 int fDo_NewTick(PMODELL pModell)
 {
-   int iCarId = 0;
-   PCAR pMyCar = 0;
-
-   for (iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
+   for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
-      pMyCar = pModell->asCars + iCarId;
+      PCAR pMyCar = pModell->asCars + iCarId;
 
       pMyCar->iV = pMyCar->iV + pMyCar->iVChange;
       pMyCar->iVChange = 0;
@@ -174,12 +164,9 @@ int fDo_NewTick(PMODELL pModell)
 
 int fDo_Accelerate(PMODELL pModell)
 {
-   int iCarId = 0;
-   PCAR pMyCar = 0;
-
-   for (iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
+   for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
-      pMyCar = pModell->asCars + iCarId;
+      PCAR pMyCar = pModell->asCars + iCarId;
 
       if (pMyCar->iV + pMyCar->iVChange < pModell->sSettings.iVMax)
       {
@@ -192,16 +179,13 @@ int fDo_Accelerate(PMODELL pModell)
 
 int fDo_Retard(PMODELL pModell)
 {
-   int iCarId = 0, iDiff = 0;
-   PCAR pMyCar = 0, pCarInfront = 0;
-
-   for (iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
+   for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
-      pMyCar = pModell->asCars + iCarId;
-      pCarInfront = pModell->asCars + ((iCarId + 1) % pModell->sSettings.iCars);
-
-      iDiff = pCarInfront->iPosition - pMyCar->iPosition;
+      PCAR pMyCar = pModell->asCars + iCarId;
+      PCAR pCarInfront = pModell->asCars + ((iCarId + 1) % pModell->sSettings.iCars);
+      int iDiff = pCarInfront->iPosition - pMyCar->iPosition;
       iDiff += ((iDiff > 0) ? (-1) : (STREET_LENGTH));
+
       if (pMyCar->iV + pMyCar->iVChange > iDiff)
       {
          pMyCar->iVChange = iDiff - pMyCar->iV;
@@ -213,17 +197,13 @@ int fDo_Retard(PMODELL pModell)
 
 int fDo_DillyDally(PMODELL pModell)
 {
-   int iCarId = 0, iRandom = 0;
-   PCAR pMyCar = 0;
-
-
-   for (iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
+   for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
-      pMyCar = pModell->asCars + iCarId;
+      PCAR pMyCar = pModell->asCars + iCarId;
 
       if (pMyCar->iV + pMyCar->iVChange > 0)
       {
-         iRandom = rand() % 100;
+         int iRandom = rand() % 100;
 
          if (pModell->sSettings.iIncreasedDelayAtV0Prozent > 0 && pMyCar->bDoDelayAtV0 == true)
          {
@@ -250,12 +230,9 @@ int fDo_DillyDally(PMODELL pModell)
 
 int fDo_Drive(PMODELL pModell)
 {
-   int iCarId = 0;
-   PCAR pMyCar = 0;
-
-   for (iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
+   for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
-      pMyCar = pModell->asCars + iCarId;
+      PCAR  pMyCar = pModell->asCars + iCarId;
 
       pMyCar->iPosition = (pMyCar->iPosition + pMyCar->iV + pMyCar->iVChange) % STREET_LENGTH;
    }
@@ -265,48 +242,42 @@ int fDo_Drive(PMODELL pModell)
 
 int fDo_TestJam(PMODELL pModell)
 {
-   int iCarId = 0;
-   int iCurrentJams = 0;
-   int iLastJamGroupId = -1;
-   PCAR pCar = 0;
-
    pModell->sGaugings.iTicks++;
 
-   for (iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
+   for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
       fDo_TestJam_OnOne(pModell, iCarId);
    }
 
-   iLastJamGroupId = pModell->asCars[pModell->sSettings.iCars - 1].iJamGroupId;
-   for (iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
-      pCar = pModell->asCars + iCarId;
-
-      if (pCar->iJamGroupId >= 0)
+      int iCurrentJams = 0;
+      int iLastJamGroupId = pModell->asCars[pModell->sSettings.iCars - 1].iJamGroupId;
+      for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
       {
-         if (pCar->iJamGroupId != iLastJamGroupId)
+         PCAR pCar = pModell->asCars + iCarId;
+
+         if (pCar->iJamGroupId >= 0)
          {
-            iCurrentJams++;
-            iLastJamGroupId = pCar->iJamGroupId;
+            if (pCar->iJamGroupId != iLastJamGroupId)
+            {
+               iCurrentJams++;
+               iLastJamGroupId = pCar->iJamGroupId;
+            }
          }
       }
+      pModell->sGaugings.iCurrentTrafficJams = iCurrentJams;
    }
-   pModell->sGaugings.iCurrentTrafficJams = iCurrentJams;
 
    return OP_DEFAULT;
 }
 
 bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
 {
-   int iDiff = 0, iCarInfrontId = 0;
-   PCAR pMyCar = 0, pCarInfront = 0;
+   int iCarInfrontId = (iCarId + 1) % pModell->sSettings.iCars;
+   PCAR pMyCar = pModell->asCars + iCarId;
+   PCAR pCarInfront = pModell->asCars + iCarInfrontId;
 
-
-   iCarInfrontId = (iCarId + 1) % pModell->sSettings.iCars;
-   pMyCar = pModell->asCars + iCarId;
-   pCarInfront = pModell->asCars + iCarInfrontId;
-
-   iDiff = pCarInfront->iPosition - pMyCar->iPosition;
+   int iDiff = pCarInfront->iPosition - pMyCar->iPosition;
    iDiff += ((iDiff > 0) ? (-1) : (STREET_LENGTH));
 
    if (pMyCar->bIsInJam == true)
@@ -346,6 +317,7 @@ bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
          }
       }
    }
+
    return pMyCar->bIsInJam;
 }
 

@@ -4,9 +4,8 @@
 
 void printStatusSettings(PMODELL pModell)
 {
-   short int siX = 2;
-   short int siY = BOARDHEIGHT + MENUHEIGHT + 3;
-   int iDiff = 0;
+   const short int siX = 2;
+   const short int siY = BOARDHEIGHT + MENUHEIGHT + 3;
 
 
    //!Prints:
@@ -28,40 +27,39 @@ void printStatusSettings(PMODELL pModell)
    printf("Mode: %s", (pModell->sSettings.eMode == step1) ? ("Step") : ("Auto"));
 
 
-   siX += 14;
-
 
    //! - Delayet at v=0
-   _gotoxy(siX, siY + 0);
+   _gotoxy(siX + 14, siY + 0);
    printf("Increased delay at v=0:  %2.1d%%", pModell->sSettings.iIncreasedDelayAtV0Prozent);
 
    //! - CruiseControl
-   _gotoxy(siX, siY + 1);
+   _gotoxy(siX + 14, siY + 1);
    printf("Cruise-control: %s", (pModell->sSettings.eTCruiseControl == off) ? ("OFF") : ("ON "));
 
    //! - Save to file
-   _gotoxy(siX, siY + 2);
+   _gotoxy(siX + 14, siY + 2);
    printf("Save to file:   %s", (pModell->sSettings.eTSaveToFile == off) ? ("OFF") : ("ON "));
 
    //! - FILEPATH
-   _gotoxy(siX, siY + 3);
-   iDiff = strlen(pModell->sSettings.acFilename) - 19;
-   if (iDiff < 0) //Print if necesary space
    {
-      for (iDiff = -iDiff; iDiff > 0; iDiff--)
+      _gotoxy(siX + 14, siY + 3);
+      int iDiff = strlen(pModell->sSettings.acFilename) - 19;
+      if (iDiff < 0) //Print if necesary space
       {
-         printf(" ");
+         for (iDiff = -iDiff; iDiff > 0; iDiff--)
+         {
+            printf(" ");
+         }
       }
-      iDiff = 0;
-   }
 
-   if (iDiff <= 0)
-   {
-      printf("-%s[.bmp]-", pModell->sSettings.acFilename);
-   }
-   else
-   {
-      printf("-%.*s..[.bmp]-", 17, pModell->sSettings.acFilename);
+      if (iDiff <= 0)
+      {
+         printf("-%s[.bmp]-", pModell->sSettings.acFilename);
+      }
+      else
+      {
+         printf("-%.*s..[.bmp]-", 17, pModell->sSettings.acFilename);
+      }
    }
 
 

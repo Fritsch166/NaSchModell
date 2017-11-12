@@ -4,9 +4,8 @@
 
 void printStatusGaugings(PMODELL pModell)
 {
-   short int siX = STATUS_SETTINGS_WIDTH + 3;
-   short int siY = BOARDHEIGHT + MENUHEIGHT + 3;
-   int iTimeMs = 0;
+   const short int siX = STATUS_SETTINGS_WIDTH + 3;
+   const short int siY = BOARDHEIGHT + MENUHEIGHT + 3;
 
    //!Prints:
 
@@ -22,7 +21,6 @@ void printStatusGaugings(PMODELL pModell)
    _gotoxy(siX, siY + 2);
    printf("Current traffic jams: %7.1d", pModell->sGaugings.iCurrentTrafficJams); //TODO calc value
 
-
    //! - Time
    _gotoxy(siX, siY + 3);
    if (pModell->sSettings.eMode == step1)
@@ -35,20 +33,16 @@ void printStatusGaugings(PMODELL pModell)
       {
          if (pModell->sGaugings.iTotalTrafficJams == 0)
          {
-            iTimeMs = (int)(clock() - pModell->sGaugings.runtime);
+            int iTimeMs = (int)(clock() - pModell->sGaugings.runtime);
             sprintf_s(pModell->sGaugings.acTimeStamp, TIMESTAMPLENGTH, "Time    without jams:  %2.1d,%0.3dsec", (int)(iTimeMs / CLOCKS_PER_SEC), (int)(iTimeMs % CLOCKS_PER_SEC));
          }
-
          printf("%s", pModell->sGaugings.acTimeStamp);
       }
       else
       {
          printf("Time    without jams:   0,000sec");
       }
-
    }
-
-
 
    //Standard position of the cursor
    _gotoxy(0, 0);

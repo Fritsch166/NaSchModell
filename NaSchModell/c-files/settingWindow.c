@@ -5,14 +5,14 @@
 
 int settingWindow(PMODELL pModell)
 {
-   short int siX = (WINDOWWIDTH + 2 - (2 + SETTING_WINDOW_WIDTH)) / 2;
-   short int siY = MENUHEIGHT + 2 + (BOARDHEIGHT - (2 + SETTING_WINDOW_HEIGHT)) / 2;
+   const short int siX = (WINDOWWIDTH + 2 - (2 + SETTING_WINDOW_WIDTH)) / 2;
+   const short int siY = MENUHEIGHT + 2 + (BOARDHEIGHT - (2 + SETTING_WINDOW_HEIGHT)) / 2;
    int iOpt = OP_DEFAULT;
-   int iState = 0;
-   int aiValues[COUNT_VALUES];
 
-   int aiMINValues[COUNT_VALUES] = {1, 1, 0, 0};
-   int aiMAXValues[COUNT_VALUES] = {ARRAY_LENGTH, 50, 90, 90};
+
+   int aiValues[COUNT_VALUES];
+   const int aiMINValues[COUNT_VALUES] = {1, 1, 0, 0};
+   const int aiMAXValues[COUNT_VALUES] = {ARRAY_LENGTH, 50, 90, 90};
 
 
    aiValues[0] = pModell->sSettings.iCars;
@@ -34,7 +34,7 @@ int settingWindow(PMODELL pModell)
 
    _gotoxy(0, 0);
 
-   do
+   for (int iState = 0; iOpt != OP_EXIT && iOpt != OP_STOP && iOpt != OP_SAVESETTINGS; )
    {
 
       _gotoxy(siX + 3, siY + 2);
@@ -96,7 +96,7 @@ int settingWindow(PMODELL pModell)
             break;
       }
    }
-   while (iOpt != OP_EXIT && iOpt != OP_STOP && iOpt != OP_SAVESETTINGS);
+
 
    if (iOpt == OP_SAVESETTINGS)
    {
