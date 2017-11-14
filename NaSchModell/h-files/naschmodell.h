@@ -8,6 +8,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
+#include <math.h>
 
 #include "Utilities.h"
 

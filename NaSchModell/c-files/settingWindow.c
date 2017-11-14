@@ -65,16 +65,22 @@ int settingWindow(PMODELL pModell)
 
 
          case OP_INKREMENT:
-            if (aiValues[iState] < aiMAXValues[iState])
+            if (iState < COUNT_VALUES)
             {
-               aiValues[iState]++;
+               if (aiValues[iState] < aiMAXValues[iState])
+               {
+                  aiValues[iState]++;
+               }
             }
             break;
 
          case OP_DEKREMENT:
-            if (aiValues[iState] > aiMINValues[iState])
+            if (iState < COUNT_VALUES)
             {
-               aiValues[iState]--;
+               if (aiValues[iState] > aiMINValues[iState])
+               {
+                  aiValues[iState]--;
+               }
             }
             break;
 
@@ -93,6 +99,24 @@ int settingWindow(PMODELL pModell)
             break;
 
          default:
+            if (iOpt >= '0' && iOpt <= '9' && iState < COUNT_VALUES)
+            {
+               
+               int iCopy = aiValues[iState];
+
+               iCopy = iCopy * 10 + iOpt - '0';
+
+               while (iCopy > aiMAXValues[iState])
+               {
+                  double d10PowX = pow(10.0, floor(log10(iCopy)));
+                  iCopy = iCopy - floor(iCopy / d10PowX) * d10PowX;
+               }
+
+               if (iCopy >= aiMINValues[iState] && iCopy <= aiMAXValues[iState])
+               {
+                  aiValues[iState] = iCopy;
+               }
+            }
             break;
       }
    }
