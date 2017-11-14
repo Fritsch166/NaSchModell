@@ -66,7 +66,10 @@ int userinteraction(PMODELL pModell)
       {
          iOpt = _getch();
       }
-      while (iOpt != OP_EXIT && iOpt != OP_STOP && iOpt != OP_STEP && (pModell->sSettings.eTSaveToFile == off || iOpt != OP_PRINT));
+      while (iOpt != OP_EXIT
+         && iOpt != OP_STOP
+         && iOpt != OP_STEP
+         && (pModell->sSettings.eTSaveToFile == off || iOpt != OP_PRINT));
    }
    else
    {
@@ -74,7 +77,9 @@ int userinteraction(PMODELL pModell)
       {
          iOpt = _getch();
 
-         if (iOpt != OP_EXIT && iOpt != OP_STOP && (pModell->sSettings.eTSaveToFile == off || iOpt != OP_PRINT))
+         if (iOpt != OP_EXIT
+            && iOpt != OP_STOP
+            && (pModell->sSettings.eTSaveToFile == off || iOpt != OP_PRINT))
          {
             iOpt = OP_DEFAULT;
          }
@@ -208,7 +213,7 @@ int fDo_DillyDally(PMODELL pModell)
          if (pModell->sSettings.iIncreasedDelayAtV0Prozent > 0 && pMyCar->bDoDelayAtV0 == true)
          {
             pMyCar->bDoDelayAtV0 = false;
-            if (iRandom < (pModell->sSettings.iPProzent + ((100 - pModell->sSettings.iPProzent) * pModell->sSettings.iIncreasedDelayAtV0Prozent / 100)))
+            if (iRandom < (pModell->sSettings.iPDDProzent + ((100 - pModell->sSettings.iPDDProzent) * pModell->sSettings.iIncreasedDelayAtV0Prozent / 100)))
             {
                pMyCar->iVChange--;
             }
@@ -217,7 +222,7 @@ int fDo_DillyDally(PMODELL pModell)
          {
             //Tempomat is on => no dilly_dally
          }
-         else if (iRandom < pModell->sSettings.iPProzent)
+         else if (iRandom < pModell->sSettings.iPDDProzent)
          {
             pMyCar->iVChange--;
          }
@@ -250,22 +255,22 @@ int fDo_TestJam(PMODELL pModell)
    }
 
    {
-      int iCurrentJams = 0;
+      pModell->sGaugings.iCurrentTrafficJams = 0;
       int iLastJamGroupId = pModell->asCars[pModell->sSettings.iCars - 1].iJamGroupId;
       for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
       {
          PCAR pCar = pModell->asCars + iCarId;
 
-         if (pCar->iJamGroupId >= 0)
+         if (pCar->bIsInJam == true)
          {
             if (pCar->iJamGroupId != iLastJamGroupId)
             {
-               iCurrentJams++;
+               pModell->sGaugings.iCurrentTrafficJams++;
                iLastJamGroupId = pCar->iJamGroupId;
             }
          }
       }
-      pModell->sGaugings.iCurrentTrafficJams = iCurrentJams;
+      
    }
 
    return OP_DEFAULT;
@@ -284,6 +289,7 @@ bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
    {
       if (pMyCar->iV + pMyCar->iVChange > 0 && pMyCar->iV + pMyCar->iVChange <= iDiff)
       {
+         //FALL D
          pMyCar->bIsInJam = false;
          pMyCar->iJamGroupId = -1;
       }
@@ -296,10 +302,12 @@ bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
 
          if (iDiff <= 1 && fDo_TestJam_OnOne(pModell, iCarInfrontId) == true)
          {
+            //FALL B
             pMyCar->iJamGroupId = pCarInfront->iJamGroupId;
          }
          else
          {
+            //FALL A
             pMyCar->iJamGroupId = pModell->sGaugings.iTotalTrafficJams;
             pModell->sGaugings.iTotalTrafficJams++;
          }
@@ -308,12 +316,9 @@ bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
       {
          if (fDo_TestJam_OnOne(pModell, iCarInfrontId) == true)
          {
+            //FALL C
             pMyCar->bIsInJam = true;
             pMyCar->iJamGroupId = pCarInfront->iJamGroupId;
-         }
-         else
-         {
-            //interessant (:
          }
       }
    }

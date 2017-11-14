@@ -16,11 +16,11 @@ int main(void)
    srand(time(NULL));
 
    sModell.sSettings.eMode = step1;
-   sModell.sSettings.eTSaveToFile = off;
+   sModell.sSettings.eTSaveToFile = on;
    sModell.sSettings.eTCruiseControl = off;
    sModell.sSettings.iIncreasedDelayAtV0Prozent = 0;
    sModell.sSettings.iCars = 1;
-   sModell.sSettings.iPProzent = 33;
+   sModell.sSettings.iPDDProzent = 33;
    sModell.sSettings.iVMax = 5;
    for (int i = 0; i < COMPLPATHLENGTH; i++)
    {
@@ -59,18 +59,7 @@ int main(void)
    printBoard(&sModell, NULL);
    printStatusSettings(&sModell);
    printStatusGaugings(&sModell);
-
-
-   _gotoxy(2, 1);
-   printf("MENUE                                                            ");
-   _gotoxy(2, 2);
-   printf("                                                                 ");
-   _gotoxy(2, 3);
-   printf(" [e] Exit         [m] Toggle Mode                                ");
-   _gotoxy(2, 4);
-   printf(" [f] Speichern..  [q] Start..      [c] Toggle Cruise-control     ");
-
-   _gotoxy(0, 0);
+   printMainMenue();
 
 
    //LOOP---------------------------------------------------------
@@ -195,15 +184,7 @@ int main(void)
                printBoard(&sModell, NULL);
             }
 
-            _gotoxy(2, 1);
-            printf("MENUE                                                            ");
-            _gotoxy(2, 2);
-            printf("                                                                 ");
-            _gotoxy(2, 3);
-            printf(" [e] Exit         [m] Toggle Mode                                ");
-            _gotoxy(2, 4);
-            printf(" [f] Speichern..  [q] Start..      [c] Toggle Cruise-control     ");
-            _gotoxy(0, 0);
+            printMainMenue();
             break;
 
          case OP_EXIT:

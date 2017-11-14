@@ -20,11 +20,11 @@ void printStatusSettings(PMODELL pModell)
 
    //! - P%
    _gotoxy(siX, siY + 2);
-   printf("P%%:     %2.1d%%", pModell->sSettings.iPProzent);
+   printf("P-DD:   %2.1d%%", pModell->sSettings.iPDDProzent);
 
    //! - Mode
    _gotoxy(siX, siY + 3);
-   printf("Mode: %s", (pModell->sSettings.eMode == step1) ? ("Step") : ("Auto"));
+   printf("Mode: %s", (pModell->sSettings.eMode == step1) ? ("Step1") : ("Auto6"));
 
 
 
@@ -34,15 +34,15 @@ void printStatusSettings(PMODELL pModell)
 
    //! - CruiseControl
    _gotoxy(siX + 14, siY + 1);
-   printf("Cruise-control: %s", (pModell->sSettings.eTCruiseControl == off) ? ("OFF") : ("ON "));
+   printf("Cruise-control:         %s", (pModell->sSettings.eTCruiseControl == off) ? ("OFF") : ("ON "));
 
    //! - Save to file
    _gotoxy(siX + 14, siY + 2);
-   printf("Save to file:   %s", (pModell->sSettings.eTSaveToFile == off) ? ("OFF") : ("ON "));
+   printf("Save to file:           %s", (pModell->sSettings.eTSaveToFile == off) ? ("OFF") : ("ON "));
 
    //! - FILEPATH
    {
-      _gotoxy(siX + 14, siY + 3);
+      _gotoxy(siX + 15, siY + 3);
       int iDiff = strlen(pModell->sSettings.acFilename) - 19;
       if (iDiff < 0) //Print if necesary space
       {

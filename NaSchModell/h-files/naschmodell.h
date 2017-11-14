@@ -80,7 +80,7 @@ struct settings
 {
    int iVMax;
    int iCars;
-   int iPProzent;
+   int iPDDProzent;
    enum toggle eTCruiseControl;
    int iIncreasedDelayAtV0Prozent;
    enum toggle eTSaveToFile;
@@ -96,7 +96,6 @@ struct gaugings
    int iCurrentTrafficJams;
    clock_t runtime;
    char acTimeStamp[TIMESTAMPLENGTH];
-
    //TODO colormap
 };
 
@@ -124,6 +123,7 @@ typedef struct object_car* PCAR;
 
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
+void printMainMenue(void);
 void printBoard(PMODELL pModell, enum states * pEState);
 void printStatusSettings(PMODELL pModell);
 void printStatusGaugings(PMODELL pModell);

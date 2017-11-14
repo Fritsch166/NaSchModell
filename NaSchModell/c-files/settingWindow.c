@@ -17,7 +17,7 @@ int settingWindow(PMODELL pModell)
 
    aiValues[0] = pModell->sSettings.iCars;
    aiValues[1] = pModell->sSettings.iVMax;
-   aiValues[2] = pModell->sSettings.iPProzent;
+   aiValues[2] = pModell->sSettings.iPDDProzent;
    aiValues[3] = pModell->sSettings.iIncreasedDelayAtV0Prozent;
 
    deleteArea(siX, siY, 2 + SETTING_WINDOW_WIDTH, 2 + SETTING_WINDOW_HEIGHT);
@@ -42,7 +42,7 @@ int settingWindow(PMODELL pModell)
       _gotoxy(siX + 3, siY + 4);
       printf("VMax:   %2.1d        ", aiValues[1]);
       _gotoxy(siX + 3, siY + 6);
-      printf("P%%:    %2.1d%%        ", aiValues[2]);
+      printf("P-DD:  %2.1d%%        ", aiValues[2]);
       _gotoxy(siX + 3, siY + 8);
       printf("IDV0:  %2.1d%%        ", aiValues[3]);
 
@@ -102,7 +102,7 @@ int settingWindow(PMODELL pModell)
    {
       pModell->sSettings.iCars = aiValues[0];
       pModell->sSettings.iVMax = aiValues[1];
-      pModell->sSettings.iPProzent = aiValues[2];
+      pModell->sSettings.iPDDProzent = aiValues[2];
       pModell->sSettings.iIncreasedDelayAtV0Prozent = aiValues[3];
    }
 
