@@ -9,6 +9,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include <math.h>
+#include <Windows.h>
 
 #include "Utilities.h"
 
@@ -32,6 +33,7 @@
 #define OP_SAVESETTINGS 5555555
 #define OP_PRINT 'p'
 #define OP_STEP ' '
+#define OP_TAB 9
 
 
 #define FILLCHAR '#'

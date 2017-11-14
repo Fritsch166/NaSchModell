@@ -16,7 +16,7 @@ int main(void)
    srand(time(NULL));
 
    sModell.sSettings.eMode = step1;
-   sModell.sSettings.eTSaveToFile = on;
+   sModell.sSettings.eTSaveToFile = off;
    sModell.sSettings.eTCruiseControl = off;
    sModell.sSettings.iIncreasedDelayAtV0Prozent = 0;
    sModell.sSettings.iCars = 1;
@@ -153,22 +153,24 @@ int main(void)
                printStatusGaugings(&sModell);
 
                _gotoxy(2, 1);
-               printf("CALCULATION                                                      ");
+               printf("CALCULATION                                                                        ");
                _gotoxy(2, 2);
-               printf("                                                                 ");
+               printf("                                                                                   ");
                _gotoxy(2, 3);
-               printf(" [e] Exit                                                        ");
+               printf(" [e] Exit                    [s] Abbruch                                           ");
+               _gotoxy(2, 4);
+               printf("                                                                                   ");
+
                if (sModell.sSettings.eTSaveToFile == on)
                {
-                  _gotoxy(2, 3);
-                  printf(" [e] Exit         [p] Abbruch und drucken                        ");
+                  _gotoxy(2, 4);
+                  printf(" [p] Abbruch und drucken   ");
                }
-               _gotoxy(2, 4);
-               printf(" [s] Abbruch                                                     ");
+
                if (sModell.sSettings.eMode == step1 || sModell.sSettings.eMode == step6)
                {
-                  _gotoxy(2, 4);
-                  printf(" [s] Abbruch      [LEER] Next..                                  ");
+                  _gotoxy(2 + 27, 4);
+                  printf("  [LEER] Next..                                         ");
                }
                _gotoxy(0, 0);
 

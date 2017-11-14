@@ -8,7 +8,7 @@ int settingWindow(PMODELL pModell)
    const short int siX = (WINDOWWIDTH + 2 - (2 + SETTING_WINDOW_WIDTH)) / 2;
    const short int siY = MENUHEIGHT + 2 + (BOARDHEIGHT - (2 + SETTING_WINDOW_HEIGHT)) / 2;
    int iOpt = OP_DEFAULT;
-
+   int iKEY_STATE;
 
    int aiValues[COUNT_VALUES];
    const int aiMINValues[COUNT_VALUES] = {1, 1, 0, 0};
@@ -24,13 +24,13 @@ int settingWindow(PMODELL pModell)
    printFrame(siX, siY, 2 + SETTING_WINDOW_WIDTH, 2 + SETTING_WINDOW_HEIGHT);
 
    _gotoxy(2, 1);
-   printf("Start..                                                          ");
+   printf("START..                                                                            ");
    _gotoxy(2, 2);
-   printf("                                                                 ");
+   printf("                                                                                   ");
    _gotoxy(2, 3);
-   printf(" [e] Exit                                                        ");
+   printf(" [e] Exit                    [s] Abbruch                                           ");
    _gotoxy(2, 4);
-   printf(" [s] Abbruch      [ENTER] Next..                                 ");
+   printf(" [UMSCHALT+TAB] Prev..       [TAB] Next..                                          ");
 
    _gotoxy(0, 0);
 
@@ -48,6 +48,9 @@ int settingWindow(PMODELL pModell)
 
       if (iState < COUNT_VALUES)
       {
+         _gotoxy(siX + 3, siY + 10);
+         printf("                      ");
+
          _gotoxy(siX + 13, siY + 2 + 2 * iState);
          printf("   [+/-]");
          _gotoxy(siX + 13, siY + 2 + 2 * iState);
@@ -59,6 +62,11 @@ int settingWindow(PMODELL pModell)
       }
 
       iOpt = _getch();
+      iKEY_STATE = 0;
+      iKEY_STATE = GetKeyState(VK_SHIFT);
+
+
+
 
       switch (iOpt)
       {
@@ -84,9 +92,22 @@ int settingWindow(PMODELL pModell)
             }
             break;
 
+         case OP_TAB:
+            if (0x8000 & iKEY_STATE)
+            {
+               if (iState > 0)
+               {
+                  iState--;
+               }
+            }
+            else if (iState < COUNT_VALUES)
+            {
+               iState++;
+            }
+            break;
+
          case OP_ENTER:
-            iState++;
-            if (iState > COUNT_VALUES)
+            if (iState == COUNT_VALUES)
             {
                iOpt = OP_SAVESETTINGS;
             }
@@ -101,7 +122,7 @@ int settingWindow(PMODELL pModell)
          default:
             if (iOpt >= '0' && iOpt <= '9' && iState < COUNT_VALUES)
             {
-               
+
                int iCopy = aiValues[iState];
 
                iCopy = iCopy * 10 + iOpt - '0';
