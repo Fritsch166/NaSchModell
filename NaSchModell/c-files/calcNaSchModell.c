@@ -7,6 +7,7 @@ int fPrint_Retard(PMODELL pModell);
 int fPrint_DillyDally(PMODELL pModell);
 int fPrint_Drive(PMODELL pModell);
 int fPrint_TestJam(PMODELL pModell);
+int userinteractionSTEP1(PMODELL pModell);
 int userinteraction(PMODELL pModell);
 int fDo_NewTick(PMODELL pModell);
 int fDo_Accelerate(PMODELL pModell);
@@ -25,19 +26,19 @@ int calcNaSchModell(PMODELL pModell)
    {
       fDo_NewTick,
       fPrint_NewTick,
-      userinteraction,
+      userinteractionSTEP1,
       fDo_Accelerate,
       fPrint_Accelerate,
-      userinteraction,
+      userinteractionSTEP1,
       fDo_Retard,
       fPrint_Retard,
-      userinteraction,
+      userinteractionSTEP1,
       fDo_DillyDally,
       fPrint_DillyDally,
-      userinteraction,
+      userinteractionSTEP1,
       fDo_Drive,
       fPrint_Drive,
-      userinteraction,
+      userinteractionSTEP1,
       fDo_TestJam,
       fPrint_TestJam,
       userinteraction
@@ -56,11 +57,30 @@ int calcNaSchModell(PMODELL pModell)
    return iOpt;
 }
 
-int userinteraction(PMODELL pModell)
+int userinteractionSTEP1(PMODELL pModell)
 {
    int iOpt = OP_DEFAULT;
 
    if (pModell->sSettings.eMode == step1)
+   {
+      do
+      {
+         iOpt = _getch();
+      }
+      while (iOpt != OP_EXIT
+         && iOpt != OP_STOP
+         && iOpt != OP_STEP
+         && (pModell->sSettings.eTSaveToFile == off || iOpt != OP_PRINT));
+   }
+
+   return iOpt;
+}
+
+int userinteraction(PMODELL pModell)
+{
+   int iOpt = OP_DEFAULT;
+
+   if (pModell->sSettings.eMode == step1 || pModell->sSettings.eMode == step6)
    {
       do
       {
@@ -142,7 +162,7 @@ int fPrint_Drive(PMODELL pModell)
 int fPrint_TestJam(PMODELL pModell)
 {
    enum states eState = test_jam;
-   if (pModell->sSettings.eMode == step1 || pModell->sSettings.eMode == auto6)
+   if (pModell->sSettings.eMode != autoX)
    {
       printBoard(pModell, &eState);
    }
@@ -270,7 +290,7 @@ int fDo_TestJam(PMODELL pModell)
             }
          }
       }
-      
+
    }
 
    return OP_DEFAULT;

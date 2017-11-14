@@ -71,8 +71,10 @@ enum toggle
 
 enum mode
 {
-   step1,
-   auto6
+   step1 = 0,
+   step6,
+   auto6,
+   autoX
 };
 
 

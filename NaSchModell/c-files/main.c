@@ -72,14 +72,24 @@ int main(void)
       {
 
          case OP_CHANGEMODESTATE:
-            if (sModell.sSettings.eMode == step1)
+            switch (sModell.sSettings.eMode)
             {
-               sModell.sSettings.eMode = auto6;
+               case step1:
+                  sModell.sSettings.eMode = step6;
+                  break;
+
+               case step6:
+                  sModell.sSettings.eMode = auto6;
+                  break;
+
+               case auto6:
+                  sModell.sSettings.eMode = autoX;
+                  break;
+
+               default:
+                  sModell.sSettings.eMode = step1;
             }
-            else if (sModell.sSettings.eMode == auto6)
-            {
-               sModell.sSettings.eMode = step1;
-            }
+
             printStatusSettings(&sModell);
             printStatusGaugings(&sModell);
             break;
@@ -133,7 +143,7 @@ int main(void)
 
                   }
                }
-               if (sModell.sSettings.eMode != step1)
+               if (sModell.sSettings.eMode == auto6 || sModell.sSettings.eMode == autoX)
                {
                   sModell.sGaugings.runtime = clock();
                }
@@ -155,7 +165,7 @@ int main(void)
                }
                _gotoxy(2, 4);
                printf(" [s] Abbruch                                                     ");
-               if (sModell.sSettings.eMode == step1)
+               if (sModell.sSettings.eMode == step1 || sModell.sSettings.eMode == step6)
                {
                   _gotoxy(2, 4);
                   printf(" [s] Abbruch      [LEER] Next..                                  ");

@@ -19,11 +19,11 @@ void printStatusGaugings(PMODELL pModell)
 
    //! - Current traffic jams
    _gotoxy(siX, siY + 2);
-   printf("Current traffic jams: %7.1d", pModell->sGaugings.iCurrentTrafficJams); //TODO calc value
+   printf("Current traffic jams: %7.1d", pModell->sGaugings.iCurrentTrafficJams);
 
    //! - Time
    _gotoxy(siX, siY + 3);
-   if (pModell->sSettings.eMode == step1)
+   if (pModell->sSettings.eMode == step1 || pModell->sSettings.eMode == step6)
    {
       printf("                                ");
    }

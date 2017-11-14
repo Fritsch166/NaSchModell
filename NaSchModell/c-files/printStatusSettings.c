@@ -2,6 +2,13 @@
 
 #include "..\h-files\naschmodell.h"
 
+static char * apcModeText[4] = {
+   "Step1",
+   "Step6",
+   "Auto6",
+   "AutoX"
+};
+
 void printStatusSettings(PMODELL pModell)
 {
    const short int siX = 2;
@@ -24,7 +31,7 @@ void printStatusSettings(PMODELL pModell)
 
    //! - Mode
    _gotoxy(siX, siY + 3);
-   printf("Mode: %s", (pModell->sSettings.eMode == step1) ? ("Step1") : ("Auto6"));
+   printf("Mode: %s", apcModeText[pModell->sSettings.eMode]);
 
 
 
