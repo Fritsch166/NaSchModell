@@ -111,7 +111,7 @@ int userinteraction(PMODELL pModell)
 
 int fPrint_NewTick(PMODELL pModell)
 {
-   enum states eState = newtick;
+   static const enum states eState = newtick;
    if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
@@ -121,7 +121,7 @@ int fPrint_NewTick(PMODELL pModell)
 
 int fPrint_Accelerate(PMODELL pModell)
 {
-   enum states eState = accelerate;
+   static const enum states eState = accelerate;
    if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
@@ -131,7 +131,7 @@ int fPrint_Accelerate(PMODELL pModell)
 
 int fPrint_Retard(PMODELL pModell)
 {
-   enum states eState = retard;
+   static const enum states eState = retard;
    if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
@@ -141,7 +141,7 @@ int fPrint_Retard(PMODELL pModell)
 
 int fPrint_DillyDally(PMODELL pModell)
 {
-   enum states eState = dilly_dally;
+   static const enum states eState = dilly_dally;
    if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
@@ -151,7 +151,7 @@ int fPrint_DillyDally(PMODELL pModell)
 
 int fPrint_Drive(PMODELL pModell)
 {
-   enum states eState = drive;
+   static const enum states eState = drive;
    if (pModell->sSettings.eMode == step1)
    {
       printBoard(pModell, &eState);
@@ -161,7 +161,7 @@ int fPrint_Drive(PMODELL pModell)
 
 int fPrint_TestJam(PMODELL pModell)
 {
-   enum states eState = test_jam;
+   static const enum states eState = test_jam;
    if (pModell->sSettings.eMode != autoX)
    {
       printBoard(pModell, &eState);
@@ -174,7 +174,7 @@ int fDo_NewTick(PMODELL pModell)
 {
    for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
-      PCAR pMyCar = pModell->asCars + iCarId;
+      const PCAR pMyCar = pModell->asCars + iCarId;
 
       pMyCar->iV = pMyCar->iV + pMyCar->iVChange;
       pMyCar->iVChange = 0;
@@ -228,7 +228,7 @@ int fDo_DillyDally(PMODELL pModell)
 
       if (pMyCar->iV + pMyCar->iVChange > 0)
       {
-         int iRandom = rand() % 100;
+         const int iRandom = rand() % 100;
 
          if (pModell->sSettings.iIncreasedDelayAtV0Prozent > 0 && pMyCar->bDoDelayAtV0 == true)
          {
@@ -298,9 +298,9 @@ int fDo_TestJam(PMODELL pModell)
 
 bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
 {
-   int iCarInfrontId = (iCarId + 1) % pModell->sSettings.iCars;
-   PCAR pMyCar = pModell->asCars + iCarId;
-   PCAR pCarInfront = pModell->asCars + iCarInfrontId;
+   const int iCarInfrontId = (iCarId + 1) % pModell->sSettings.iCars;
+   const PCAR pMyCar = pModell->asCars + iCarId;
+   const PCAR pCarInfront = pModell->asCars + iCarInfrontId;
 
    int iDiff = pCarInfront->iPosition - pMyCar->iPosition;
    iDiff += ((iDiff > 0) ? (-1) : (STREET_LENGTH));

@@ -2,7 +2,7 @@
 
 #include "..\h-files\naschmodell.h"
 
-static char * apcModeText[4] = {
+static const char * const apcModeText[4] = {
    "Step1",
    "Step6",
    "Auto6",

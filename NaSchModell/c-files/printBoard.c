@@ -3,7 +3,7 @@
 
 static const char* const acVelocitys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-static const char* apcText[7] =
+static const char* const apcText[7] =
 {
    "NewTick        ",
    "Beschleunigen  ",
@@ -110,7 +110,7 @@ void printBoard(PMODELL pModell, enum states * pEState)
       else
       {
          _gotoxy(isXStart, isYStart);
-
+         //Print empty text/last text of array apcText
          printf("%s", apcText[(sizeof(apcText) / sizeof(char*)) - 1]);
       }
    }
