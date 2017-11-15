@@ -111,7 +111,7 @@ struct gaugings
    int iCurrentTrafficJams;
    clock_t runtime;
    char acTimeStamp[TIMESTAMPLENGTH];
-   struct saveState ppsState[STREET_LENGTH][MAXTICKS];
+   struct saveState ** ppsState;
 };
 
 struct object_car

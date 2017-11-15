@@ -13,10 +13,10 @@ int main(void)
 
    //Initializes the struct----------------------------------------
 
-   srand((unsigned int) time(NULL));
+   srand((unsigned int)time(NULL));
 
    sModell.sSettings.eMode = step1;
-   sModell.sSettings.eTSaveToFile = off;
+   sModell.sSettings.eTSaveToFile = on;
    sModell.sSettings.eTCruiseControl = off;
    sModell.sSettings.iIncreasedDelayAtV0Prozent = 0;
    sModell.sSettings.iCars = 1;
@@ -36,6 +36,11 @@ int main(void)
    sModell.sGaugings.iTotalTrafficJams = 0;
    sModell.sGaugings.iCurrentTrafficJams = 0;
    sModell.sGaugings.runtime = 0;
+   sModell.sGaugings.ppsState = calloc(sizeof(struct saveState **), STREET_LENGTH);
+   for (unsigned int iX = 0; iX < STREET_LENGTH; iX++)
+   {
+      sModell.sGaugings.ppsState[iX] = calloc(sizeof(struct saveState *), MAXTICKS);
+   }
 
 
    //init one car
@@ -128,6 +133,16 @@ int main(void)
                sModell.sGaugings.iTotalTrafficJams = 0;
                sModell.sGaugings.iCurrentTrafficJams = 0;
                sModell.sGaugings.runtime = 0;
+               for (unsigned int iX = 0; iX < STREET_LENGTH; iX++)
+               {
+                  for (unsigned int iY = 0; iY < MAXTICKS; iY++)
+                  {
+                     sModell.sGaugings.ppsState[iX][iY].bEnable = 0;
+                     sModell.sGaugings.ppsState[iX][iY].bIsInJam = 0;
+                     sModell.sGaugings.ppsState[iX][iY].bVTotal = 0;
+                     sModell.sGaugings.ppsState[iX][iY].bJamGroup = 0;
+                  }
+               }
                {
                   int aiPositions[STREET_LENGTH];
                   randomize(aiPositions, sModell.sSettings.iCars);
@@ -174,6 +189,7 @@ int main(void)
                }
                _gotoxy(0, 0);
 
+               //Start Simulation
                iOpt = calcNaSchModell(&sModell);
 
                if (sModell.sSettings.eTSaveToFile == on)
@@ -207,6 +223,15 @@ int main(void)
       }
 
    }
+
+   
+   for (unsigned int iX = 0; iX < STREET_LENGTH; iX++)
+   {
+      free(sModell.sGaugings.ppsState[iX]);
+      sModell.sGaugings.ppsState[iX] = NULL;
+   }
+   free(sModell.sGaugings.ppsState);
+   sModell.sGaugings.ppsState = NULL;
 
    _clrscr();
 

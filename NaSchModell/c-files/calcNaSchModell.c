@@ -16,6 +16,7 @@ int fDo_DillyDally(PMODELL pModell);
 int fDo_Drive(PMODELL pModell);
 int fDo_TestJam(PMODELL pModell);
 bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId);
+void saveCarState(const int iTicks, struct saveState ** const ppsState, PCAR const pCar);
 
 #define FUNC_COUNT 18
 
@@ -293,6 +294,14 @@ int fDo_TestJam(PMODELL pModell)
 
    }
 
+   if (pModell->sSettings.eTSaveToFile == on)
+   {
+      for (int i = 0; i < pModell->sSettings.iCars; i++)
+      {
+         saveCarState(pModell->sGaugings.iTicks, pModell->sGaugings.ppsState, pModell->asCars + i);
+      }
+   }
+
    return OP_DEFAULT;
 }
 
@@ -346,3 +355,17 @@ bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
    return pMyCar->bIsInJam;
 }
 
+void saveCarState(const int iTicks, struct saveState ** const ppsState, PCAR const pCar)
+{
+   const unsigned int iY = iTicks - 1;
+   const unsigned int iX = pCar->iPosition;
+   struct saveState * const psState = *(ppsState + iX) + iY;
+
+   psState->bEnable = 1;
+   psState->bVTotal = pCar->iV + pCar->iVChange;
+   psState->bIsInJam = (pCar->bIsInJam == true) ? 1 : 0;
+   if (psState->bIsInJam)
+   {
+      psState->bJamGroup = pCar->iJamGroupId;
+   }
+}
