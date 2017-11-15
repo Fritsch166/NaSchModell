@@ -34,9 +34,9 @@ void printStatusGaugings(PMODELL pModell)
          if (pModell->sGaugings.iTotalTrafficJams == 0)
          {
             int iTimeMs = (int)(clock() - pModell->sGaugings.runtime);
-            sprintf_s(pModell->sGaugings.acTimeStamp, TIMESTAMPLENGTH, "Time    without jams:  %2.1d,%0.3dsec", (int)(iTimeMs / CLOCKS_PER_SEC), (int)(iTimeMs % CLOCKS_PER_SEC));
+            sprintf_s(pModell->sGaugings.acTimeStamp, TIMESTAMPLENGTH, "%2.1d,%0.3dsec", (int)(iTimeMs / CLOCKS_PER_SEC), (int)(iTimeMs % CLOCKS_PER_SEC));
          }
-         printf("%s", pModell->sGaugings.acTimeStamp);
+         printf("Time    without jams:  %s", pModell->sGaugings.acTimeStamp);
       }
       else
       {

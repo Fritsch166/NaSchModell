@@ -55,7 +55,7 @@
 
 #define MAXWRITEPATHLENGTH 250
 #define COMPLPATHLENGTH (MAXWRITEPATHLENGTH + 5)
-#define TIMESTAMPLENGTH 50
+#define TIMESTAMPLENGTH 12
 
 
 enum states
@@ -96,6 +96,14 @@ struct settings
    char acComplFilePath[COMPLPATHLENGTH];
 };
 
+struct saveState
+{
+   unsigned int bEnable : 1;
+   unsigned int bIsInJam : 1;
+   unsigned int bVTotal : 6;
+   unsigned int bJamGroup : 24;
+};
+
 struct gaugings
 {
    int iTicks;
@@ -103,7 +111,7 @@ struct gaugings
    int iCurrentTrafficJams;
    clock_t runtime;
    char acTimeStamp[TIMESTAMPLENGTH];
-   //TODO colormap
+   struct saveState ppsState[STREET_LENGTH][MAXTICKS];
 };
 
 struct object_car

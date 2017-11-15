@@ -23,7 +23,8 @@ union hexToRGB
    struct cMapColor sRGB;
 };
 
-typedef const union hexToRGB*const COLOR;
+typedef const union hexToRGB * const COLOR;
+typedef struct colormap * COLORMAP;
 
 extern const union hexToRGB VALUE_RED;
 extern const union hexToRGB VALUE_GREEN;
@@ -33,24 +34,6 @@ extern const union hexToRGB VALUE_BLUE;
 #define GREEN (&VALUE_GREEN)
 #define BLUE  (&VALUE_BLUE)
 
-/*
-#define initColorMap(map,iWidth,iHeight)              \
-map->iWidth = iWidth;                                 \
-map->iHeight = iHeight;                               \
-map->ppucRED   = malloc(sizeof(char**)*iWidth);       \
-map->ppucGREEN = malloc(sizeof(char**)*iWidth);       \
-map->ppucBLUE  = malloc(sizeof(char**)*iWidth);       \
-for ( int i = 0 ; i < iWidth ; i++ ) {                \
-map->ppucRED[i]   = calloc(iHeight, sizeof(char*));\
-map->ppucGREEN[i] = calloc(iHeight, sizeof(char*));\
-map->ppucBLUE[i]  = calloc(iHeight, sizeof(char*));\
-}
-
-
-#define setColorMap(map,color,y,x)         \
-map->ppucRED[x][y]   = (color)->sRGB.ucRED;  \
-map->ppucGREEN[x][y] = (color)->sRGB.ucGREEN;\
-map->ppucBLUE[x][y]  = (color)->sRGB.ucBLUE;
-
-*/
-
+void initColorMap(COLORMAP map, const int iWidth, const int iHeight);
+void setColorMap(COLORMAP map, COLOR color, int y, int x);
+void freeColorMap(COLORMAP map);
