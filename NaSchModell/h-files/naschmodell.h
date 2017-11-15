@@ -137,7 +137,7 @@ struct naschmodell
 struct colorschemes
 {
    unsigned int iId;
-   COLOR(*pfConverter)(struct saveState*);
+   COLOR(*pf_Converter)(struct saveState*, struct settings*);
 };
 
 
