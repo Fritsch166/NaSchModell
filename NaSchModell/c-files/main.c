@@ -9,6 +9,8 @@ int main(void)
 {
    struct naschmodell sModell;
 
+   initGlobalColorSchemes();
+
    //Initializes the struct and prints the standard GUI-------------
 
    //Initializes the struct----------------------------------------
@@ -26,10 +28,8 @@ int main(void)
    {
       sModell.sSettings.acFilename[i] = 0;
       sModell.sSettings.acComplFilePath[i] = 0;
-      if (i < TIMESTAMPLENGTH)
-      {
-         sModell.sGaugings.acTimeStamp[i] = 0;
-      }
+      (i < TIMESTAMPLENGTH) ? (sModell.sGaugings.acTimeStamp[i] = 0) : (0);
+      (i < MAX_COLOR_SCHEMES) ? (sModell.sSettings.apsCSchemes[i] = NULL) : (0);
    }
 
    sModell.sGaugings.iTicks = 0;
@@ -181,7 +181,7 @@ int main(void)
                /************************************************
                 * Start Simulation
                 ************************************************/
-               
+
                iOpt = calcNaSchModell(&sModell);
 
                /************************************************/

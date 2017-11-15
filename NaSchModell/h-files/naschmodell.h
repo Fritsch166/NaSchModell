@@ -18,6 +18,7 @@
 #define STREET_LENGTH 1000
 #define PART_STREET_LENGTH 200
 #define ARRAY_CARS_MAX_LENGTH 990
+#define MAX_COLOR_SCHEMES 9
 
 #define MAXTICKS 500
 
@@ -57,6 +58,7 @@
 #define COMPLPATHLENGTH (MAXWRITEPATHLENGTH + 5)
 #define TIMESTAMPLENGTH 12
 
+extern struct colorschemes GLOBAL_ARRAY_COLOR_SCHEMES[9];
 
 enum states
 {
@@ -94,7 +96,7 @@ struct settings
    enum mode eMode;
    char acFilename[COMPLPATHLENGTH];
    char acComplFilePath[COMPLPATHLENGTH];
-   struct colorschemes* asCSchemes[9];
+   struct colorschemes* apsCSchemes[MAX_COLOR_SCHEMES];
 };
 
 struct saveState
@@ -151,5 +153,5 @@ void printStatusSettings(PMODELL pModell);
 void printStatusGaugings(PMODELL pModell);
 int settingWindow(PMODELL pModell);
 int calcNaSchModell(PMODELL pModell);
-
+void initGlobalColorSchemes(void);
 

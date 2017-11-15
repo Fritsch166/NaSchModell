@@ -27,6 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="c-files\calcNaSchModell.c" />
+    <ClCompile Include="c-files\colorschemes.c" />
     <ClCompile Include="c-files\deleteArea.c" />
     <ClCompile Include="c-files\main.c" />
     <ClCompile Include="c-files\printBoard.c" />
