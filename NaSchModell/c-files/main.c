@@ -10,13 +10,11 @@ int main(void)
    struct naschmodell sModell;
 
    initGlobalColorSchemes();
-   
+   srand((unsigned int)time(NULL));
 
    //Initializes the struct and prints the standard GUI-------------
 
    //Initializes the struct----------------------------------------
-
-   srand((unsigned int)time(NULL));
 
    sModell.sSettings.eMode = step1;
    sModell.sSettings.eTSaveToFile = off;
