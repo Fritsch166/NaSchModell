@@ -30,7 +30,8 @@ int settingWindow(PMODELL pModell)
    _gotoxy(2, 3);
    printf(" [e] Exit                    [s] Abort                                             ");
    _gotoxy(2, 4);
-   printf(" [UMSCHALT+TAB] Prev..       [TAB] Next..                                          ");
+   printf(" [UMSCHALT+TAB] Prev..       [TAB] Next..                [0..9] Set value          ");
+
 
    _gotoxy(0, 0);
 
@@ -38,13 +39,13 @@ int settingWindow(PMODELL pModell)
    {
 
       _gotoxy(siX + 3, siY + 2);
-      printf("Cars:  %3.1d        ", aiValues[0]);
+      printf("Cars:  %3.1d                  ", aiValues[0]);
       _gotoxy(siX + 3, siY + 4);
-      printf("VMax:   %2.1d        ", aiValues[1]);
+      printf("VMax:   %2.1d                  ", aiValues[1]);
       _gotoxy(siX + 3, siY + 6);
-      printf("P-DD:  %2.1d%%        ", aiValues[2]);
+      printf("P-DD:  %2.1d%%                  ", aiValues[2]);
       _gotoxy(siX + 3, siY + 8);
-      printf("IDV0:  %2.1d%%        ", aiValues[3]);
+      printf("IDV0:  %2.1d%%                  ", aiValues[3]);
 
       if (iState < COUNT_VALUES)
       {
@@ -52,7 +53,7 @@ int settingWindow(PMODELL pModell)
          printf("                      ");
 
          _gotoxy(siX + 13, siY + 2 + 2 * (short int)(iState));
-         printf("   [+/-]");
+         printf("   [+/-]  {%1.1d..%3.1d}", aiMINValues[iState], aiMAXValues[iState]);
          _gotoxy(siX + 13, siY + 2 + 2 * (short int)(iState));
       }
       else if (iState == COUNT_VALUES)
