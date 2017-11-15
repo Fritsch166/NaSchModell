@@ -16,7 +16,7 @@ int main(void)
    srand((unsigned int)time(NULL));
 
    sModell.sSettings.eMode = step1;
-   sModell.sSettings.eTSaveToFile = on;
+   sModell.sSettings.eTSaveToFile = off;
    sModell.sSettings.eTCruiseControl = off;
    sModell.sSettings.iIncreasedDelayAtV0Prozent = 0;
    sModell.sSettings.iCars = 1;
