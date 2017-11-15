@@ -14,7 +14,7 @@ static const char* const apcText[7] =
    "               "
 };
 
-void printBoard(PMODELL pModell, enum states * pEState)
+void printBoard(PMODELL pModell, const enum states * pEState)
 {
    const short int isXStart = 3;
    const short int isYStart = MENUHEIGHT + 3;
@@ -39,16 +39,16 @@ void printBoard(PMODELL pModell, enum states * pEState)
    //Street
    for (int iPosStreet = 0; iPosStreet < STREET_LENGTH; iPosStreet += PART_STREET_LENGTH)
    {
-      int iX = (short int)(iPosStreet % PART_STREET_LENGTH);
-      int iY = (short int)(iPosStreet / PART_STREET_LENGTH);
+      short int siX = (short int)(iPosStreet % PART_STREET_LENGTH);
+      short int siY = (short int)(iPosStreet / PART_STREET_LENGTH);
 
-      _gotoxy(isXStart + iX, (isYStart + iY * 5) + 2);
+      _gotoxy(isXStart + siX, (isYStart + siY * 5) + 2);
       printf("%.*s", PART_STREET_LENGTH, acStreet + iPosStreet);
-      _gotoxy(isXStart + iX, (isYStart + iY * 5) + 3);
+      _gotoxy(isXStart + siX, (isYStart + siY * 5) + 3);
       printf("%.*s", PART_STREET_LENGTH, acStreet + iPosStreet);
-      _gotoxy(isXStart + iX, (isYStart + iY * 5) + 4);
+      _gotoxy(isXStart + siX, (isYStart + siY * 5) + 4);
       printf("%.*s", PART_STREET_LENGTH, acStreet + iPosStreet);
-      _gotoxy(isXStart + iX, (isYStart + iY * 5) + 5);
+      _gotoxy(isXStart + siX, (isYStart + siY * 5) + 5);
       printf("%.*s", PART_STREET_LENGTH, acStreet + iPosStreet);
 
    }
@@ -65,13 +65,13 @@ void printBoard(PMODELL pModell, enum states * pEState)
       int iJamGroupId = pModell->asCars[iN].iJamGroupId;
 
 
-      int iX = (short int)(iPosStreet % PART_STREET_LENGTH);
-      int iY = (short int)(iPosStreet / PART_STREET_LENGTH);
+      short int siX = (short int)(iPosStreet % PART_STREET_LENGTH);
+      short int siY = (short int)(iPosStreet / PART_STREET_LENGTH);
 
 
-      _gotoxy(isXStart + iX, (isYStart + iY * 5) + 2);
+      _gotoxy(isXStart + siX, (isYStart + siY * 5) + 2);
       printf("%c", 'A' + (iN % 26));
-      _gotoxy(isXStart + iX, (isYStart + iY * 5) + 3);
+      _gotoxy(isXStart + siX, (isYStart + siY * 5) + 3);
       printf("%c", acVelocitys[iTotalVelocity]);
 
 
@@ -90,7 +90,7 @@ void printBoard(PMODELL pModell, enum states * pEState)
             case accelerate:
             case retard:
             case dilly_dally:
-               _gotoxy(isXStart + iX, (isYStart + iY * 5) + 4);
+               _gotoxy(isXStart + siX, (isYStart + siY * 5) + 4);
                printf("%c", cCompareV);
                break;
 
@@ -103,7 +103,7 @@ void printBoard(PMODELL pModell, enum states * pEState)
 
          if (bIsInJam == true)
          {
-            _gotoxy(isXStart + iX, (isYStart + iY * 5) + 5);
+            _gotoxy(isXStart + siX, (isYStart + siY * 5) + 5);
             printf("%c", 'a' + (iJamGroupId % 26));
          }
       }

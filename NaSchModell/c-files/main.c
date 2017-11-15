@@ -1,7 +1,7 @@
 
-
-
 #include "..\h-files\naschmodell.h"
+
+#include "..\..\common_includes\colormap.h"
 
 void randomize(int aiPositions[STREET_LENGTH], const int iAmountPositions);
 
@@ -13,7 +13,7 @@ int main(void)
 
    //Initializes the struct----------------------------------------
 
-   srand(time(NULL));
+   srand((unsigned int) time(NULL));
 
    sModell.sSettings.eMode = step1;
    sModell.sSettings.eTSaveToFile = off;

@@ -1,4 +1,6 @@
 
+#pragma warning( disable : 4710 464 )
+
 #include "..\h-files\drawbmp.h"
 
 #include <stdio.h>
@@ -19,7 +21,6 @@ void drawbmp(
    int extrabytes;
    int paddedsize;
    int x; int y; int n;
-   int red = 0, green = 0, blue = 0;
 
 
    extrabytes = 4 - ((iWIDTH * 3) % 4);                 // How many bytes of padding to add to each

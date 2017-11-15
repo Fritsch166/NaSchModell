@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma warning( disable : 4710 464 820 )
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <conio.h>
@@ -12,6 +10,10 @@
 #include <Windows.h>
 
 #include "Utilities.h"
+
+#include "..\..\common_includes\drawbmp.h"
+#include "..\..\common_includes\colormap.h"
+
 
 #define STREET_LENGTH 1000
 #define PART_STREET_LENGTH 200
@@ -129,9 +131,10 @@ typedef struct object_car* PCAR;
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void printMainMenue(void);
-void printBoard(PMODELL pModell, enum states * pEState);
+void printBoard(PMODELL pModell, const enum states * pEState);
 void printStatusSettings(PMODELL pModell);
 void printStatusGaugings(PMODELL pModell);
 int settingWindow(PMODELL pModell);
+int calcNaSchModell(PMODELL pModell);
 
 

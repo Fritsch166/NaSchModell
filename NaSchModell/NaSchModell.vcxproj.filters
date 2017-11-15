@@ -52,7 +52,7 @@
     <ClCompile Include="c-files\calcNaSchModell.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="printMainMenue.c">
+    <ClCompile Include="c-files\printMainMenue.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

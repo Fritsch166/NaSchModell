@@ -5,8 +5,8 @@
 
 int settingWindow(PMODELL pModell)
 {
-   const short int siX = (WINDOWWIDTH + 2 - (2 + SETTING_WINDOW_WIDTH)) / 2;
-   const short int siY = MENUHEIGHT + 2 + (BOARDHEIGHT - (2 + SETTING_WINDOW_HEIGHT)) / 2;
+   const short siX = (WINDOWWIDTH + 2 - (2 + SETTING_WINDOW_WIDTH)) / 2;
+   const short siY = MENUHEIGHT + 2 + (BOARDHEIGHT - (2 + SETTING_WINDOW_HEIGHT)) / 2;
    int iOpt = OP_DEFAULT;
    int iKEY_STATE;
 
@@ -51,9 +51,9 @@ int settingWindow(PMODELL pModell)
          _gotoxy(siX + 3, siY + 10);
          printf("                      ");
 
-         _gotoxy(siX + 13, siY + 2 + 2 * iState);
+         _gotoxy(siX + 13, siY + 2 + 2 * (short int)(iState));
          printf("   [+/-]");
-         _gotoxy(siX + 13, siY + 2 + 2 * iState);
+         _gotoxy(siX + 13, siY + 2 + 2 * (short int)(iState));
       }
       else if (iState == COUNT_VALUES)
       {
@@ -130,7 +130,7 @@ int settingWindow(PMODELL pModell)
                while (iCopy > aiMAXValues[iState])
                {
                   double d10PowX = pow(10.0, floor(log10(iCopy)));
-                  iCopy = iCopy - floor(iCopy / d10PowX) * d10PowX;
+                  iCopy = (int)(iCopy - floor(iCopy / d10PowX) * d10PowX);
                }
 
                if (iCopy >= aiMINValues[iState] && iCopy <= aiMAXValues[iState])
