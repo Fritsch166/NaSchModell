@@ -233,6 +233,7 @@ int fDo_DillyDally(PMODELL pModell)
 
          if (pModell->sSettings.iIncreasedDelayAtV0Prozent > 0 && pMyCar->bDoDelayAtV0 == true)
          {
+            //iIncreasedDelayAtV0Prozent is enabled 
             pMyCar->bDoDelayAtV0 = false;
             if (iRandom < (pModell->sSettings.iPDDProzent + ((100 - pModell->sSettings.iPDDProzent) * pModell->sSettings.iIncreasedDelayAtV0Prozent / 100)))
             {
@@ -245,6 +246,7 @@ int fDo_DillyDally(PMODELL pModell)
          }
          else if (iRandom < pModell->sSettings.iPDDProzent)
          {
+            //dilly-dally
             pMyCar->iVChange--;
          }
       }
@@ -260,6 +262,7 @@ int fDo_Drive(PMODELL pModell)
    {
       PCAR  pMyCar = pModell->asCars + iCarId;
 
+      //drive car
       pMyCar->iPosition = (pMyCar->iPosition + pMyCar->iV + pMyCar->iVChange) % STREET_LENGTH;
    }
 
@@ -268,12 +271,13 @@ int fDo_Drive(PMODELL pModell)
 
 int fDo_TestJam(PMODELL pModell)
 {
-
+   //test jam on all cars
    for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
       fDo_TestJam_OnOne(pModell, iCarId);
    }
 
+   //calc current jams
    {
       pModell->sGaugings.iCurrentTrafficJams = 0;
       int iLastJamGroupId = pModell->asCars[pModell->sSettings.iCars - 1].iJamGroupId;
@@ -299,6 +303,7 @@ int fDo_TestJam(PMODELL pModell)
       }
    }
 
+   //save state if necessary
    if (pModell->sSettings.eTSaveToFile == on)
    {
       for (int i = 0; i < pModell->sSettings.iCars; i++)

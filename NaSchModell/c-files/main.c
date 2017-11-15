@@ -10,6 +10,7 @@ int main(void)
    struct naschmodell sModell;
 
    initGlobalColorSchemes();
+   
 
    //Initializes the struct and prints the standard GUI-------------
 
@@ -178,13 +179,13 @@ int main(void)
                   sModell.sGaugings.runtime = clock();
                }
 
-               /************************************************
-                * Start Simulation
-                ************************************************/
+              /************************************************
+               * Start Simulation
+               ************************************************/
 
                iOpt = calcNaSchModell(&sModell);
 
-               /************************************************/
+              /************************************************/
 
                //! safetofile if necessary
                if (sModell.sSettings.eTSaveToFile == on)
@@ -230,6 +231,7 @@ int main(void)
 
    }
 
+   //Release allocated memory
    for (unsigned int iX = 0; iX < ARRAY_CARS_MAX_LENGTH; iX++)
    {
       free(sModell.sGaugings.ppsState[iX]);
@@ -238,24 +240,26 @@ int main(void)
    free(sModell.sGaugings.ppsState);
    sModell.sGaugings.ppsState = NULL;
 
+   //clear window
    _clrscr();
 
+   //EXIT
    return EXIT_SUCCESS;
 }
 
 void randomize(int aiPositions[STREET_LENGTH], const int iAmountPositions)
 {
-   int iN = 0;
-   int iPosition = 0;
-
-   for (iPosition = 0; iPosition < STREET_LENGTH; iPosition++)
+ 
+   //init array
+   for (int iPosition = 0; iPosition < STREET_LENGTH; iPosition++)
    {
       aiPositions[iPosition] = -1;
    }
 
-   for (iN = 0; iN < iAmountPositions;)
+   //calc random positions
+   for (int iN = 0; iN < iAmountPositions;)
    {
-      iPosition = (rand() % STREET_LENGTH);
+      int iPosition = (rand() % STREET_LENGTH);
 
       if (aiPositions[iPosition] < 0)
       {
@@ -264,13 +268,12 @@ void randomize(int aiPositions[STREET_LENGTH], const int iAmountPositions)
       }
    }
 
-   iN = 0;
-   for (iPosition = 0; iPosition < STREET_LENGTH; iPosition++)
+   //Sort psitions at array start
+   for (int iPosition = 0, iN = 0; iPosition < STREET_LENGTH; iPosition++)
    {
       if (aiPositions[iPosition] >= 0)
       {
          aiPositions[iN++] = aiPositions[iPosition];
       }
    }
-
 }
