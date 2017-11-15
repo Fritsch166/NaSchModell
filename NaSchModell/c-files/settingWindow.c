@@ -24,11 +24,11 @@ int settingWindow(PMODELL pModell)
    printFrame(siX, siY, 2 + SETTING_WINDOW_WIDTH, 2 + SETTING_WINDOW_HEIGHT);
 
    _gotoxy(2, 1);
-   printf("START..                                                                            ");
+   printf("MENUE\\START..                                                                      ");
    _gotoxy(2, 2);
    printf("                                                                                   ");
    _gotoxy(2, 3);
-   printf(" [e] Exit                    [s] Abbruch                                           ");
+   printf(" [e] Exit                    [s] Abort                                             ");
    _gotoxy(2, 4);
    printf(" [UMSCHALT+TAB] Prev..       [TAB] Next..                                          ");
 

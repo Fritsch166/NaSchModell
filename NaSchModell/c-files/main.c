@@ -123,12 +123,9 @@ int main(void)
             //! print changes settings
             printStatusSettings(&sModell);
 
-
-
             if (iOpt == OP_SAVESETTINGS)
             {
                //! init cars and gaugings
-
                sModell.sGaugings.iTicks = 0;
                sModell.sGaugings.iTotalTrafficJams = 0;
                sModell.sGaugings.iCurrentTrafficJams = 0;
@@ -158,30 +155,25 @@ int main(void)
 
                   }
                }
-               if (sModell.sSettings.eMode == auto6 || sModell.sSettings.eMode == autoX)
-               {
-                  sModell.sGaugings.runtime = clock();
-               }
 
                //! print data 
                printBoard(&sModell, NULL);
                printStatusGaugings(&sModell);
 
+               //! print menue for simulation
                _gotoxy(2, 1);
-               printf("CALCULATION                                                                        ");
+               printf("MENUE\\START\\CALCULATION                                                            ");
                _gotoxy(2, 2);
                printf("                                                                                   ");
                _gotoxy(2, 3);
-               printf(" [e] Exit                    [s] Abbruch                                           ");
+               printf(" [e] Exit                    [s] Abort                                             ");
                _gotoxy(2, 4);
                printf("                                                                                   ");
-
                if (sModell.sSettings.eTSaveToFile == on)
                {
                   _gotoxy(2, 4);
-                  printf(" [p] Abbruch und drucken   ");
+                  printf(" [p] Abbort and print      ");
                }
-
                if (sModell.sSettings.eMode == step1 || sModell.sSettings.eMode == step6)
                {
                   _gotoxy(2 + 27, 4);
@@ -189,9 +181,16 @@ int main(void)
                }
                _gotoxy(0, 0);
 
-               //Start Simulation
+               //! if auto mode start timer
+               if (sModell.sSettings.eMode == auto6 || sModell.sSettings.eMode == autoX)
+               {
+                  sModell.sGaugings.runtime = clock();
+               }
+
+               //! Start Simulation
                iOpt = calcNaSchModell(&sModell);
 
+               //! safetofile if necessary
                if (sModell.sSettings.eTSaveToFile == on)
                {
                   if (iOpt == OP_PRINT || sModell.sGaugings.iTicks >= MAXTICKS)
@@ -200,8 +199,10 @@ int main(void)
                   }
                }
 
+               //! print gaugings last time
                printStatusGaugings(&sModell);
 
+               //!reset gaugings
                sModell.sGaugings.iTicks = 0;
                sModell.sGaugings.iTotalTrafficJams = 0;
                sModell.sGaugings.iCurrentTrafficJams = 0;
@@ -209,9 +210,11 @@ int main(void)
             }
             else
             {
+               //! print Board after setting abort
                printBoard(&sModell, NULL);
             }
 
+            //!print main menue
             printMainMenue();
             break;
 
