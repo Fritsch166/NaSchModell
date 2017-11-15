@@ -36,10 +36,10 @@ int main(void)
    sModell.sGaugings.iTotalTrafficJams = 0;
    sModell.sGaugings.iCurrentTrafficJams = 0;
    sModell.sGaugings.runtime = 0;
-   sModell.sGaugings.ppsState = calloc(sizeof(struct saveState **), STREET_LENGTH);
-   for (unsigned int iX = 0; iX < STREET_LENGTH; iX++)
+   sModell.sGaugings.ppsState = (struct saveState **) malloc(sizeof(struct saveState *) * ARRAY_CARS_MAX_LENGTH);
+   for (unsigned int iX = 0; iX < ARRAY_CARS_MAX_LENGTH; iX++)
    {
-      sModell.sGaugings.ppsState[iX] = calloc(sizeof(struct saveState *), MAXTICKS);
+      sModell.sGaugings.ppsState[iX] = (struct saveState *) malloc(sizeof(struct saveState) * MAXTICKS);
    }
 
 
@@ -130,16 +130,7 @@ int main(void)
                sModell.sGaugings.iTotalTrafficJams = 0;
                sModell.sGaugings.iCurrentTrafficJams = 0;
                sModell.sGaugings.runtime = 0;
-               for (unsigned int iX = 0; iX < STREET_LENGTH; iX++)
-               {
-                  for (unsigned int iY = 0; iY < MAXTICKS; iY++)
-                  {
-                     sModell.sGaugings.ppsState[iX][iY].bEnable = 0;
-                     sModell.sGaugings.ppsState[iX][iY].bIsInJam = 0;
-                     sModell.sGaugings.ppsState[iX][iY].bVTotal = 0;
-                     sModell.sGaugings.ppsState[iX][iY].bJamGroup = 0;
-                  }
-               }
+
                {
                   int aiPositions[STREET_LENGTH];
                   randomize(aiPositions, sModell.sSettings.iCars);
@@ -187,8 +178,13 @@ int main(void)
                   sModell.sGaugings.runtime = clock();
                }
 
-               //! Start Simulation
+               /************************************************
+                * Start Simulation
+                ************************************************/
+               
                iOpt = calcNaSchModell(&sModell);
+
+               /************************************************/
 
                //! safetofile if necessary
                if (sModell.sSettings.eTSaveToFile == on)
@@ -197,6 +193,13 @@ int main(void)
                   {
                      //TODO print to file
                   }
+               }
+
+               //! print board in autox mode at end
+               if (sModell.sGaugings.iTicks >= MAXTICKS && sModell.sSettings.eMode == autoX)
+               {
+                  const enum states eState = test_jam;
+                  printBoard(&sModell, &eState);
                }
 
                //! print gaugings last time
@@ -227,8 +230,7 @@ int main(void)
 
    }
 
-   
-   for (unsigned int iX = 0; iX < STREET_LENGTH; iX++)
+   for (unsigned int iX = 0; iX < ARRAY_CARS_MAX_LENGTH; iX++)
    {
       free(sModell.sGaugings.ppsState[iX]);
       sModell.sGaugings.ppsState[iX] = NULL;

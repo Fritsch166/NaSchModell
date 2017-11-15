@@ -13,15 +13,15 @@ void initColorMap(COLORMAP map, const int iWidth, const int iHeight)
    map->iWidth = iWidth;
    map->iHeight = iHeight;
 
-   map->ppucRED = malloc(sizeof(char**)*iWidth);
-   map->ppucGREEN = malloc(sizeof(char**)*iWidth);
-   map->ppucBLUE = malloc(sizeof(char**)*iWidth);
+   map->ppucRED = malloc(sizeof(char*)*iWidth);
+   map->ppucGREEN = malloc(sizeof(char*)*iWidth);
+   map->ppucBLUE = malloc(sizeof(char*)*iWidth);
 
    for (int i = 0; i < iWidth; i++)
    {
-      map->ppucRED[i] = calloc(iHeight, sizeof(char*));
-      map->ppucGREEN[i] = calloc(iHeight, sizeof(char*));
-      map->ppucBLUE[i] = calloc(iHeight, sizeof(char*));
+      map->ppucRED[i] = calloc(iHeight, sizeof(char));
+      map->ppucGREEN[i] = calloc(iHeight, sizeof(char));
+      map->ppucBLUE[i] = calloc(iHeight, sizeof(char));
    }
 }
 

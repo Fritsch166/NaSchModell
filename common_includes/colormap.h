@@ -10,25 +10,23 @@ struct colormap
    unsigned char ** ppucBLUE;
 };
 
-struct cMapColor
-{
-   unsigned char ucBLUE;
-   unsigned char ucGREEN;
-   unsigned char ucRED;
-};
-
-union hexToRGB
+union uCOLOR
 {
    unsigned int uiHEX;
-   struct cMapColor sRGB;
+   struct
+   {
+      unsigned char ucBLUE;
+      unsigned char ucGREEN;
+      unsigned char ucRED;
+   } sRGB;
 };
 
-typedef const union hexToRGB * const COLOR;
+typedef const union uCOLOR * const COLOR;
 typedef struct colormap * COLORMAP;
 
-extern const union hexToRGB VALUE_RED;
-extern const union hexToRGB VALUE_GREEN;
-extern const union hexToRGB VALUE_BLUE;
+extern const union uCOLOR VALUE_RED;
+extern const union uCOLOR VALUE_GREEN;
+extern const union uCOLOR VALUE_BLUE;
 
 #define RED   (&VALUE_RED)
 #define GREEN (&VALUE_GREEN)

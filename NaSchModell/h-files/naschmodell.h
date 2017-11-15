@@ -17,7 +17,7 @@
 
 #define STREET_LENGTH 1000
 #define PART_STREET_LENGTH 200
-#define ARRAY_LENGTH 990
+#define ARRAY_CARS_MAX_LENGTH 990
 
 #define MAXTICKS 500
 
@@ -94,14 +94,15 @@ struct settings
    enum mode eMode;
    char acFilename[COMPLPATHLENGTH];
    char acComplFilePath[COMPLPATHLENGTH];
+   struct colorschemes* asCSchemes[9];
 };
 
 struct saveState
 {
-   unsigned int bEnable : 1;
-   unsigned int bIsInJam : 1;
-   unsigned int bVTotal : 6;
-   unsigned int bJamGroup : 24;
+   bool bIsInJam;
+   int iVTotal;
+   int iJamGroup;
+   int iPosition;
 };
 
 struct gaugings
@@ -128,7 +129,13 @@ struct naschmodell
 {
    struct settings sSettings;
    struct gaugings sGaugings;
-   struct object_car asCars[ARRAY_LENGTH];
+   struct object_car asCars[ARRAY_CARS_MAX_LENGTH];
+};
+
+struct colorschemes
+{
+   unsigned int iId;
+   COLOR(*pfConverter)(struct saveState*);
 };
 
 

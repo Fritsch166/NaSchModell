@@ -12,7 +12,7 @@ int settingWindow(PMODELL pModell)
 
    int aiValues[COUNT_VALUES];
    const int aiMINValues[COUNT_VALUES] = {1, 1, 0, 0};
-   const int aiMAXValues[COUNT_VALUES] = {ARRAY_LENGTH, 50, 90, 90};
+   const int aiMAXValues[COUNT_VALUES] = {ARRAY_CARS_MAX_LENGTH, 50, 90, 90};
 
 
    aiValues[0] = pModell->sSettings.iCars;

@@ -16,7 +16,7 @@ int fDo_DillyDally(PMODELL pModell);
 int fDo_Drive(PMODELL pModell);
 int fDo_TestJam(PMODELL pModell);
 bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId);
-void saveCarState(const int iTicks, struct saveState ** const ppsState, PCAR const pCar);
+void saveCarState(const int iTicks, struct saveState ** const ppsState, PCAR const pCar, const int iCarId);
 
 #define FUNC_COUNT 18
 
@@ -268,7 +268,6 @@ int fDo_Drive(PMODELL pModell)
 
 int fDo_TestJam(PMODELL pModell)
 {
-   pModell->sGaugings.iTicks++;
 
    for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
    {
@@ -278,12 +277,14 @@ int fDo_TestJam(PMODELL pModell)
    {
       pModell->sGaugings.iCurrentTrafficJams = 0;
       int iLastJamGroupId = pModell->asCars[pModell->sSettings.iCars - 1].iJamGroupId;
+      bool bIsAtLeastOneInJam = false;
       for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
       {
          PCAR pCar = pModell->asCars + iCarId;
 
          if (pCar->bIsInJam == true)
          {
+            bIsAtLeastOneInJam = true;
             if (pCar->iJamGroupId != iLastJamGroupId)
             {
                pModell->sGaugings.iCurrentTrafficJams++;
@@ -291,16 +292,22 @@ int fDo_TestJam(PMODELL pModell)
             }
          }
       }
-
+      if (bIsAtLeastOneInJam == true && pModell->sGaugings.iCurrentTrafficJams == 0)
+      {
+         //SELTENER FALL: all are in same jam
+         pModell->sGaugings.iCurrentTrafficJams = 1;
+      }
    }
 
    if (pModell->sSettings.eTSaveToFile == on)
    {
       for (int i = 0; i < pModell->sSettings.iCars; i++)
       {
-         saveCarState(pModell->sGaugings.iTicks, pModell->sGaugings.ppsState, pModell->asCars + i);
+         saveCarState(pModell->sGaugings.iTicks, pModell->sGaugings.ppsState, pModell->asCars + i, i);
       }
    }
+
+   pModell->sGaugings.iTicks++;
 
    return OP_DEFAULT;
 }
@@ -333,6 +340,12 @@ bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
          {
             //FALL B
             pMyCar->iJamGroupId = pCarInfront->iJamGroupId;
+            if (pMyCar->iJamGroupId < 0)
+            {
+               //SELTENER FALL: all ar in same jam
+               pMyCar->iJamGroupId = pModell->sGaugings.iTotalTrafficJams;
+               pModell->sGaugings.iTotalTrafficJams++;
+            }
          }
          else
          {
@@ -355,17 +368,14 @@ bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId)
    return pMyCar->bIsInJam;
 }
 
-void saveCarState(const int iTicks, struct saveState ** const ppsState, PCAR const pCar)
+void saveCarState(const int iTicks, struct saveState ** const ppsState, PCAR const pCar, const int iCarId)
 {
-   const unsigned int iY = iTicks - 1;
-   const unsigned int iX = pCar->iPosition;
-   struct saveState * const psState = *(ppsState + iX) + iY;
+   const unsigned int iY = iTicks;
+   const unsigned int iX = iCarId;
+   struct saveState * const psState = &(ppsState[iX][iY]);
 
-   psState->bEnable = 1;
-   psState->bVTotal = pCar->iV + pCar->iVChange;
-   psState->bIsInJam = (pCar->bIsInJam == true) ? 1 : 0;
-   if (psState->bIsInJam)
-   {
-      psState->bJamGroup = pCar->iJamGroupId;
-   }
+   psState->iPosition = pCar->iPosition;
+   psState->iVTotal = pCar->iV + pCar->iVChange;
+   psState->bIsInJam = pCar->bIsInJam;
+   psState->iJamGroup = pCar->iJamGroupId;
 }
