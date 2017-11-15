@@ -3,9 +3,9 @@
 
 #include <stdlib.h>
 
-const union hexToRGB VALUE_RED = {.uiHEX = 0xff0000};
-const union hexToRGB VALUE_GREEN = {.uiHEX = 0x00ff00};
-const union hexToRGB VALUE_BLUE = {.uiHEX = 0x0000ff};
+const union uCOLOR VALUE_RED = {.uiHEX = 0xff0000};
+const union uCOLOR VALUE_GREEN = {.uiHEX = 0x00ff00};
+const union uCOLOR VALUE_BLUE = {.uiHEX = 0x0000ff};
 
 
 void initColorMap(COLORMAP map, const int iWidth, const int iHeight)
