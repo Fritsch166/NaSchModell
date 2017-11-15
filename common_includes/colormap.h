@@ -23,7 +23,7 @@ union hexToRGB
    struct cMapColor sRGB;
 };
 
-typedef union hexToRGB* COLOR;
+typedef const union hexToRGB*const COLOR;
 
 extern const union hexToRGB VALUE_RED;
 extern const union hexToRGB VALUE_GREEN;
