@@ -2,7 +2,7 @@
 
 void printToFile(PMODELL pModell)
 {
- 
+
    /***************Umwandeln in Farbschema*********************
 
      pModell->sSettings.iCars x pModell->sGaugings.iTicks:
@@ -24,23 +24,35 @@ void printToFile(PMODELL pModell)
    {
       if (pModell->sSettings.apsCSchemes[iFX] != NULL)
       {
-         
-         
+
+
          //Daten umwandeln 
          for (int iY = 0; iY < pModell->sGaugings.iTicks; iY++)
          {
-            //TODO zeile löschen
-            for (int iCarId = 0; iCarId < pModell->sSettings.iCars; iCarId++)
+
+            int iCarId = pModell->sSettings.iCars - 1;
+            struct saveState * psState = &(pModell->sGaugings.ppsState[iCarId][iY]);
+            const int iStartPosition = psState->iPosition;
+            int iPosition = iStartPosition;
+
+            do
             {
 
-               struct saveState * const psState = &(pModell->sGaugings.ppsState[iCarId][iY]);
+               if (psState->iPosition == iPosition)
+               {
+                  COLOR pColor = pModell->sSettings.apsCSchemes[iFX]->pf_Converter(psState, &(pModell->sSettings));
+                  setColorMap(map, pColor, iY, iPosition);
+                  iCarId = (iCarId + 1) % pModell->sSettings.iCars;
+                  psState = &(pModell->sGaugings.ppsState[iCarId][iY]);
+               }
+               else
+               {
+                  setColorMap(map, Black, iY, iPosition);
+               }
 
-               int iX = psState->iPosition;
-
-               COLOR pColor = pModell->sSettings.apsCSchemes[iFX]->pf_Converter(psState, &(pModell->sSettings));
-
-               setColorMap(map, pColor, iY, iX);
+               iPosition = (iPosition + 1) % STREET_LENGTH;
             }
+            while (iPosition != iStartPosition);
          }
 
          drawbmp(pModell->sSettings.acComplFilePath, map->iWidth, map->iHeight, map->ppucRED, map->ppucGREEN, map->ppucBLUE);
