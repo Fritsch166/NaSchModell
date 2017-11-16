@@ -58,5 +58,8 @@
     <ClCompile Include="c-files\colorschemes.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c-files\printToFile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

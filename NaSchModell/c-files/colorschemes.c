@@ -1,13 +1,12 @@
 #include "..\h-files\naschmodell.h"
 
-#define NUMBER_OF_COLORS 36
+#define NUMBER_OF_COLORS 32
 
 static bool bIsInit = false;
 static COLOR pCOLOR_LIST[NUMBER_OF_COLORS] = {
 Aqua ,
 Azure,
 Beige,
-Black ,
 Blue ,
 Brown ,
 Chocolate ,
@@ -17,7 +16,6 @@ Cyan ,
 Fuchsia ,
 Gold ,
 Grey ,
-Green ,
 Indigo  ,
 Ivory ,
 Khaki ,
@@ -31,14 +29,12 @@ Olive ,
 Orange ,
 Orchid ,
 Pink ,
-Red ,
 Silver ,
 Snow ,
 Tan ,
 Tomato ,
 Turquoise ,
 Violet ,
-White ,
 Yellow
 };
 

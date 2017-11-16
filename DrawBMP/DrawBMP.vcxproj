@@ -101,6 +101,7 @@
       <PreprocessorDefinitions>WIN32;DLLFUNKTION_EXPORT;_DEBUG;DRAWBMP_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnablePREfast>false</EnablePREfast>
       <CompileAs>CompileAsC</CompileAs>
+      <DisableSpecificWarnings>4710;4464</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

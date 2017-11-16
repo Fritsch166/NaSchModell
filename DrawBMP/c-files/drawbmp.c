@@ -1,5 +1,4 @@
 
-#pragma warning( disable : 4710 464 )
 
 #include "..\h-files\drawbmp.h"
 

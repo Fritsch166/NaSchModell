@@ -31,6 +31,7 @@ int main(void)
       (i < MAX_COLOR_SCHEMES) ? (sModell.sSettings.apsCSchemes[i] = NULL) : (0);
    }
 
+   
    sModell.sGaugings.iTicks = 0;
    sModell.sGaugings.iTotalTrafficJams = 0;
    sModell.sGaugings.iCurrentTrafficJams = 0;
@@ -41,6 +42,12 @@ int main(void)
       sModell.sGaugings.ppsState[iX] = (struct saveState *) malloc(sizeof(struct saveState) * MAXTICKS);
    }
 
+   /*
+   sprintf_s(sModell.sSettings.acFilename, MAXWRITEPATHLENGTH, "test");//TODO remove test value
+   sprintf_s(sModell.sSettings.acComplFilePath, COMPLPATHLENGTH, "%s.bmp", sModell.sSettings.acFilename);//TODO remove test value
+   sModell.sSettings.eTSaveToFile = on;//TODO remove test value
+   sModell.sSettings.apsCSchemes[2] = GLOBAL_ARRAY_COLOR_SCHEMES + 2;//TODO remove test value
+   */
 
    //init one car
    sModell.asCars[0].bDoDelayAtV0 = false;
@@ -190,7 +197,7 @@ int main(void)
                {
                   if (iOpt == OP_PRINT || sModell.sGaugings.iTicks >= MAXTICKS)
                   {
-                     //TODO print to file
+                     printToFile(&sModell);
                   }
                }
 

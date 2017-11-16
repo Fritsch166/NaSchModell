@@ -55,7 +55,7 @@
 
 
 #define MAXWRITEPATHLENGTH 250
-#define COMPLPATHLENGTH (MAXWRITEPATHLENGTH + 5)
+#define COMPLPATHLENGTH (MAXWRITEPATHLENGTH + 4)
 #define TIMESTAMPLENGTH 12
 
 extern struct colorschemes GLOBAL_ARRAY_COLOR_SCHEMES[MAX_COLOR_SCHEMES];
@@ -94,8 +94,8 @@ struct settings
    int iIncreasedDelayAtV0Prozent;
    enum toggle eTSaveToFile;
    enum mode eMode;
-   char acFilename[COMPLPATHLENGTH];
-   char acComplFilePath[COMPLPATHLENGTH];
+   char acFilename[COMPLPATHLENGTH+1];
+   char acComplFilePath[COMPLPATHLENGTH+1];
    struct colorschemes* apsCSchemes[MAX_COLOR_SCHEMES];
 };
 
@@ -154,4 +154,5 @@ void printStatusGaugings(PMODELL pModell);
 int settingWindow(PMODELL pModell);
 int calcNaSchModell(PMODELL pModell);
 void initGlobalColorSchemes(void);
+void printToFile(PMODELL pModell);
 
