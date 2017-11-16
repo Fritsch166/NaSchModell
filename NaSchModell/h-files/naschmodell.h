@@ -37,6 +37,7 @@
 #define OP_PRINT 'p'
 #define OP_STEP ' '
 #define OP_TAB 9
+#define OP_REMOVECYPHER 8
 
 
 #define FILLCHAR '#'

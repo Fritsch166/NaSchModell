@@ -31,9 +31,9 @@ int settingWindow(PMODELL pModell)
    _gotoxy(2, 2);
    printf("                                                                                   ");
    _gotoxy(2, 3);
-   printf(" [e] Exit                    [s] Abort                                             ");
+   printf(" [e] Exit                    [s]   Abort                 [<-]   Remove             ");
    _gotoxy(2, 4);
-   printf(" [UMSCHALT+TAB] Prev..       [TAB] Next..                [0..9] Set value          ");
+   printf(" [UMSCHALT+TAB] Prev..       [TAB] Next..                [0..9] Add                ");
 
 
    _gotoxy(0, 0);
@@ -59,7 +59,7 @@ int settingWindow(PMODELL pModell)
 
          _gotoxy(siX + 13, siY + 2 + 2 * (short int)(iState));
          printf("   [+/-]  {%1.1d..%3.1d}", aiMINValues[iState], aiMAXValues[iState]);
-         
+
          siCursorX = siX + 13;
          siCursorY = siY + 2 + 2 * (short int)(iState);
       }
@@ -75,7 +75,7 @@ int settingWindow(PMODELL pModell)
 
       //get user input
       iOpt = input(siCursorX, siCursorY);
-    
+
       iKEY_STATE = GetKeyState(VK_SHIFT);
 
 
@@ -128,6 +128,20 @@ int settingWindow(PMODELL pModell)
             break;
 
          case OP_EXIT:
+            break;
+
+         case OP_REMOVECYPHER:
+            if (iState < COUNT_VALUES)
+            {
+               int iCopy = aiValues[iState];
+
+               iCopy = (int)(iCopy / 10);
+
+               if (iCopy >= aiMINValues[iState] && iCopy <= aiMAXValues[iState])
+               {
+                  aiValues[iState] = iCopy;
+               }
+            }
             break;
 
          default:
