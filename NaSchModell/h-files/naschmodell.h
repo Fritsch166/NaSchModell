@@ -155,4 +155,5 @@ int settingWindow(PMODELL pModell);
 int calcNaSchModell(PMODELL pModell);
 void initGlobalColorSchemes(void);
 void printToFile(PMODELL pModell);
+int input(const short int siX, const short int siY);
 

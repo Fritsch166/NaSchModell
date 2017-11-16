@@ -5,9 +5,22 @@
 
 void randomize(int aiPositions[STREET_LENGTH], const int iAmountPositions);
 
+unsigned int GLOBAL_CURSOR_BLINK_RATE = 530;
+
 int main(void)
 {
+
    struct naschmodell sModell;
+
+
+
+
+   {
+      char value[12];
+      DWORD BufferSize = 12;
+      RegGetValue(HKEY_CURRENT_USER, "Control Panel\\Desktop", "CursorBlinkRate", REG_SZ, NULL, (PVOID)&value, &BufferSize);
+      GLOBAL_CURSOR_BLINK_RATE = atoi(value);
+   }
 
    initGlobalColorSchemes();
    srand((unsigned int)time(NULL));
@@ -31,7 +44,7 @@ int main(void)
       (i < MAX_COLOR_SCHEMES) ? (sModell.sSettings.apsCSchemes[i] = NULL) : (0);
    }
 
-   
+
    sModell.sGaugings.iTicks = 0;
    sModell.sGaugings.iTotalTrafficJams = 0;
    sModell.sGaugings.iCurrentTrafficJams = 0;
@@ -42,12 +55,12 @@ int main(void)
       sModell.sGaugings.ppsState[iX] = (struct saveState *) malloc(sizeof(struct saveState) * MAXTICKS);
    }
 
-   /*
-   sprintf_s(sModell.sSettings.acFilename, MAXWRITEPATHLENGTH, "test");//TODO remove test value
-   sprintf_s(sModell.sSettings.acComplFilePath, COMPLPATHLENGTH, "%s.bmp", sModell.sSettings.acFilename);//TODO remove test value
-   sModell.sSettings.eTSaveToFile = on;//TODO remove test value
-   sModell.sSettings.apsCSchemes[2] = GLOBAL_ARRAY_COLOR_SCHEMES + 2;//TODO remove test value
-   */
+
+   //sprintf_s(sModell.sSettings.acFilename, MAXWRITEPATHLENGTH, "test");//todo remove test value
+   //sprintf_s(sModell.sSettings.acComplFilePath, COMPLPATHLENGTH, "%s.bmp", sModell.sSettings.acFilename);//todo remove test value
+   //sModell.sSettings.eTSaveToFile = on;//todo remove test value
+   //sModell.sSettings.apsCSchemes[2] = GLOBAL_ARRAY_COLOR_SCHEMES + 2;//todo remove test value
+
 
    //init one car
    sModell.asCars[0].bDoDelayAtV0 = false;
@@ -77,7 +90,7 @@ int main(void)
 
    for (int iOpt = OP_DEFAULT; iOpt != OP_EXIT; )
    {
-      iOpt = _getch();
+      iOpt = input(0, 0);
 
       switch (iOpt)
       {
@@ -184,24 +197,15 @@ int main(void)
                   sModell.sGaugings.runtime = clock();
                }
 
-              /************************************************
-               * Start Simulation
-               ************************************************/
+               /************************************************
+                * Start Simulation
+                ************************************************/
 
                iOpt = calcNaSchModell(&sModell);
 
-              /************************************************/
+               /************************************************/
 
-               //! safetofile if necessary
-               if (sModell.sSettings.eTSaveToFile == on)
-               {
-                  if (iOpt == OP_PRINT || sModell.sGaugings.iTicks >= MAXTICKS)
-                  {
-                     printToFile(&sModell);
-                  }
-               }
-
-               //! print board in autox mode at end
+                //! print board in autox mode at end
                if (sModell.sGaugings.iTicks >= MAXTICKS && sModell.sSettings.eMode == autoX)
                {
                   const enum states eState = test_jam;
@@ -210,6 +214,33 @@ int main(void)
 
                //! print gaugings last time
                printStatusGaugings(&sModell);
+
+               //! safetofile if necessary
+               if (sModell.sSettings.eTSaveToFile == on)
+               {
+                  if (iOpt == OP_PRINT || sModell.sGaugings.iTicks >= MAXTICKS)
+                  {
+                     deleteArea(1, 1, WINDOWWIDTH, MENUHEIGHT);
+                     _gotoxy(10, 2);
+                     printf("Waiting for: Save to file..");
+                     printToFile(&sModell);
+                     printf("   DONE   [ Press any key to continue ] ");
+
+                     {
+                        fseek(stdin, 0, SEEK_END);
+                        int iToggle = 0;
+                        while (_kbhit() == 0)
+                        {
+                           _gotoxy(48 + iToggle * 26, 2);
+                           iToggle = (iToggle + 1) % 2;
+                           Sleep(GLOBAL_CURSOR_BLINK_RATE);
+                        }
+                     }
+
+                  }
+               }
+
+
 
                //!reset gaugings
                sModell.sGaugings.iTicks = 0;
@@ -254,7 +285,7 @@ int main(void)
 
 void randomize(int aiPositions[STREET_LENGTH], const int iAmountPositions)
 {
- 
+
    //init array
    for (int iPosition = 0; iPosition < STREET_LENGTH; iPosition++)
    {
@@ -281,4 +312,53 @@ void randomize(int aiPositions[STREET_LENGTH], const int iAmountPositions)
          aiPositions[iN++] = aiPositions[iPosition];
       }
    }
+}
+
+void clearKeyboardBuffer(void)
+{
+   int i;
+   while (_kbhit() == 1 && (i = _getch()) != '\n' && i != EOF);
+}
+
+int input(const short int siX, const short int siY)
+{
+   int iKEY_STATE = 0;
+   int iToggle = 0;
+
+
+   _gotoxy(siX, siY);
+   clearKeyboardBuffer();
+
+   while (1)
+   {
+
+      iKEY_STATE = GetKeyState(VK_CAPITAL);
+
+      if (0x0001 & iKEY_STATE)
+      {
+         _gotoxy(150, 4 + MENUHEIGHT + BOARDHEIGHT);
+         printf("[ Caps Lock ]");
+         do
+         {
+            _gotoxy(151 + iToggle * 10, 4 + MENUHEIGHT + BOARDHEIGHT);
+            iToggle = (iToggle + 1) % 2;
+            Sleep(GLOBAL_CURSOR_BLINK_RATE / 2);
+            iKEY_STATE = GetKeyState(VK_CAPITAL);
+         }
+         while (0x0001 & iKEY_STATE);
+
+         _gotoxy(150, 4 + MENUHEIGHT + BOARDHEIGHT);
+         printf("             ");
+         _gotoxy(siX, siY);
+         clearKeyboardBuffer();
+      }
+
+      if (_kbhit() == 1)
+      {
+         int iOpt = _getch();
+         clearKeyboardBuffer();
+         return iOpt;
+      }
+   }
+
 }

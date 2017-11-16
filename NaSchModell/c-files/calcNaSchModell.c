@@ -66,7 +66,7 @@ int userinteractionSTEP1(PMODELL pModell)
    {
       do
       {
-         iOpt = _getch();
+         iOpt = input(0, 0);
       }
       while (iOpt != OP_EXIT
          && iOpt != OP_STOP
@@ -85,7 +85,7 @@ int userinteraction(PMODELL pModell)
    {
       do
       {
-         iOpt = _getch();
+         iOpt = input(0, 0);
       }
       while (iOpt != OP_EXIT
          && iOpt != OP_STOP

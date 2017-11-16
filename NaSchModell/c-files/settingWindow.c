@@ -9,6 +9,7 @@ int settingWindow(PMODELL pModell)
    const short siY = MENUHEIGHT + 2 + (BOARDHEIGHT - (2 + SETTING_WINDOW_HEIGHT)) / 2;
    int iOpt = OP_DEFAULT;
    int iKEY_STATE;
+   short int siCursorX, siCursorY;
 
    int aiValues[COUNT_VALUES];
    const int aiMINValues[COUNT_VALUES] = {1, 1, 0, 0};
@@ -58,18 +59,23 @@ int settingWindow(PMODELL pModell)
 
          _gotoxy(siX + 13, siY + 2 + 2 * (short int)(iState));
          printf("   [+/-]  {%1.1d..%3.1d}", aiMINValues[iState], aiMAXValues[iState]);
-         _gotoxy(siX + 13, siY + 2 + 2 * (short int)(iState));
+         
+         siCursorX = siX + 13;
+         siCursorY = siY + 2 + 2 * (short int)(iState);
       }
       else if (iState == COUNT_VALUES)
       {
          _gotoxy(siX + 3, siY + 10);
          printf("Save Settings? [ENTER]");
+
+         siCursorX = siX + 25;
+         siCursorY = siY + 10;
       }
 
 
       //get user input
-      iOpt = _getch();
-      iKEY_STATE = 0;
+      iOpt = input(siCursorX, siCursorY);
+    
       iKEY_STATE = GetKeyState(VK_SHIFT);
 
 
