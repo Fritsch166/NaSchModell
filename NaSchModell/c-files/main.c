@@ -228,11 +228,11 @@ int main(void)
 
                      {
                         fseek(stdin, 0, SEEK_END);
-                        int iToggle = 0;
+                        short int siToggle = 0;
                         while (_kbhit() == 0)
                         {
-                           _gotoxy(48 + iToggle * 26, 2);
-                           iToggle = (iToggle + 1) % 2;
+                           _gotoxy(48 + siToggle * 26, 2);
+                           siToggle = (siToggle + 1) % 2;
                            Sleep(GLOBAL_CURSOR_BLINK_RATE);
                         }
                      }
@@ -323,7 +323,7 @@ void clearKeyboardBuffer(void)
 int input(const short int siX, const short int siY)
 {
    int iKEY_STATE = 0;
-   int iToggle = 0;
+   short int siToggle = 0;
 
 
    _gotoxy(siX, siY);
@@ -340,8 +340,8 @@ int input(const short int siX, const short int siY)
          printf("[ Caps Lock ]");
          do
          {
-            _gotoxy(151 + iToggle * 10, 4 + MENUHEIGHT + BOARDHEIGHT);
-            iToggle = (iToggle + 1) % 2;
+            _gotoxy(151 + siToggle * 10, 4 + MENUHEIGHT + BOARDHEIGHT);
+            siToggle = (siToggle + 1) % 2;
             Sleep(GLOBAL_CURSOR_BLINK_RATE / 2);
             iKEY_STATE = GetKeyState(VK_CAPITAL);
          }
