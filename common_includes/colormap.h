@@ -105,3 +105,4 @@ extern const union uCOLOR VALUE_Yellow;
 void initColorMap(COLORMAP map, const int iWidth, const int iHeight);
 void setColorMap(COLORMAP map, COLOR color, const int y, const int x);
 void freeColorMap(COLORMAP map);
+COLOR getMixedColor(COLOR pColor0, COLOR pColorN, const int iN, const int iI);
