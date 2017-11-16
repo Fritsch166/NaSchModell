@@ -12,9 +12,6 @@ int main(void)
 
    struct naschmodell sModell;
 
-
-
-
    {
       char value[12];
       DWORD BufferSize = 12;
@@ -55,11 +52,13 @@ int main(void)
       sModell.sGaugings.ppsState[iX] = (struct saveState *) malloc(sizeof(struct saveState) * MAXTICKS);
    }
 
-
-   //sprintf_s(sModell.sSettings.acFilename, MAXWRITEPATHLENGTH, "test");//todo remove test value
-   //sprintf_s(sModell.sSettings.acComplFilePath, COMPLPATHLENGTH, "%s.bmp", sModell.sSettings.acFilename);//todo remove test value
-   //sModell.sSettings.eTSaveToFile = on;//todo remove test value
-   //sModell.sSettings.apsCSchemes[2] = GLOBAL_ARRAY_COLOR_SCHEMES + 2;//todo remove test value
+   //TODO remove test values
+   /*sprintf_s(sModell.sSettings.acFilename, MAXWRITEPATHLENGTH, "test");
+   sprintf_s(sModell.sSettings.acComplFilePath, COMPLPATHLENGTH, "%sFX.bmp", sModell.sSettings.acFilename);
+   sModell.sSettings.eTSaveToFile = on;
+   sModell.sSettings.apsCSchemes[1] = GLOBAL_ARRAY_COLOR_SCHEMES + 1;
+   sModell.sSettings.apsCSchemes[2] = GLOBAL_ARRAY_COLOR_SCHEMES + 2;
+   sModell.sSettings.apsCSchemes[3] = GLOBAL_ARRAY_COLOR_SCHEMES + 3;*/
 
 
    //init one car

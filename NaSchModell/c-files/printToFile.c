@@ -55,7 +55,9 @@ void printToFile(PMODELL pModell)
             while (iPosition != iStartPosition);
          }
 
+         //TODO add Color Schemes Id to Filepath
          drawbmp(pModell->sSettings.acComplFilePath, map->iWidth, map->iHeight, map->ppucRED, map->ppucGREEN, map->ppucBLUE);
+         //TODO remove Color Schemes Id from Filepath
       }
    }
 
