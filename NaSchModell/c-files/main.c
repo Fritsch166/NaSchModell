@@ -12,6 +12,9 @@ int main(void)
 
    struct naschmodell sModell;
 
+   SMALL_RECT windowSize = {0 , 0 , 207, 39};
+   SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &windowSize);
+
    {
       char value[12];
       DWORD BufferSize = 12;
