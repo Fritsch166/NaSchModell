@@ -61,5 +61,8 @@
     <ClCompile Include="c-files\printToFile.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c-files\printWindow.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

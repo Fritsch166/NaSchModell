@@ -36,6 +36,7 @@
     <ClCompile Include="c-files\printStatusGaugings.c" />
     <ClCompile Include="c-files\printStatusSettings.c" />
     <ClCompile Include="c-files\printToFile.c" />
+    <ClCompile Include="c-files\printWindow.c" />
     <ClCompile Include="c-files\settingWindow.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

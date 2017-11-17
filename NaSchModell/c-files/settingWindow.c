@@ -3,6 +3,7 @@
 
 #define COUNT_VALUES 4
 
+
 int settingWindow(PMODELL pModell)
 {
    const short siX = (WINDOWWIDTH + 2 - (2 + SETTING_WINDOW_WIDTH)) / 2;
@@ -27,13 +28,13 @@ int settingWindow(PMODELL pModell)
 
    //print menu
    _gotoxy(2, 1);
-   printf("MENUE\\START..                                                                      ");
+   printf("MENUE\\START..                                                                             ");
    _gotoxy(2, 2);
-   printf("                                                                                   ");
+   printf("                                                                                          ");
    _gotoxy(2, 3);
-   printf(" [e] Exit                    [s]   Abort                 [<-]   Remove             ");
+   printf(" [e] Exit                    [s]   Abort                 [<-]   Remove                    ");
    _gotoxy(2, 4);
-   printf(" [UMSCHALT+TAB] Prev..       [TAB] Next..                [0..9] Add                ");
+   printf(" [UMSCHALT+TAB] Prev..       [TAB] Next..                [0..9] Add                       ");
 
 
    _gotoxy(0, 0);
@@ -130,7 +131,7 @@ int settingWindow(PMODELL pModell)
          case OP_EXIT:
             break;
 
-         case OP_REMOVECYPHER:
+         case OP_REMOVE:
             if (iState < COUNT_VALUES)
             {
                int iCopy = aiValues[iState];

@@ -49,14 +49,14 @@ void printStatusSettings(PMODELL pModell)
 
    //! - FILEPATH
    _gotoxy(siX + 15, siY + 3);
-   int iDiff = 20 - strlen(pModell->sSettings.acFilename);
+   int iDiff = 18 - strlen(pModell->sSettings.acFilename);
    if ((iDiff) >= 0)
    {
-      printf("-%s[.bmp]-", pModell->sSettings.acFilename);
+      printf("-%s[FX.bmp]-", pModell->sSettings.acFilename);
    }
    else
    {
-      printf("-%.*s..[.bmp]-", 18, pModell->sSettings.acFilename);
+      printf("-%.*s..[FX.bmp]-", 16, pModell->sSettings.acFilename);
    }
 
    //! - Color Schemes

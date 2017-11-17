@@ -37,7 +37,10 @@
 #define OP_PRINT 'p'
 #define OP_STEP ' '
 #define OP_TAB 9
-#define OP_REMOVECYPHER 8
+#define OP_REMOVE 8
+#define OP_ESC 27
+#define OP_BACKSPACE 8
+#define OP_CHANGESAVESTATE '>'
 
 
 #define FILLCHAR '#'
@@ -52,10 +55,12 @@
 #define STATUS_GAUGINGS_WIDTH 34
 #define SETTING_WINDOW_WIDTH 32
 #define SETTING_WINDOW_HEIGHT 11
+#define PRINT_WINDOW_WIDTH 33
+#define PRINT_WINDOW_HEIGHT 12
 
 
 
-#define MAXWRITEPATHLENGTH 250
+#define MAXWRITEPATHLENGTH 180
 #define COMPLPATHLENGTH (MAXWRITEPATHLENGTH + 6)
 #define TIMESTAMPLENGTH 12
 
@@ -157,4 +162,5 @@ int calcNaSchModell(PMODELL pModell);
 void initGlobalColorSchemes(void);
 void printToFile(PMODELL pModell);
 int input(const short int siX, const short int siY);
+void printWindow(PMODELL pModell);
 

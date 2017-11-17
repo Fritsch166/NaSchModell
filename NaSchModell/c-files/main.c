@@ -52,15 +52,6 @@ int main(void)
       sModell.sGaugings.ppsState[iX] = (struct saveState *) malloc(sizeof(struct saveState) * MAXTICKS);
    }
 
-   //TODO remove test values
-   /*sprintf_s(sModell.sSettings.acFilename, MAXWRITEPATHLENGTH, "test");
-   sprintf_s(sModell.sSettings.acComplFilePath, COMPLPATHLENGTH, "%sFX.bmp", sModell.sSettings.acFilename);
-   sModell.sSettings.eTSaveToFile = on;
-   sModell.sSettings.apsCSchemes[1] = GLOBAL_ARRAY_COLOR_SCHEMES + 1;
-   sModell.sSettings.apsCSchemes[2] = GLOBAL_ARRAY_COLOR_SCHEMES + 2;
-   sModell.sSettings.apsCSchemes[3] = GLOBAL_ARRAY_COLOR_SCHEMES + 3;*/
-
-
    //init one car
    sModell.asCars[0].bDoDelayAtV0 = false;
    sModell.asCars[0].bIsInJam = false;
@@ -130,7 +121,10 @@ int main(void)
             break;
 
          case OP_OPENMENUSAVE:
-            //TODO open_menu_save
+            printWindow(&sModell);
+            printMainMenue();
+            printBoard(&sModell, NULL);
+            printStatusSettings(&sModell);
             break;
 
          case OP_START:
@@ -171,13 +165,13 @@ int main(void)
 
                //! print menue for simulation
                _gotoxy(2, 1);
-               printf("MENUE\\START\\CALCULATION                                                            ");
+               printf("MENUE\\START\\CALCULATION.                                                                  ");
                _gotoxy(2, 2);
-               printf("                                                                                   ");
+               printf("                                                                                          ");
                _gotoxy(2, 3);
-               printf(" [e] Exit                    [s] Abort                                             ");
+               printf(" [e] Exit                    [s] Abort                                                    ");
                _gotoxy(2, 4);
-               printf("                                                                                   ");
+               printf("                                                                                          ");
                if (sModell.sSettings.eTSaveToFile == on)
                {
                   _gotoxy(2, 4);
