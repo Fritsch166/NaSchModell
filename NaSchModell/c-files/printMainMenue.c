@@ -16,7 +16,7 @@ void printMainMenue(void)
    printf("Autor: Daniel W. Fritsch");
 
    _gotoxy(90, 6 + MENUHEIGHT + BOARDHEIGHT);
-   printf("V1.02.00");
+   printf("V1.02.01");
 
    _gotoxy(0, 0);
 
