@@ -1,5 +1,9 @@
 #pragma once
 
+/**************************************
+ * dll for printing *.bmp file
+ **************************************/
+
 #ifdef DLLFUNKTION_EXPORT
 #define _DLL_DECLSPEC_ _declspec(dllexport) 
 #else
