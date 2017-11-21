@@ -401,8 +401,6 @@ int watchdog(PMODELL pModell, int iF)
 {
 
    const int iN = pModell->sSettings.iCars;
-   const int iVMax = pModell->sSettings.iVMax;
-   const int iTicks = pModell->sGaugings.iTicks;
 
    int i = 0;
    int iReturn = 0;
