@@ -88,41 +88,6 @@ int main(void)
       switch (iOpt)
       {
 
-         case OP_CHANGEMODESTATE:
-            switch (sModell.sSettings.eMode)
-            {
-               case step1:
-                  sModell.sSettings.eMode = step6;
-                  break;
-
-               case step6:
-                  sModell.sSettings.eMode = auto6;
-                  break;
-
-               case auto6:
-                  sModell.sSettings.eMode = autoX;
-                  break;
-
-               default:
-                  sModell.sSettings.eMode = step1;
-            }
-
-            printStatusSettings(&sModell);
-            printStatusGaugings(&sModell);
-            break;
-
-         case OP_CHANGECRUISECONTROLSTATE:
-            if (sModell.sSettings.eTCruiseControl == off)
-            {
-               sModell.sSettings.eTCruiseControl = on;
-            }
-            else
-            {
-               sModell.sSettings.eTCruiseControl = off;
-            }
-            printStatusSettings(&sModell);
-            break;
-
          case OP_OPENMENUSAVE:
             printWindow(&sModell);
             printMainMenue();
@@ -137,6 +102,7 @@ int main(void)
 
             //! print changes settings
             printStatusSettings(&sModell);
+            printStatusGaugings(&sModell);
 
             if (iOpt == OP_SAVESETTINGS)
             {

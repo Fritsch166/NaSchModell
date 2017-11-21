@@ -2,7 +2,7 @@
 
 #include "..\h-files\naschmodell.h"
 
-static const char * const apcModeText[4] = {
+const char * const GLOBAL_APC_MODETEXT[4] = {
    "Step1",
    "Step6",
    "Auto6",
@@ -31,7 +31,7 @@ void printStatusSettings(PMODELL pModell)
 
    //! - Mode
    _gotoxy(siX, siY + 3);
-   printf("Mode: %s", apcModeText[pModell->sSettings.eMode]);
+   printf("Mode: %s", GLOBAL_APC_MODETEXT[pModell->sSettings.eMode]);
 
 
 

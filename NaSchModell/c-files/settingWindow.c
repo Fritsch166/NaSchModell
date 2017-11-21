@@ -1,7 +1,7 @@
 
 #include "..\h-files\naschmodell.h"
 
-#define COUNT_VALUES 4
+#define COUNT_VALUES 6
 
 
 int settingWindow(PMODELL pModell)
@@ -13,14 +13,16 @@ int settingWindow(PMODELL pModell)
    short int siCursorX, siCursorY;
 
    int aiValues[COUNT_VALUES];
-   const int aiMINValues[COUNT_VALUES] = {1, 1, 0, 0};
-   const int aiMAXValues[COUNT_VALUES] = {ARRAY_CARS_MAX_LENGTH, 50, 90, 90};
+   const int aiMINValues[COUNT_VALUES] = {1, 1, 0, 0, 0, 0};
+   const int aiMAXValues[COUNT_VALUES] = {ARRAY_CARS_MAX_LENGTH, 50, 90, 90, 1, 3};
 
    //get current setting values
    aiValues[0] = pModell->sSettings.iCars;
    aiValues[1] = pModell->sSettings.iVMax;
    aiValues[2] = pModell->sSettings.iPDDProzent;
    aiValues[3] = pModell->sSettings.iIncreasedDelayAtV0Prozent;
+   aiValues[4] = pModell->sSettings.eTCruiseControl;
+   aiValues[5] = pModell->sSettings.eMode;
 
    //print window
    deleteArea(siX, siY, 2 + SETTING_WINDOW_WIDTH, 2 + SETTING_WINDOW_HEIGHT);
@@ -44,33 +46,37 @@ int settingWindow(PMODELL pModell)
    {
       //print values
       _gotoxy(siX + 3, siY + 2);
-      printf("Cars:  %3.1d                  ", aiValues[0]);
+      printf("Cars:   %3.1d                 ", aiValues[0]);
       _gotoxy(siX + 3, siY + 4);
-      printf("VMax:   %2.1d                  ", aiValues[1]);
+      printf("VMax:    %2.1d                 ", aiValues[1]);
       _gotoxy(siX + 3, siY + 6);
-      printf("P-DD:  %2.1d%%                  ", aiValues[2]);
+      printf("P-DD:   %2.1d%%                 ", aiValues[2]);
       _gotoxy(siX + 3, siY + 8);
-      printf("IDV0:  %2.1d%%                  ", aiValues[3]);
+      printf("IDV0:   %2.1d%%                 ", aiValues[3]);
+      _gotoxy(siX + 3, siY + 10);
+      printf("C-c:    %s                   ", (aiValues[4]) ? (" ON") : ("OFF") );
+      _gotoxy(siX + 3, siY + 12);
+      printf("Mode: %s                   ", GLOBAL_APC_MODETEXT[aiValues[5]]);
 
       //print cursor
       if (iState < COUNT_VALUES)
       {
-         _gotoxy(siX + 3, siY + 10);
+         _gotoxy(siX + 3, siY + 2 + 2 * COUNT_VALUES);
          printf("                      ");
 
-         _gotoxy(siX + 13, siY + 2 + 2 * (short int)(iState));
-         printf("   [+/-]  {%1.1d..%3.1d}", aiMINValues[iState], aiMAXValues[iState]);
+         _gotoxy(siX + 14, siY + 2 + 2 * (short int)(iState));
+         printf("  [+/-]  {%1.1d..%3.1d}", aiMINValues[iState], aiMAXValues[iState]);
 
-         siCursorX = siX + 13;
+         siCursorX = siX + 14;
          siCursorY = siY + 2 + 2 * (short int)(iState);
       }
       else if (iState == COUNT_VALUES)
       {
-         _gotoxy(siX + 3, siY + 10);
+         _gotoxy(siX + 3, siY + 2 + 2 * COUNT_VALUES);
          printf("Save Settings? [ENTER]");
 
          siCursorX = siX + 25;
-         siCursorY = siY + 10;
+         siCursorY = siY + 2 + 2 * COUNT_VALUES;
       }
 
 
@@ -179,6 +185,8 @@ int settingWindow(PMODELL pModell)
       pModell->sSettings.iVMax = aiValues[1];
       pModell->sSettings.iPDDProzent = aiValues[2];
       pModell->sSettings.iIncreasedDelayAtV0Prozent = aiValues[3];
+      pModell->sSettings.eTCruiseControl = aiValues[4];
+      pModell->sSettings.eMode = aiValues[5];
    }
 
    //clear frame

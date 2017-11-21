@@ -25,10 +25,7 @@
 #define OP_DEFAULT '.'
 #define OP_EXIT 'e'
 #define OP_START 'q'
-#define OP_CHANGEMODESTATE 'm'
 #define OP_OPENMENUSAVE 'f'
-#define OP_CHANGECRUISECONTROLSTATE 'c'
-#define OP_CHANGEDELAYATV0STATE 'd'
 #define OP_STOP 's'
 #define OP_ENTER 13
 #define OP_DEKREMENT '-'
@@ -54,7 +51,7 @@
 #define STATUS_SETTINGS_WIDTH 45
 #define STATUS_GAUGINGS_WIDTH 34
 #define SETTING_WINDOW_WIDTH 32
-#define SETTING_WINDOW_HEIGHT 11
+#define SETTING_WINDOW_HEIGHT 15
 #define PRINT_WINDOW_WIDTH 33
 #define PRINT_WINDOW_HEIGHT 11
 
@@ -78,7 +75,7 @@ enum states
 
 enum toggle
 {
-   off,
+   off = 0,
    on
 };
 
@@ -150,6 +147,7 @@ struct colorschemes
 typedef struct naschmodell * PMODELL;
 typedef struct object_car* PCAR;
 
+extern const char * const GLOBAL_APC_MODETEXT[4];
 
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);

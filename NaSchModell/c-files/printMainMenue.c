@@ -7,16 +7,16 @@ void printMainMenue(void)
    _gotoxy(2, 2);
    printf("                                                                                          ");
    _gotoxy(2, 3);
-   printf(" [e] Exit                    [m] Toggle Mode                                              ");
+   printf(" [e] Exit                                                                                 ");
    _gotoxy(2, 4);
-   printf(" [f] Save..                  [q] Start..                 [c] Toggle Cruise-control        ");
+   printf(" [f] Save..                  [q] Start..                                                  ");
 
 
    _gotoxy(90, 4 + MENUHEIGHT + BOARDHEIGHT);
    printf("Autor: Daniel W. Fritsch");
 
-   _gotoxy(0, 0);
-   printf("V1.01.05");
+   _gotoxy(90, 6 + MENUHEIGHT + BOARDHEIGHT);
+   printf("V1.01.06");
 
    _gotoxy(0, 0);
 
