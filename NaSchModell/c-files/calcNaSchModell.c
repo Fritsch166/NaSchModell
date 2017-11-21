@@ -402,6 +402,25 @@ int watchdog(PMODELL pModell, int iF)
 
    const int iN = pModell->sSettings.iCars;
 
+   //rare case 1 car
+   if (iN < 2)
+   {
+      return 0;
+   }
+
+   //rare case 2 cars
+   if (iN == 2)
+   {
+      if (pModell->asCars[0].iPosition == pModell->asCars[1].iPosition)
+      {
+         _gotoxy(0, 0);
+         printf("   WAU WAU   f<%d> ", iF);
+         return -1;
+      }
+      return 0;
+   }
+
+   //default case iCars > 2
    int i = 0;
    int iReturn = 0;
    do
