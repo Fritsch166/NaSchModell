@@ -61,7 +61,7 @@
 #define COMPLPATHLENGTH (MAXWRITEPATHLENGTH + 6)
 #define TIMESTAMPLENGTH 12
 
-extern struct colorschemes GLOBAL_ARRAY_COLOR_SCHEMES[MAX_COLOR_SCHEMES];
+
 
 enum states
 {
@@ -97,8 +97,8 @@ struct settings
    int iIncreasedDelayAtV0Prozent;
    enum toggle eTSaveToFile;
    enum mode eMode;
-   char acFilename[COMPLPATHLENGTH+1];
-   char acComplFilePath[COMPLPATHLENGTH+1];
+   char acFilename[COMPLPATHLENGTH + 1];
+   char acComplFilePath[COMPLPATHLENGTH + 1];
    struct colorschemes* apsCSchemes[MAX_COLOR_SCHEMES];
 };
 
@@ -147,18 +147,34 @@ struct colorschemes
 typedef struct naschmodell * PMODELL;
 typedef struct object_car* PCAR;
 
+extern struct colorschemes GLOBAL_ARRAY_COLOR_SCHEMES[MAX_COLOR_SCHEMES];
 extern const char * const GLOBAL_APC_MODETEXT[4];
+extern unsigned int GLOBAL_CURSOR_BLINK_RATE;
+
+
+int input(const short int siX, const short int siY);
+int testConsoleSize(void);
+void initGlobalCursorBlinkRate(void);
+void initGlobalColorSchemes(void);
+
+void initModell(PMODELL pModell);
+void initCarsAndGaugings(PMODELL pModell);
 
 void printFrame(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
 void deleteArea(const short int siXStart, const short int siYStart, const short int siLength, const short int siHeight);
+
 void printMainMenue(void);
+void printCalculationMenue(PMODELL pModell);
 void printBoard(PMODELL pModell, const enum states * pEState);
 void printStatusSettings(PMODELL pModell);
 void printStatusGaugings(PMODELL pModell);
+
 int settingWindow(PMODELL pModell);
-int calcNaSchModell(PMODELL pModell);
-void initGlobalColorSchemes(void);
-void printToFile(PMODELL pModell);
-int input(const short int siX, const short int siY);
 void printWindow(PMODELL pModell);
+
+int calcNaSchModell(PMODELL pModell);
+void printToFile(PMODELL pModell);
+
+
+
 

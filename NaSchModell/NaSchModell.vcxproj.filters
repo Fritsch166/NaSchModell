@@ -64,5 +64,14 @@
     <ClCompile Include="c-files\printWindow.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c-files\mySysFunctions.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c-files\initModell.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c-files\printCalculationMenue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

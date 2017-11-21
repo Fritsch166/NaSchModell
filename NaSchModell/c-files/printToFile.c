@@ -3,6 +3,10 @@
 void printToFile(PMODELL pModell)
 {
 
+   deleteArea(1, 1, WINDOWWIDTH, MENUHEIGHT);
+   _gotoxy(10, 2);
+   printf("Waiting for: Save to file..");
+
    /***************Umwandeln in Farbschema*********************
 
      pModell->sSettings.iCars x pModell->sGaugings.iTicks:
@@ -55,7 +59,7 @@ void printToFile(PMODELL pModell)
             while (iPosition != iStartPosition);
          }
 
-         
+
          unsigned int uiLen = strlen(pModell->sSettings.acComplFilePath);
          char * pcFX = pModell->sSettings.acComplFilePath + uiLen - 6;
 
@@ -66,4 +70,19 @@ void printToFile(PMODELL pModell)
    }
 
    freeColorMap(map);
+
+   /**************************************************************/
+
+   printf("   DONE   [ Press any key to continue ] ");
+
+   {
+      fseek(stdin, 0, SEEK_END);
+      short int siToggle = 0;
+      while (_kbhit() == 0)
+      {
+         _gotoxy(48 + siToggle * 26, 2);
+         siToggle = (siToggle + 1) % 2;
+         Sleep(GLOBAL_CURSOR_BLINK_RATE);
+      }
+   }
 }

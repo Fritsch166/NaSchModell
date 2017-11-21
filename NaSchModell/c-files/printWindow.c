@@ -213,7 +213,7 @@ void printWindow(PMODELL pModell)
             break;
 
          case 0:
-            //special keys
+            //special keys {F1|F2|F3|F4|..}
             {
                int iFX = 0;
 
