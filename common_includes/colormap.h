@@ -1,5 +1,8 @@
 #pragma once
 
+/***********************
+ *lib for colors
+ ***********************/
 
 struct colormap
 {
