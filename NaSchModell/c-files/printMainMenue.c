@@ -16,5 +16,8 @@ void printMainMenue(void)
    printf("Autor: Daniel W. Fritsch");
 
    _gotoxy(0, 0);
+   printf("V1.01.01");
+
+   _gotoxy(0, 0);
 
 }

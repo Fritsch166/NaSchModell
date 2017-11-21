@@ -17,6 +17,7 @@ int fDo_Drive(PMODELL pModell);
 int fDo_TestJam(PMODELL pModell);
 bool fDo_TestJam_OnOne(PMODELL pModell, int iCarId);
 void saveCarState(const int iTicks, struct saveState ** const ppsState, PCAR const pCar, const int iCarId);
+int watchdog(PMODELL pModell, int iF);
 
 #define FUNC_COUNT 18
 
@@ -45,9 +46,12 @@ int calcNaSchModell(PMODELL pModell)
       userinteraction
    };
 
+
    for (int iF = 0; iOpt != OP_EXIT && iOpt != OP_STOP && iOpt != OP_PRINT; iF++, iF %= FUNC_COUNT)
    {
       iOpt = aFunc[iF](pModell);
+
+      watchdog(pModell, iF);
 
       if (iF == FUNC_COUNT - 1 && pModell->sGaugings.iTicks >= MAXTICKS)
       {
@@ -209,8 +213,16 @@ int fDo_Retard(PMODELL pModell)
    {
       PCAR pMyCar = pModell->asCars + iCarId;
       PCAR pCarInfront = pModell->asCars + ((iCarId + 1) % pModell->sSettings.iCars);
-      int iDiff = pCarInfront->iPosition - pMyCar->iPosition;
-      iDiff += ((iDiff > 0) ? (-1) : (STREET_LENGTH));
+
+      int iDiff = 0;
+      if (pCarInfront->iPosition > pMyCar->iPosition)
+      {
+         iDiff = (pCarInfront->iPosition - pMyCar->iPosition) - 1;
+      }
+      else
+      {
+         iDiff = (STREET_LENGTH - 1 - pMyCar->iPosition) + (pCarInfront->iPosition);
+      }
 
       if (pMyCar->iV + pMyCar->iVChange > iDiff)
       {
@@ -383,4 +395,64 @@ void saveCarState(const int iTicks, struct saveState ** const ppsState, PCAR con
    psState->iVTotal = pCar->iV + pCar->iVChange;
    psState->bIsInJam = pCar->bIsInJam;
    psState->iJamGroup = pCar->iJamGroupId;
+}
+
+int watchdog(PMODELL pModell, int iF)
+{
+
+   const int iN = pModell->sSettings.iCars;
+   const int iVMax = pModell->sSettings.iVMax;
+   const int iTicks = pModell->sGaugings.iTicks;
+
+   int i = 0;
+   int iReturn = 0;
+   do
+   {
+      //[i]
+      PCAR pBefore = pModell->asCars + (i - 1 + iN) % iN;
+      PCAR pCurrent = pModell->asCars + i;
+      PCAR pAfter = pModell->asCars + (i + 1) % iN;
+
+      int iPBefore = 0;
+      int iPCurrent = 0;
+      int iPAfter = 0;
+      if (iF < 6)
+      {
+         iPBefore = 0;
+         iPCurrent = 1;
+         iPAfter = 2;
+      }
+      else if (iF < 12)
+      {
+         iPBefore = (pBefore->iPosition + pBefore->iV + pBefore->iVChange) % STREET_LENGTH;
+         iPCurrent = (pCurrent->iPosition + pCurrent->iV + pCurrent->iVChange) % STREET_LENGTH;
+         iPAfter = (pAfter->iPosition + pAfter->iV + pAfter->iVChange) % STREET_LENGTH;
+      }
+      else
+      {
+         iPBefore = pBefore->iPosition;
+         iPCurrent = pCurrent->iPosition;
+         iPAfter = pAfter->iPosition;
+      }
+
+      if ((iPBefore < iPAfter) && (iPCurrent > iPBefore && iPCurrent < iPAfter))
+      {
+
+      }
+      else if ((iPBefore > iPAfter) && (iPCurrent > iPBefore || iPCurrent < iPAfter))
+      {
+
+      }
+      else
+      {
+         _gotoxy(0, 0);
+         printf("   WAU WAU   f<%d> ", iF);
+         iReturn = -1;
+      }
+
+      i = (i + 1) % iN;
+   }
+   while (i != 0 && iReturn == 0);
+
+   return iReturn;
 }
